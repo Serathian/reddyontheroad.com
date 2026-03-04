@@ -32,6 +32,7 @@ export default [
     },
     rules: {
       ...ts.configs.recommended.rules,
+      'svelte/no-navigation-without-resolve': 'off',
     },
   },
   {

@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-body: "Lora", serif;
+  --font-handwritten: "Caveat", cursive;
+
+  --color-stone-950: #0c0a09;
+  --color-amber-50: #fffbeb;
+}
