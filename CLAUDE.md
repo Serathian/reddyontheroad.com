@@ -43,15 +43,20 @@ This file provides comprehensive context for AI assistants working on this codeb
 
 ```
 reddyontheroad.com/
+├── .github/
+│   └── workflows/
+│       └── pr.yml            # GitHub Actions: lint, type-check, test on PRs
 ├── src/
 │   ├── app.html              # Root HTML template (fonts, viewport, favicon)
 │   ├── lib/                  # Shared utilities and components ($lib alias)
 │   │   ├── components/       # Reusable Svelte components (to be created)
-│   │   └── utils/            # Helper functions (to be created)
+│   │   └── utils/            # Helper functions (*.ts + *.test.ts colocated)
 │   └── routes/               # SvelteKit file-based routing
 │       └── +page.svelte      # Home page (currently a placeholder)
 ├── static/                   # Static assets (served as-is)
 ├── .env.example              # Required environment variable template
+├── .npmrc                    # GitHub Package Registry config for @serathian scope
+├── eslint.config.js          # ESLint flat config (TypeScript + Svelte)
 ├── svelte.config.js          # SvelteKit config (adapter-node, $lib alias)
 ├── vite.config.ts            # Vite config (Tailwind + SvelteKit plugins)
 ├── tsconfig.json             # TypeScript config (strict, ES modules)
@@ -88,6 +93,9 @@ reddyontheroad.com/
 | `npm run preview` | Serve the production build locally |
 | `npm run check` | Run SvelteKit sync + TypeScript type-check |
 | `npm run check:watch` | Continuous type-checking in watch mode |
+| `npm run lint` | Run ESLint across all `.ts` and `.svelte` files |
+| `npm run test` | Run Vitest unit tests |
+| `npm run test:coverage` | Run Vitest with V8 coverage report |
 
 ### Development Server
 
@@ -239,10 +247,27 @@ Environment variables must be present at **runtime** (not just build time) since
 
 ---
 
+## CI/CD
+
+A GitHub Actions workflow runs on every pull request targeting `master` (`.github/workflows/pr.yml`). It executes three checks in order:
+
+1. **Lint** — ESLint across all `.ts` and `.svelte` files (`npm run lint`)
+2. **Type check** — SvelteKit sync + `svelte-check` (`npm run check`)
+3. **Tests** — Vitest unit tests (`npm run test`)
+
+All three must pass before a PR can be merged. The workflow authenticates with the GitHub Package Registry (via `secrets.GITHUB_TOKEN`) to install the `@serathian/basecamp-cms-types` private package.
+
+### Development Workflow
+
+Each feature or phase is developed on a branch and merged to `master` via a pull request. The PR workflow gate ensures linting and tests always pass on `master`.
+
+---
+
 ## Important Constraints
 
-- **No testing framework is configured yet.** Before adding tests, agree on the framework (Vitest is the standard for SvelteKit projects).
-- **No CI/CD is configured yet.**
+- **Testing framework:** Vitest is configured. Place test files alongside source files as `*.test.ts`.
+- **Linting:** ESLint is configured in `eslint.config.js` with TypeScript and Svelte plugins.
+- **CMS types package:** `@serathian/basecamp-cms-types` is installed from the GitHub Package Registry. The `.npmrc` reads the auth token from the `GITHUB_TOKEN` environment variable — locally use a personal access token with `read:packages` scope.
 - **Do not commit `.env`** — it is in `.gitignore`. Only `.env.example` is tracked.
 - **Keep `PUBLIC_` prefix** on all environment variables that are accessed in browser code (SvelteKit enforces this).
 - **SSR awareness:** SvelteKit renders on the server by default. Any browser-only code (Mapbox, `window`, `document`) must be guarded with `onMount` or `browser` checks.
