@@ -274,7 +274,63 @@ button:hover .cta-arrow {
 
 ### Task 3: TypeScript Types
 
+**Important:** All CMS collection types are generated from Payload CMS and published to npm as `@basecamp-cms/basecamp-cms-types` (already in `package.json`). Do not redefine types that exist in this package — import them directly.
+
 **Create `src/lib/types.ts`:**
+
+```typescript
+// ─── CMS types — import from shared package, do not redefine ────────────────
+export type {
+  Media,
+  Author,
+  Tag,
+  RotrPost,
+  RotrLocation,
+} from '@basecamp-cms/basecamp-cms-types'
+
+// ─── Local re-exports for convenience ────────────────────────────────────────
+// Re-export any enums/string unions the package exposes:
+export type { PlaceType, MarkerType, PostType, PostStatus } from '@basecamp-cms/basecamp-cms-types'
+
+// ─── Types that only exist on the frontend (not in Payload schema) ────────────
+
+export interface RotrLocationStop {
+  location: RotrLocation
+  visit_date?: string
+  id?: string
+}
+
+// ─── Payload REST API envelope ────────────────────────────────────────────────
+
+export interface PayloadListResponse<T> {
+  docs: T[]
+  totalDocs: number
+  limit: number
+  page: number
+  totalPages: number
+  hasNextPage: boolean
+  hasPrevPage: boolean
+}
+
+// ─── Map types ────────────────────────────────────────────────────────────────
+
+export interface MapCoord {
+  lng: number
+  lat: number
+}
+```
+
+If the package does not yet export a type you need, check `node_modules/@basecamp-cms/basecamp-cms-types/dist/index.d.ts` first. Only define locally if it is genuinely absent.
+
+**Verify:** `npm run check` → no errors.
+
+**Commit:** `git add src/lib/types.ts && git commit -m "feat: TypeScript interfaces matching Payload CMS rotr schema"`
+
+---
+
+<!-- original Task 3 manual type definitions preserved below for reference only — use package instead -->
+<!--
+**Create `src/lib/types.ts` (LEGACY — use package above instead):**
 
 ```typescript
 // ─── CMS media / relational types ──────────────────────────────────────────
@@ -374,10 +430,7 @@ export interface MapCoord {
   lat: number
 }
 ```
-
-**Verify:** `npm run check` → no errors.
-
-**Commit:** `git add src/lib/types.ts && git commit -m "feat: TypeScript interfaces matching Payload CMS rotr schema"`
+-->
 
 ---
 
