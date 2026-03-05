@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from 'svelte'
   import type { RotrPost } from '$lib/types'
   import { MAP_STYLE, INITIAL_BOUNDS, ROUTE_COLOR, ROUTE_COLOR_MUTED } from '$lib/map/config'
+  import { getRouteCoords, locationToLngLat, getResolvedLocations } from '$lib/map/utils'
   import 'maplibre-gl/dist/maplibre-gl.css'
   import { Map, Marker, type LngLatBoundsLike } from 'maplibre-gl'
 
@@ -17,12 +18,6 @@
   $effect.pre(() => {
     void posts.length
   })
-
-  function getRouteCoords() {
-    return posts
-      .filter((p) => p.latitude != null && p.longitude != null)
-      .map((p) => [p.longitude!, p.latitude!] as [number, number])
-  }
 
   function prefersReducedMotion() {
     return typeof window !== 'undefined'
@@ -41,17 +36,14 @@
     const post = posts[weekIndex]
     if (!post?.locations) return
 
-    for (const stop of post.locations) {
-      const loc = stop.location
-      if (typeof loc !== 'object' || !loc?.latitude || !loc?.longitude) continue
-
+    for (const loc of getResolvedLocations(post.locations)) {
       const el = document.createElement('div')
       el.style.cssText = 'width:10px;height:10px;background:#b45309;border:2px solid #fdf6e3;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.2);'
       el.setAttribute('title', loc.name)
 
       markers.push(
         new Marker({ element: el })
-          .setLngLat([loc.longitude, loc.latitude])
+          .setLngLat(locationToLngLat(loc))
           .addTo(mapInstance)
       )
     }
@@ -59,7 +51,7 @@
 
   function updateActiveSegment(weekIndex: number) {
     if (!mapInstance?.isStyleLoaded()) return
-    const routeCoords = getRouteCoords()
+    const routeCoords = getRouteCoords(posts)
     const activeCoords = routeCoords.slice(Math.max(0, weekIndex - 1), weekIndex + 1)
     if (activeCoords.length < 2) return
     const source = mapInstance.getSource('route-active')
@@ -71,7 +63,7 @@
   function flyToWeek(weekIndex: number) {
     if (!mapInstance) return
     const post = posts[weekIndex]
-    if (!post?.latitude || !post?.longitude) return
+    if (post?.latitude == null || post?.longitude == null) return
     if (prefersReducedMotion()) {
       mapInstance.jumpTo({ center: [post.longitude, post.latitude], zoom: 6 })
     } else {
@@ -96,7 +88,7 @@
 
     await new Promise<void>((resolve) => mapInstance!.on('load', () => resolve()))
 
-    const routeCoords = getRouteCoords()
+    const routeCoords = getRouteCoords(posts)
 
     mapInstance.addSource('route-full', {
       type: 'geojson',

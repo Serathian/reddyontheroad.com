@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "^5.2.12",
@@ -19,7 +20,8 @@
     "svelte-check": "^4.0.0",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.7.0",
-    "vite": "^6.0.0"
+    "vite": "^6.0.0",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "@basecamp-cms/basecamp-cms-types": "^1.0.0",
