@@ -1,4 +1,5 @@
-export const MAPBOX_STYLE = 'mapbox://styles/mapbox/light-v11'
+// OpenFreeMap light style — no API key required
+export const MAP_STYLE = 'https://tiles.openfreemap.org/styles/positron'
 
 export const INITIAL_BOUNDS: [[number, number], [number, number]] = [
   [-10, 35],

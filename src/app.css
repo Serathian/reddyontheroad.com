@@ -122,11 +122,11 @@ button:hover .cta-arrow {
   letter-spacing: 0.01em;
 }
 
-/* ─── Mapbox GL JS overrides ────────────────────────────────────────────────── */
-.mapboxgl-map {
+/* ─── MapLibre GL JS overrides ──────────────────────────────────────────────── */
+.maplibregl-map {
   font-family: var(--font-body) !important;
 }
-.mapboxgl-ctrl-logo {
+.maplibregl-ctrl-logo {
   opacity: 0.4;
 }
 

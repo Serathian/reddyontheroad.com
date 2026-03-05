@@ -23,6 +23,6 @@
   },
   "dependencies": {
     "@basecamp-cms/basecamp-cms-types": "^1.0.0",
-    "mapbox-gl": "^3.6.0"
+    "maplibre-gl": "^5.19.0"
   }
 }

@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
   import type { RotrPost } from '$lib/types'
-  import { MAPBOX_STYLE, INITIAL_BOUNDS, ROUTE_COLOR, ROUTE_COLOR_MUTED } from '$lib/map/config'
-  import { PUBLIC_MAPBOX_TOKEN } from '$env/static/public'
+  import { MAP_STYLE, INITIAL_BOUNDS, ROUTE_COLOR, ROUTE_COLOR_MUTED } from '$lib/map/config'
+  import 'maplibre-gl/dist/maplibre-gl.css'
+  import { Map, Marker, type LngLatBoundsLike } from 'maplibre-gl'
 
   let { posts, activeWeekIndex }: {
     posts: RotrPost[]
@@ -10,15 +11,10 @@
   } = $props()
 
   let mapContainer: HTMLDivElement
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let mapInstance: any = null
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let mapboxgl: any = null
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let markers: any[] = []
+  let mapInstance: Map | null = null
+  let markers: Marker[] = []
 
   $effect.pre(() => {
-    // Access posts to track dependency — routeCoords is derived from it
     void posts.length
   })
 
@@ -40,7 +36,7 @@
   }
 
   function addMarkersForWeek(weekIndex: number) {
-    if (!mapInstance || !mapboxgl) return
+    if (!mapInstance) return
     clearMarkers()
     const post = posts[weekIndex]
     if (!post?.locations) return
@@ -54,7 +50,7 @@
       el.setAttribute('title', loc.name)
 
       markers.push(
-        new mapboxgl.Marker({ element: el })
+        new Marker({ element: el })
           .setLngLat([loc.longitude, loc.latitude])
           .addTo(mapInstance)
       )
@@ -67,37 +63,38 @@
     const activeCoords = routeCoords.slice(Math.max(0, weekIndex - 1), weekIndex + 1)
     if (activeCoords.length < 2) return
     const source = mapInstance.getSource('route-active')
-    source?.setData({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: activeCoords } })
+    if (source && 'setData' in source) {
+      (source as any).setData({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: activeCoords } })
+    }
   }
 
   function flyToWeek(weekIndex: number) {
     if (!mapInstance) return
     const post = posts[weekIndex]
     if (!post?.latitude || !post?.longitude) return
-    const method = prefersReducedMotion() ? 'jumpTo' : 'flyTo'
-    mapInstance[method]({ center: [post.longitude, post.latitude], zoom: 6, duration: 1200 })
+    if (prefersReducedMotion()) {
+      mapInstance.jumpTo({ center: [post.longitude, post.latitude], zoom: 6 })
+    } else {
+      mapInstance.flyTo({ center: [post.longitude, post.latitude], zoom: 6, duration: 1200 })
+    }
   }
 
   $effect(() => {
-    if (!mapInstance || !mapboxgl) return
+    if (!mapInstance) return
     flyToWeek(activeWeekIndex)
     addMarkersForWeek(activeWeekIndex)
     updateActiveSegment(activeWeekIndex)
   })
 
   onMount(async () => {
-    const module = await import('mapbox-gl')
-    mapboxgl = module.default ?? module
-    mapboxgl.accessToken = PUBLIC_MAPBOX_TOKEN
-
-    mapInstance = new mapboxgl.Map({
+    mapInstance = new Map({
       container: mapContainer,
-      style: MAPBOX_STYLE,
-      bounds: INITIAL_BOUNDS,
+      style: MAP_STYLE,
+      bounds: INITIAL_BOUNDS as LngLatBoundsLike,
       fitBoundsOptions: { padding: 40 },
     })
 
-    await new Promise<void>((resolve) => mapInstance.on('load', () => resolve()))
+    await new Promise<void>((resolve) => mapInstance!.on('load', () => resolve()))
 
     const routeCoords = getRouteCoords()
 
@@ -128,10 +125,6 @@
     mapInstance = null
   })
 </script>
-
-<svelte:head>
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" />
-</svelte:head>
 
 <div
   bind:this={mapContainer}
