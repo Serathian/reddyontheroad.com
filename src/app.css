@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ─── Brand tokens ──────────────────────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-parchment: #fdf6e3;
+  --color-ink:       #1c1917;
+  --color-amber:     #b45309;
+  --color-sage:      #4d7c0f;
+  --color-stone:     #78716c;
+  --color-rule:      #d6cfc0;
+  --color-paper:     #f5edda;
+  --color-map-bg:    #f0e8d0;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+  --font-script:  'Caveat', cursive;
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.4s ease both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Paper grain overlay ───────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+html {
+  background-color: #fdf6e3;
+  color: #1c1917;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body, Georgia, serif);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Nav link underline (amber) ────────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #b45309;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+/* ─── CTA arrow nudge ───────────────────────────────────────────────────────── */
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+a:hover .cta-arrow,
+button:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Prose body styles ─────────────────────────────────────────────────────── */
+.prose-journal p {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: #1c1917;
+  margin-bottom: 1.5rem;
+}
+
+.prose-journal h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1c1917;
+}
+
+.prose-journal h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── Week number script label ──────────────────────────────────────────────── */
+.week-label {
+  font-family: var(--font-script);
+  font-size: 1.25rem;
+  color: #b45309;
+  letter-spacing: 0.01em;
+}
+
+/* ─── Mapbox GL JS overrides ────────────────────────────────────────────────── */
+.mapboxgl-map {
+  font-family: var(--font-body) !important;
+}
+.mapboxgl-ctrl-logo {
+  opacity: 0.4;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
