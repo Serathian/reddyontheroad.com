@@ -52,10 +52,12 @@ The map and content must move together seamlessly—as you navigate through days
 - Photo storage mechanism TBD
 
 **Design System:**
-- Leather-bound journal aesthetic with aged paper, handwritten headers (Caveat), readable body serif (Crimson Text)
+- **CRITICAL**: MUST use existing design system — DO NOT create new design
+- Complete specification in `JOURNAL_DESIGN_SYSTEM.md` and `design-system/reddy-on-the-road/MASTER.md`
+- Typography: Caveat (handwritten headers), Crimson Text (body serif), Courier Prime (metadata)
 - Color palette: aged cream paper (#F5F1E8), rich leather browns (#3E2723-#8D6E63), sepia tones
-- Paper grain textures, vintage photo frames, ink bleed effects
-- Documented in `JOURNAL_DESIGN_SYSTEM.md`
+- Effects: Paper grain textures, vintage photo frames, ink bleed, torn edges
+- Implementation: Convert existing CSS variables and styles to Next.js CSS Modules
 
 **Existing Prototype:**
 - Static HTML/CSS/JS prototype exists (`journal-prototype.html`)

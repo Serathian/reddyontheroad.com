@@ -24,11 +24,12 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Establish technical foundation with working Next.js app, CMS integration, and visual design system
 **Depends on**: Nothing (first phase)
 **Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04
+**Design System**: MUST implement existing design system from `JOURNAL_DESIGN_SYSTEM.md` and `design-system/reddy-on-the-road/MASTER.md` — DO NOT create new design
 **Success Criteria** (what must be TRUE):
   1. Next.js application runs locally with TypeScript and App Router
   2. Server Component fetches daily entries from Payload CMS and renders to HTML
   3. Split-screen layout displays on desktop (map placeholder left, content right) and stacked on mobile
-  4. Leather journal aesthetic is visible (aged paper background, Caveat font headers, vintage styling)
+  4. Leather journal aesthetic matches existing design system exactly (aged paper background, Caveat/Crimson Text/Courier Prime fonts, defined color palette, vintage styling)
   5. GPS coordinates are validated with 5-6 decimal precision and stored in standardized format
 **Plans**: TBD
 

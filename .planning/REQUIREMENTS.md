@@ -23,9 +23,11 @@ Requirements extracted from PROJECT.md and validated against research findings. 
 - **Why**: Core UI structure for journal experience
 - **Phase**: Phase 1
 
-**FOUND-04**: Leather journal design system implementation (aged paper, Caveat font, vintage aesthetic)
-- **Source**: PROJECT.md design system, JOURNAL_DESIGN_SYSTEM.md
-- **Why**: Visual identity that differentiates from generic blogs
+**FOUND-04**: Implement existing leather journal design system exactly as specified
+- **Source**: `JOURNAL_DESIGN_SYSTEM.md` and `design-system/reddy-on-the-road/MASTER.md`
+- **Specification**: Use defined color palette, typography (Caveat, Crimson Text, Courier Prime), spacing, aged paper texture, vintage aesthetic
+- **Constraint**: DO NOT create new design system - implement the existing one
+- **Why**: Visual identity already defined and validated, differentiates from generic blogs
 - **Phase**: Phase 1
 
 ### Carousel Navigation (CAROUSEL)
