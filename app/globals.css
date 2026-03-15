@@ -16,6 +16,16 @@
   --font-body: var(--font-crimson);
   --font-mono: var(--font-courier);
   
+  /* Typography Size Scale - Referenced by components */
+  --text-sm: 0.875rem;     /* 14px - Small text, captions, metadata */
+  --text-base: 1.125rem;   /* 18px - Body text (matches body font-size) */
+  --text-lg: 1.25rem;      /* 20px - Subheadings, emphasized text */
+  --text-xl: 1.5rem;       /* 24px - Large headings (matches h3) */
+  --text-3xl: 3rem;        /* 48px - Display headings (matches h1) */
+  
+  /* Font Family Aliases */
+  --font-heading: var(--font-display); /* Alias for semantic clarity */
+  
   /* Aged Paper Foundation (JOURNAL_DESIGN_SYSTEM.md lines 23-32) */
   --journal-paper: #F5F1E8;
   --journal-paper-dark: #EDE8DC;
