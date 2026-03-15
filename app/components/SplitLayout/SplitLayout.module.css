@@ -1,0 +1,43 @@
+/* Responsive split-screen: side-by-side desktop, stacked mobile */
+
+.container {
+  display: flex;
+  flex-direction: row; /* Side-by-side on desktop */
+  min-height: 100vh;
+  width: 100%;
+}
+
+.mapPane {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
+  background: var(--journal-paper-dark);
+  position: relative;
+}
+
+.contentPane {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: var(--space-xl);
+  background: var(--journal-paper);
+}
+
+/* Mobile: Stack vertically, sticky map */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .mapPane {
+    height: 40vh; /* Fixed height for map on mobile */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex: none; /* Don't grow/shrink */
+  }
+  
+  .contentPane {
+    padding: var(--space-lg);
+    flex: 1;
+  }
+}
