@@ -31,7 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Split-screen layout displays on desktop (map placeholder left, content right) and stacked on mobile
   4. Leather journal aesthetic matches existing design system exactly (aged paper background, Caveat/Crimson Text/Courier Prime fonts, defined color palette, vintage styling)
   5. GPS coordinates are validated with 5-6 decimal precision and stored in standardized format
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
+
+Plans:
+- [ ] 01-01-PLAN.md — Next.js scaffold, fonts, test framework (Wave 1)
+- [ ] 01-02-PLAN.md — Design system CSS implementation (Wave 1)
+- [ ] 01-03-PLAN.md — Split-screen layout + GPS validation (Wave 2)
+- [ ] 01-04-PLAN.md — Payload CMS integration + sample page (Wave 3)
 
 ### Phase 2: Core Scroll
 **Goal**: Users can navigate through daily entries via scrollable carousel with visual feedback
