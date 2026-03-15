@@ -1,66 +1,69 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import SplitLayout from './components/SplitLayout/SplitLayout'
+import { mockDailyEntries } from '@/lib/mockData'
+import styles from './page.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <SplitLayout
+      map={
+        <div className={styles.mapPlaceholder}>
+          <p>🗺️ Map will go here</p>
+          <p className={styles.mapNote}>
+            Interactive map showing journal entry locations
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      }
+      content={
+        <div className={styles.entriesList}>
+          <h1 className={styles.title}>Travel Journal</h1>
+          
+          {mockDailyEntries.map((entry) => (
+            <article key={entry.id} className={styles.entryCard}>
+              <header className={styles.entryHeader}>
+                <h2 className={styles.location}>{entry.location}</h2>
+                <time className={styles.date}>
+                  {new Date(entry.date).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              </header>
+              
+              {entry.weather && (
+                <p className={styles.weather}>☀️ {entry.weather}</p>
+              )}
+              
+              {entry.distanceMiles && (
+                <p className={styles.distance}>
+                  📍 {entry.distanceMiles} miles traveled
+                </p>
+              )}
+              
+              <div className={styles.diary}>
+                {/* For now, render diary as plain text - markdown parsing in Phase 2 */}
+                {entry.diary.split('\n\n').map((paragraph, i) => (
+                  <p key={i}>{paragraph.replace(/^# /, '')}</p>
+                ))}
+              </div>
+              
+              {entry.photos && entry.photos.length > 0 && (
+                <div className={styles.photos}>
+                  {entry.photos.map((photo, i) => (
+                    <figure key={i}>
+                      <div className={styles.photoPlaceholder}>
+                        📷 {photo.caption || 'Photo'}
+                      </div>
+                      <figcaption>{photo.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
         </div>
-      </main>
-    </div>
-  );
+      }
+    />
+  )
 }
