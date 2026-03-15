@@ -49,7 +49,12 @@ Plans:
   2. Active day is detected automatically as user scrolls (no manual selection needed)
   3. Day cards display date, location name, and preview content clearly
   4. Scroll performance maintains 60fps with <10% JS execution during scroll
-**Plans**: TBD
+**Plans**: 3 plans in 3 waves
+
+Plans:
+- [ ] 02-01-PLAN.md — Type updates and test infrastructure (Wave 1)
+- [ ] 02-02-PLAN.md — Carousel and DayCard implementation (Wave 2)
+- [ ] 02-03-PLAN.md — Integration and verification (Wave 3)
 
 ### Phase 3: Map Integration
 **Goal**: Map displays journey and animates smoothly as user navigates through days
