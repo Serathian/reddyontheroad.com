@@ -8,6 +8,7 @@ export const mockDailyEntries: DailyEntry[] = [
     location: 'Santorini, Greece',
     latitude: 36.3932,
     longitude: 25.4615,
+    preview: 'Arrived in Santorini and witnessed the legendary sunset at Oia. The caldera turned deep blue as the sun melted into the Aegean.',
     diary: `# Sunset at Oia
 
 Arrived in Santorini this morning. The famous blue-domed churches are even more stunning in person. Spent the afternoon exploring the narrow streets of Oia, getting lost in the maze of white-washed buildings.
@@ -31,6 +32,7 @@ Had dinner at a taverna overlooking the sea. Fresh octopus, Greek salad, and loc
     location: 'Athens, Greece',
     latitude: 37.9838,
     longitude: 23.7275,
+    preview: 'Early morning at the Acropolis to beat the crowds. The Parthenon is humbling — 2,500 years old and still standing.',
     diary: `# Acropolis Morning
 
 Took the ferry back to Athens. The city feels different from the islands - louder, grittier, more real.
@@ -49,6 +51,7 @@ Spent the afternoon in Plaka, the old neighborhood. Got hopelessly lost in the n
     location: 'Delphi, Greece',
     latitude: 38.4824,
     longitude: 22.5010,
+    preview: 'Drove to ancient Delphi, home of the Oracle. The mountain sanctuary feels mystical even today.',
     diary: `# Oracle and Mountains
 
 Three-hour bus ride to Delphi through mountain roads. The driver played Greek music the whole way, singing along occasionally.
