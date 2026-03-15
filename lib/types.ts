@@ -11,6 +11,7 @@ export interface DailyEntry {
   location: string
   latitude: number
   longitude: number
+  preview: string // Hand-crafted summary for carousel display (1-2 sentences)
   diary: string
   weather?: string
   distanceMiles?: number
@@ -28,6 +29,7 @@ export function isDailyEntry(obj: unknown): obj is DailyEntry {
     typeof entry.location === 'string' &&
     typeof entry.latitude === 'number' &&
     typeof entry.longitude === 'number' &&
+    typeof entry.preview === 'string' &&
     typeof entry.diary === 'string'
   )
 }
