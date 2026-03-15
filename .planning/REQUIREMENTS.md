@@ -142,7 +142,7 @@ Features that will NOT be implemented (from PROJECT.md Out of Scope):
 | FOUND-01 | Phase 1 | Complete |
 | FOUND-02 | Phase 1 | Pending |
 | FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Complete |
 | CAROUSEL-01 | Phase 2 | Pending |
 | CAROUSEL-02 | Phase 2 | Pending |
 | CAROUSEL-03 | Phase 2 | Pending |
