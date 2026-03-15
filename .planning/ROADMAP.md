@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] 01-01-PLAN.md — Next.js scaffold, fonts, test framework (Wave 1)
+- [x] 01-01-PLAN.md — Next.js scaffold, fonts, test framework (Wave 1) ✅ 2026-03-15
 - [ ] 01-02-PLAN.md — Design system CSS implementation (Wave 1)
 - [ ] 01-03-PLAN.md — Split-screen layout + GPS validation (Wave 2)
 - [ ] 01-04-PLAN.md — Payload CMS integration + sample page (Wave 3)
@@ -91,13 +91,13 @@ Plans:
 **Execution Order:**
 Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
-| 2. Core Scroll | 0/TBD | Not started | - |
-| 3. Map Integration | 0/TBD | Not started | - |
-| 4. Rich Content | 0/TBD | Not started | - |
-| 5. Deployment | 0/TBD | Not started | - |
+| Phase            | Plans Complete | Status      | Completed  |
+| ---------------- | -------------- | ----------- | ---------- |
+| 1. Foundation    | 1/4            | In progress | -          |
+| 2. Core Scroll   | 0/TBD          | Not started | -          |
+| 3. Map Integration | 0/TBD        | Not started | -          |
+| 4. Rich Content  | 0/TBD          | Not started | -          |
+| 5. Deployment    | 0/TBD          | Not started | -          |
 
 ---
 *Last updated: 2026-03-15*
