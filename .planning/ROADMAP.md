@@ -84,11 +84,12 @@ Plans:
   2. Current marker, 7-entry trail, and map camera pan/fly behavior remain unchanged from user perspective.
   3. Existing map regression tests for MAP-01..MAP-04 pass after provider swap.
   4. MapTiler public API key setup is documented for local/preview usage.
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
 - [ ] 03.1-01-PLAN.md — Provider foundation swap (deps/env/contracts/layer typings) (Wave 1)
 - [ ] 03.1-02-PLAN.md — JourneyMap runtime + tests migration to MapLibre/MapTiler (Wave 2)
+- [ ] 03.1-03-PLAN.md — [GAP CLOSURE] Remove legacy Mapbox token runtime fallback and re-lock MapTiler-only key path (Wave 3)
 
 ### Phase 4: Rich Content
 **Goal**: Users can view full daily entries with photos, navigate quickly via timeline, and experience smooth transitions
