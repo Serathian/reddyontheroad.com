@@ -92,6 +92,55 @@ describe('JourneyMap', () => {
         } as unknown as MediaQueryList
       },
     })
+
+    process.env.NEXT_PUBLIC_MAPTILER_API_KEY = ''
+  })
+
+  it('resolves map style from mapApiKey when provided', async () => {
+    render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapApiKey="prop-token"
+      />,
+    )
+
+    const map = await screen.findByTestId('journey-map')
+    const rawProps = map.getAttribute('data-props') ?? '{}'
+    const props = JSON.parse(rawProps) as { mapStyle?: string }
+
+    expect(props.mapStyle).toContain('key=prop-token')
+  })
+
+  it('resolves map style from NEXT_PUBLIC_MAPTILER_API_KEY when mapApiKey is omitted', async () => {
+    process.env.NEXT_PUBLIC_MAPTILER_API_KEY = 'env-token'
+
+    render(<JourneyMap entries={mockDailyEntries} activeEntryId={mockDailyEntries[2].id} />)
+
+    const map = await screen.findByTestId('journey-map')
+    const rawProps = map.getAttribute('data-props') ?? '{}'
+    const props = JSON.parse(rawProps) as { mapStyle?: string }
+
+    expect(props.mapStyle).toContain('key=env-token')
+  })
+
+  it('does not depend on legacy mapboxAccessToken prop for style key resolution', async () => {
+    process.env.NEXT_PUBLIC_MAPTILER_API_KEY = 'env-token'
+
+    render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        {...({ mapboxAccessToken: 'legacy-mapbox-token' } as unknown as object)}
+      />,
+    )
+
+    const map = await screen.findByTestId('journey-map')
+    const rawProps = map.getAttribute('data-props') ?? '{}'
+    const props = JSON.parse(rawProps) as { mapStyle?: string }
+
+    expect(props.mapStyle).toContain('key=env-token')
+    expect(props.mapStyle).not.toContain('legacy-mapbox-token')
   })
 
   it('coordinate-aware current marker uses active entry coordinates', async () => {
