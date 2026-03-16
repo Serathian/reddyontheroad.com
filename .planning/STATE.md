@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 03-map-integration-03-PLAN.md
-last_updated: "2026-03-16T11:17:04.848Z"
-last_activity: 2026-03-16 — Completed 03-03-PLAN.md (JourneyMap + Carousel Synchronization)
+status: planning
+stopped_at: Completed 03-map-integration-04-PLAN.md
+last_updated: "2026-03-16T12:05:01.029Z"
+last_activity: 2026-03-16 — Completed 03-04-PLAN.md (Coordinate-aware Marker Wiring)
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 11
-  completed_plans: 11
+  total_plans: 12
+  completed_plans: 12
   percent: 100
 ---
 
@@ -27,16 +27,16 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 3 of 5 (Map Integration)
-Plan: 3 of 3
-Status: Completed 03-03-PLAN.md; phase complete and ready for Phase 4 planning
-Last activity: 2026-03-16 — Completed 03-03-PLAN.md (JourneyMap + Carousel Synchronization)
+Plan: 4 of 4
+Status: Completed 03-04-PLAN.md; phase complete and ready for Phase 4 planning
+Last activity: 2026-03-16 — Completed 03-04-PLAN.md (Coordinate-aware Marker Wiring)
 
 Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 12
 - Average duration: 13 minutes
 - Total execution time: 2.1 hours
 
@@ -48,8 +48,8 @@ Progress: [██████████] 100%
 | 02-core-scroll   | 2/3   | 23 min | 12 min   |
 
 **Recent Trend:**
-- Last 5 plans: 01-04 (45m), 02-01 (18m), 02-02 (5m), 03-02 (2m), 03-03 (3m)
-- Trend: Fast execution sustained in recent plans
+- Last 5 plans: 02-01 (18m), 02-02 (5m), 03-02 (2m), 03-03 (3m), 03-04 (2m)
+- Trend: Fast execution sustained with map-integration gap closure complete
 
 | Phase | Plan | Duration | Tasks | Files |
 | ----- | ---- | -------- | ----- | ----- |
@@ -63,6 +63,7 @@ Progress: [██████████] 100%
 | Phase 03-map-integration P01 | 3 min | 3 tasks | 7 files |
 | Phase 03-map-integration P02 | 2 min | 3 tasks | 3 files |
 | Phase 03-map-integration P03 | 3 min | 3 tasks | 8 files |
+| Phase 03-map-integration P04 | 2 min | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 03-map-integration]: Lift active entry selection to page-level state and run Carousel in controlled mode for map sync
 - [Phase 03-map-integration]: Use map.stop() before every transition and switch pan/fly based on near-distance threshold
 - [Phase 03-map-integration]: Use subtle animated emphasis for current marker with reduced-motion static equivalent
+- [Phase 03-map-integration]: Use Mapbox Marker longitude/latitude props for both current and past stop marker UI
+- [Phase 03-map-integration]: Keep mobile marker-density behavior reactive via resize-driven viewport state instead of module-scope window reads
 
 ### Pending Todos
 
@@ -118,8 +121,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T11:17:04.846Z
-Stopped at: Completed 03-map-integration-03-PLAN.md
+Last session: 2026-03-16T12:05:01.027Z
+Stopped at: Completed 03-map-integration-04-PLAN.md
 Resume file: None
 
 ---
