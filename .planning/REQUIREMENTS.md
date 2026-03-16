@@ -146,10 +146,10 @@ Features that will NOT be implemented (from PROJECT.md Out of Scope):
 | CAROUSEL-01 | Phase 2 | Complete |
 | CAROUSEL-02 | Phase 2 | Complete |
 | CAROUSEL-03 | Phase 2 | Complete |
-| MAP-01 | Phase 3 | Pending |
-| MAP-02 | Phase 3 | Pending |
-| MAP-03 | Phase 3 | Pending |
-| MAP-04 | Phase 3 | Pending |
+| MAP-01 | Phase 3 | Complete |
+| MAP-02 | Phase 3 | Complete |
+| MAP-03 | Phase 3 | Complete |
+| MAP-04 | Phase 3 | Complete |
 | CONTENT-01 | Phase 4 | Pending |
 | CONTENT-02 | Phase 4 | Pending |
 | CONTENT-03 | Phase 4 | Pending |

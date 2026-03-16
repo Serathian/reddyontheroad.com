@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-16T10:08:33.150Z"
-last_activity: 2026-03-16 — Completed 02-03-PLAN.md (Carousel Integration)
+stopped_at: Completed 03-map-integration-01-PLAN.md
+last_updated: "2026-03-16T10:59:03.566Z"
+last_activity: 2026-03-16 — Completed 03-01-PLAN.md (Map Integration Foundation)
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
-  percent: 80
+  total_plans: 11
+  completed_plans: 9
+  percent: 82
 ---
 
 # Project State
@@ -22,23 +22,23 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** The map and content must move together seamlessly—as you navigate through days, the map animates to show where the family was, creating a unified storytelling experience that feels like flipping through a well-traveled journal.
 
-**Current focus:** Phase 2 - Core Scroll
+**Current focus:** Phase 3 - Map Integration
 
 ## Current Position
 
-Phase: 2 of 5 (Core Scroll)
-Plan: 3 of 3
-Status: Phase 02-core-scroll complete
-Last activity: 2026-03-16 — Completed 02-03-PLAN.md (Carousel Integration)
+Phase: 3 of 5 (Map Integration)
+Plan: 1 of 3
+Status: Completed 03-01-PLAN.md; ready for 03-02
+Last activity: 2026-03-16 — Completed 03-01-PLAN.md (Map Integration Foundation)
 
-Progress: [████████░░] 80%
+Progress: [████████░░] 82%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 16 minutes
-- Total execution time: 1.6 hours
+- Total plans completed: 9
+- Average duration: 14 minutes
+- Total execution time: 2.0 hours
 
 **By Phase:**
 
@@ -60,6 +60,7 @@ Progress: [████████░░] 80%
 | Phase 02-core-scroll P01 | 18 min | 3 tasks | 5 files |
 | Phase 02-core-scroll P02 | 5 min | 3 tasks | 8 files |
 | Phase 02-core-scroll P03 | 1 min | 2 tasks | 4 files |
+| Phase 03-map-integration P01 | 3 min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 02-core-scroll]: Change carousel from horizontal to vertical scroll — User requested vertical scroll after seeing horizontal implementation. Better fits journal/feed mental model.
 - [Phase 02-core-scroll]: Implement fixed viewport layout for scroll containment — Vertical scroll was leaking to page level. Fixed SplitLayout and page wrapper heights to contain scroll within carousel.
 - [Phase 02-core-scroll]: Add 40vh vertical padding to carousel container — First and last cards couldn't reach center snap position. Padding creates scroll room for edge cards to center, aligning with IntersectionObserver rootMargin.
+- [Phase 03-map-integration]: Pin mapbox dependencies to exact versions to avoid integration drift during implementation waves
+- [Phase 03-map-integration]: Encode camera timing, zoom, and 7-entry trail behavior as exported contracts before implementation
 
 ### Pending Todos
 
@@ -108,9 +111,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T10:08:33.137Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-map-integration/03-CONTEXT.md
+Last session: 2026-03-16T10:59:03.564Z
+Stopped at: Completed 03-map-integration-01-PLAN.md
+Resume file: None
 
 ---
-*Last updated: 2026-03-15*
+*Last updated: 2026-03-16*

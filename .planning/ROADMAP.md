@@ -66,7 +66,12 @@ Plans:
   3. 7-day trailing path shows recent journey route on map (not just single point)
   4. Map instance persists across day changes without re-mounting or flashing
   5. Mapbox tile requests stay under 1000 per full timeline scroll
-**Plans**: TBD
+**Plans**: 3 plans in 3 waves
+
+Plans:
+- [ ] 03-01-PLAN.md — Mapbox stack install, map contracts, and Wave 0 test scaffolds (Wave 1)
+- [ ] 03-02-PLAN.md — 7-entry trail data/layer implementation with MAP-03 tests (Wave 2)
+- [ ] 03-03-PLAN.md — JourneyMap implementation and carousel synchronization wiring (Wave 3)
 
 ### Phase 4: Rich Content
 **Goal**: Users can view full daily entries with photos, navigate quickly via timeline, and experience smooth transitions
@@ -101,7 +106,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | ---------------- | -------------- | ----------- | ---------- |
 | 1. Foundation    | 5/5            | Complete    | 2026-03-15 |
 | 2. Core Scroll   | 0/TBD          | Not started | -          |
-| 3. Map Integration | 0/TBD        | Not started | -          |
+| 3. Map Integration | 1/3 | In Progress|  |
 | 4. Rich Content  | 0/TBD          | Not started | -          |
 | 5. Deployment    | 0/TBD          | Not started | -          |
 
