@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import { mockDailyEntries } from '@/lib/mockData'
-import { createCameraSpySet, createMockMapRef } from '@/tests/mocks/mapbox'
+import { createCameraSpySet, createMockMapRef } from '@/tests/mocks/mapRuntime'
 import { JourneyMap } from '@/app/components/Map/JourneyMap'
 
 const mapSpies = createCameraSpySet()
@@ -9,7 +9,7 @@ const mapRef = createMockMapRef(mapSpies)
 
 let prefersReducedMotion = false
 
-vi.mock('react-map-gl/mapbox', async () => {
+vi.mock('react-map-gl/maplibre', async () => {
   const React = await import('react')
 
   const MockMap = React.forwardRef(function MockMap(
@@ -78,18 +78,18 @@ describe('JourneyMap', () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: (query: string) => {
-      const isReducedMotionQuery = query === '(prefers-reduced-motion: reduce)'
+        const isReducedMotionQuery = query === '(prefers-reduced-motion: reduce)'
 
-      return {
-        matches: isReducedMotionQuery ? prefersReducedMotion : false,
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      } as unknown as MediaQueryList
+        return {
+          matches: isReducedMotionQuery ? prefersReducedMotion : false,
+          media: query,
+          onchange: null,
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+        } as unknown as MediaQueryList
       },
     })
   })
@@ -99,7 +99,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[2].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -127,7 +127,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[2].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -149,7 +149,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[2].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -168,7 +168,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[2].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -181,7 +181,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[0].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -189,7 +189,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[1].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -209,7 +209,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[7].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -217,7 +217,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[8].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -227,7 +227,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[0].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -246,7 +246,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[0].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -254,21 +254,21 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[2].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
     rerender(
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[4].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
     rerender(
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[7].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
@@ -285,7 +285,7 @@ describe('JourneyMap', () => {
       <JourneyMap
         entries={mockDailyEntries}
         activeEntryId={mockDailyEntries[7].id}
-        mapboxAccessToken="test-token"
+        mapApiKey="test-token"
       />,
     )
 
