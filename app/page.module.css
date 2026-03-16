@@ -1,112 +1,18 @@
 /* app/page.module.css */
 .mapPlaceholder {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: var(--leather-light);
-  color: var(--ink-black);
-  font-family: var(--font-body);
-  text-align: center;
-  padding: var(--space-xl);
-}
-
-.mapPlaceholder p:first-child {
-  font-size: 3rem;
-  margin-bottom: var(--space-md);
-}
-
-.mapNote {
-  font-size: var(--text-sm);
-  color: var(--ink-faded);
-  font-style: italic;
-}
-
-.entriesList {
-  padding: var(--space-xl);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  color: var(--leather-dark);
-  margin-bottom: var(--space-xl);
-  text-align: center;
-}
-
-.entryCard {
+  height: 100%;
   background: var(--journal-paper);
-  border: 1px solid var(--leather-worn);
-  border-radius: 4px;
-  padding: var(--space-lg);
-  margin-bottom: var(--space-xl);
-  box-shadow: var(--shadow-sm);
-}
-
-.entryHeader {
-  border-bottom: 2px solid var(--leather-medium);
-  padding-bottom: var(--space-md);
-  margin-bottom: var(--space-md);
-}
-
-.location {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  color: var(--leather-dark);
-  margin: 0 0 var(--space-xs) 0;
-}
-
-.date {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
   color: var(--ink-faded);
-  font-style: italic;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
 }
 
-.weather,
-.distance {
-  font-size: var(--text-sm);
-  color: var(--ink-black);
-  margin: var(--space-xs) 0;
-}
-
-.diary {
-  margin: var(--space-md) 0;
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: 1.7;
-  color: var(--ink-black);
-}
-
-.diary p {
-  margin-bottom: var(--space-md);
-}
-
-.photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-}
-
-.photoPlaceholder {
-  aspect-ratio: 4/3;
-  background-color: var(--leather-light);
-  border: 1px dashed var(--leather-medium);
+.carouselWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: var(--text-lg);
-  color: var(--ink-faded);
-}
-
-.photos figcaption {
-  font-size: var(--text-sm);
-  color: var(--ink-faded);
-  font-style: italic;
-  margin-top: var(--space-xs);
-  text-align: center;
+  height: 100%;
+  overflow: hidden; /* Prevent double scrollbars */
 }
