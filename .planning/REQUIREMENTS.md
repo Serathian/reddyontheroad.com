@@ -154,9 +154,9 @@ Features that will NOT be implemented (from PROJECT.md Out of Scope):
 | MAP-02 | Phase 3 | Complete |
 | MAP-03 | Phase 3 | Complete |
 | MAP-04 | Phase 3 | Complete |
-| CONTENT-01 | Phase 4 | Pending |
+| CONTENT-01 | Phase 4 | Complete |
 | CONTENT-02 | Phase 4 | Pending |
-| CONTENT-03 | Phase 4 | Pending |
+| CONTENT-03 | Phase 4 | Complete |
 | CONTENT-04 | Phase 4 | Pending |
 | DEPLOY-01 | Phase 5 | Pending |
 | DEPLOY-02 | Phase 5 | Pending |
