@@ -6,8 +6,8 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 03.1-02-PLAN.md
-last_updated: "2026-03-16T12:41:35.554Z"
+stopped_at: Completed 03.1-03-PLAN.md
+last_updated: "2026-03-16T13:59:10.068Z"
 last_activity: 2026-03-16
 progress:
   total_phases: 5
@@ -74,6 +74,7 @@ Progress: [█████████░] 93%
 | Phase 03-map-integration P04 | 2 min | 3 tasks | 2 files |
 | Phase 03.1 P01 | 1 min | 2 tasks | 6 files |
 | Phase 03.1 P02 | 1 min | 2 tasks | 5 files |
+| Phase 03.1-maptiler-migration P03 | 1 min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -117,6 +118,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 03.1]: Preserve camera transition constants unchanged while introducing MapTiler key/style contracts
 - [Phase 03.1]: Keep JourneyMap transition behavior unchanged while swapping only provider runtime wiring.
 - [Phase 03.1]: Prefer mapApiKey/NEXT_PUBLIC_MAPTILER_API_KEY and keep legacy mapboxAccessToken as temporary migration fallback.
+- [Phase 03.1-maptiler-migration]: Removed temporary mapboxAccessToken runtime fallback after locking MapTiler-only regression coverage.
+- [Phase 03.1-maptiler-migration]: Scoped fallback-removal changes to contract/key-resolution paths only to preserve MAP-01..MAP-04 sync behavior.
 
 ### Pending Todos
 
@@ -135,8 +138,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T12:41:08.598Z
-Stopped at: Completed 03.1-02-PLAN.md
+Last session: 2026-03-16T13:59:10.066Z
+Stopped at: Completed 03.1-03-PLAN.md
 Resume file: None
 
 ---
