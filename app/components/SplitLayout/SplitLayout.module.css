@@ -6,6 +6,7 @@
   height: 100vh; /* Lock to viewport height - no page scroll */
   width: 100%;
   overflow: hidden; /* Prevent page-level scroll */
+  position: relative;
 }
 
 .mapPane {
@@ -21,6 +22,7 @@
   overflow: hidden; /* Prevent contentPane from scrolling - child will scroll */
   background: var(--journal-paper);
   height: 100%; /* Fill parent height */
+  position: relative;
 }
 
 /* Mobile: Stack vertically, sticky map */

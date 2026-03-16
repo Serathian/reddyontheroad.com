@@ -57,6 +57,26 @@
   margin: 0;
 }
 
+.openButton {
+  margin-top: var(--space-md);
+  align-self: flex-start;
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.openButton:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 /* Focus state for accessibility */
 .card:focus-visible {
   outline: 2px solid var(--focus-ring);

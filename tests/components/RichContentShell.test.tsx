@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import Home from '@/app/page'
 import { MockIntersectionObserver } from '@/tests/mocks/IntersectionObserver'
 
@@ -64,13 +64,15 @@ describe('Rich content shell orchestration', () => {
       target: { scrollTop: 420 },
     })
 
-    mockObserver.triggerIntersection(targetCard as Element, true)
+    act(() => {
+      mockObserver.triggerIntersection(targetCard as Element, true)
+    })
 
     const openButton = await screen.findByRole('button', { name: /open full day/i })
     fireEvent.click(openButton)
 
     expect(screen.getByRole('button', { name: /back to timeline/i })).toBeInTheDocument()
-    expect(screen.getByText(/Delphi, Greece/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /Delphi, Greece/i })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: /back to timeline/i }))
 

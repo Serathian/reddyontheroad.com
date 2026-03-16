@@ -3,3 +3,70 @@
   display: flex;
   flex-direction: column;
 }
+
+.rightPane {
+  position: relative;
+  height: 100%;
+}
+
+.viewSwap {
+  position: relative;
+  height: 100%;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 180ms ease-out;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fullDayLayer {
+  overflow-y: auto;
+  padding: var(--space-lg);
+}
+
+.backButton {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper-dark);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mapBoundScrubber {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.mapBoundScrubber > :global(*) {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    transition: none;
+  }
+}

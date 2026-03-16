@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 import { DayCard } from './DayCard'
 import { SkeletonCard } from './SkeletonCard'
 import type { DailyEntry } from '@/lib/types'
@@ -11,9 +11,11 @@ interface CarouselProps {
   isLoading?: boolean
   onActiveChange?: (id: string) => void
   activeId?: string | null
+  onOpenDay?: (id: string) => void
+  containerRef?: RefObject<HTMLDivElement | null>
 }
 
-export function Carousel({ entries, isLoading = false, onActiveChange, activeId }: CarouselProps) {
+export function Carousel({ entries, isLoading = false, onActiveChange, activeId, onOpenDay, containerRef }: CarouselProps) {
   const [uncontrolledActiveId, setUncontrolledActiveId] = useState<string | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const cardRefs = useRef<Map<string, HTMLElement>>(new Map())
@@ -71,12 +73,13 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId 
   }
 
   return (
-    <div className={styles.carousel}>
+    <div className={styles.carousel} data-testid="carousel-container" ref={containerRef}>
       {entries.map((entry) => (
         <DayCard
           key={entry.id}
           entry={entry}
           isActive={resolvedActiveId === entry.id}
+          onOpen={resolvedActiveId === entry.id ? () => onOpenDay?.(entry.id) : undefined}
           ref={(el) => {
             // Ref callback pattern for dynamic list
             if (el) {
