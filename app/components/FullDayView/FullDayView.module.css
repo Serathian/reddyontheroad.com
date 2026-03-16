@@ -1,0 +1,68 @@
+.container {
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--space-xl);
+  display: grid;
+  gap: var(--space-lg);
+  background: var(--journal-paper);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.date {
+  font-family: var(--font-mono), monospace;
+  color: var(--ink-faded);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: var(--text-sm);
+}
+
+.location {
+  font-size: var(--text-3xl);
+  color: var(--leather-dark);
+  line-height: 1.1;
+}
+
+.metaChips {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid var(--sepia-medium);
+  background: var(--sepia-light);
+  color: var(--ink-sepia);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.diary {
+  display: grid;
+  gap: var(--space-md);
+  color: var(--ink-black);
+  line-height: 1.7;
+}
+
+.diary :global(h1),
+.diary :global(h2),
+.diary :global(h3) {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.diary :global(p),
+.diary :global(ul),
+.diary :global(ol) {
+  margin-bottom: var(--space-sm);
+}
+
+.photos {
+  display: grid;
+  gap: var(--space-sm);
+}

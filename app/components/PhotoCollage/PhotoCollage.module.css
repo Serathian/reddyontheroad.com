@@ -1,0 +1,55 @@
+.wrapper {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+
+.photoButton {
+  border: 1px solid var(--sepia-medium);
+  background: var(--journal-paper-stained);
+  padding: var(--space-xs);
+  text-align: left;
+  display: grid;
+  gap: var(--space-xs);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.photo {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border: 1px solid var(--leather-cognac);
+}
+
+.caption {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  color: var(--ink-sepia);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.navButton {
+  border: 1px solid var(--leather-dark);
+  background: var(--sepia-light);
+  color: var(--ink-black);
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-mono), monospace;
+  cursor: pointer;
+}
+
+.emptyMessage {
+  font-family: var(--font-body), serif;
+  color: var(--ink-faded);
+  font-style: italic;
+}
