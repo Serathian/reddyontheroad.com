@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { render, screen, act } from '@testing-library/react'
 import { Carousel } from '@/app/components/Carousel/Carousel'
 import type { DailyEntry } from '@/lib/types'
 import { MockIntersectionObserver } from '@/tests/mocks/IntersectionObserver'
@@ -36,11 +36,26 @@ describe('Carousel', () => {
   ]
 
   let mockObserver: MockIntersectionObserver
+  let originalIntersectionObserver: typeof IntersectionObserver
 
   beforeEach(() => {
-    // Reset mock observer before each test
-    mockObserver = new MockIntersectionObserver()
-    vi.stubGlobal('IntersectionObserver', vi.fn(() => mockObserver))
+    // Save original constructor
+    originalIntersectionObserver = global.IntersectionObserver
+    
+    // Create a proper constructor function (not arrow function)
+    const SpyConstructor = vi.fn(function(this: any, callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+      mockObserver = new MockIntersectionObserver(callback, options)
+      return mockObserver
+    }) as any
+    
+    // Replace global constructor with spy
+    global.IntersectionObserver = SpyConstructor
+  })
+
+  afterEach(() => {
+    // Restore original constructor
+    global.IntersectionObserver = originalIntersectionObserver
+    vi.clearAllMocks()
   })
 
   it('renders all entries as DayCard components', () => {
@@ -56,7 +71,7 @@ describe('Carousel', () => {
     render(<Carousel entries={mockEntries} />)
 
     // Verify IntersectionObserver was created with center-detection config
-    expect(vi.mocked(IntersectionObserver)).toHaveBeenCalledWith(
+    expect(IntersectionObserver).toHaveBeenCalledWith(
       expect.any(Function),
       expect.objectContaining({
         root: null,
@@ -92,20 +107,22 @@ describe('Carousel', () => {
     const card2 = container.querySelector('[data-id="entry-2"]')
     expect(card2).toBeInTheDocument()
 
-    // Trigger intersection for second card
-    if (card2) {
-      mockObserver.triggerIntersection(card2, true)
-    }
+    // Trigger intersection for second card - wrap in act() because it updates state
+    act(() => {
+      if (card2) {
+        mockObserver.triggerIntersection(card2, true)
+      }
+    })
 
     // Second card should now be active
     expect(card2).toHaveAttribute('data-active', 'true')
   })
 
   it('shows skeleton cards when loading', () => {
-    render(<Carousel entries={mockEntries} isLoading={true} />)
+    const { container } = render(<Carousel entries={mockEntries} isLoading={true} />)
 
     // Skeleton cards should be present (they have aria-hidden="true")
-    const skeletons = screen.getAllByLabelText('', { hidden: true })
+    const skeletons = container.querySelectorAll('[aria-hidden="true"]')
     expect(skeletons.length).toBeGreaterThan(0)
   })
 })
