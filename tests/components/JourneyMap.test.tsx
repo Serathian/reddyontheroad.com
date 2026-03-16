@@ -163,6 +163,19 @@ describe('JourneyMap', () => {
     expect(firstPast.parentElement).toHaveAttribute('data-latitude', String(firstPastCoordinates[1]))
   })
 
+  it('coordinate-aware marker rendering avoids CSS pixel translate positioning', async () => {
+    render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    const current = await screen.findByRole('button', { name: /current location/i })
+    expect(current.getAttribute('style') ?? '').not.toContain('translate(')
+  })
+
   it('stops current camera transition before issuing the next command', async () => {
     const { rerender } = render(
       <JourneyMap
