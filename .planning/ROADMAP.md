@@ -52,8 +52,8 @@ Plans:
 **Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] 02-01-PLAN.md — Type updates and test infrastructure (Wave 1)
-- [ ] 02-02-PLAN.md — Carousel and DayCard implementation (Wave 2)
+- [x] 02-01-PLAN.md — Type updates and test infrastructure (Wave 1) ✅ 2026-03-16
+- [x] 02-02-PLAN.md — Carousel and DayCard implementation (Wave 2) ✅ 2026-03-16
 - [ ] 02-03-PLAN.md — Integration and verification (Wave 3)
 
 ### Phase 3: Map Integration

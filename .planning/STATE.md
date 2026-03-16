@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-16T06:20:29.471Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-16T08:29:00Z"
 last_activity: 2026-03-15 — Completed 01-04-PLAN.md (Mock Data Implementation)
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
   percent: 100
 ---
 
@@ -27,34 +27,38 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 2 of 5 (Core Scroll)
-Plan: 1 of 3
+Plan: 2 of 3
 Status: Phase 02-core-scroll in progress
-Last activity: 2026-03-16 — Completed 02-01-PLAN.md (Type Updates and Test Infrastructure)
+Last activity: 2026-03-16 — Completed 02-02-PLAN.md (Carousel Component)
 
-Progress: [████████░░] 75%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 18 minutes
-- Total execution time: 1.2 hours
+- Total plans completed: 6
+- Average duration: 16 minutes
+- Total execution time: 1.6 hours
 
 **By Phase:**
 
 | Phase            | Plans | Total  | Avg/Plan |
 | ---------------- | ----- | ------ | -------- |
 | 01-foundation    | 4/4   | 71 min | 18 min   |
+| 02-core-scroll   | 2/3   | 23 min | 12 min   |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6m), 01-02 (48m), 01-03 (2m), 01-04 (45m)
-- Trend: Phase complete
+- Last 5 plans: 01-02 (48m), 01-03 (2m), 01-04 (45m), 02-01 (18m), 02-02 (5m)
+- Trend: Velocity increasing (02-02 fastest plan yet)
+
+| Phase | Plan | Duration | Tasks | Files |
+| ----- | ---- | -------- | ----- | ----- |
 | Phase 01-foundation P01 | 6 min | 3 tasks | 9 files |
 | Phase 01-foundation P02 | 48 min | 2 tasks | 2 files |
 | Phase 01-foundation P03 | 2 min | 2 tasks | 5 files |
 | Phase 01-foundation P04 | 45 min | 3 tasks | 5 files |
-| Phase 01-foundation P05 | 1 min | 1 tasks | 1 files |
-| Phase 02-core-scroll P01 | 1 min | 3 tasks | 5 files |
+| Phase 02-core-scroll P01 | 18 min | 3 tasks | 5 files |
+| Phase 02-core-scroll P02 | 5 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -80,6 +84,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 01-foundation]: Added semantic --font-heading alias for component clarity (points to --font-display)
 - [Phase 02-core-scroll]: Preview field required (not optional) because every carousel card needs display text — Unlike weather/distanceMiles which are genuinely optional metadata, preview is essential for carousel card rendering
 - [Phase 02-core-scroll]: IntersectionObserver mock registered globally in test setup for DRY principle — Prevents repetitive mock setup in every test file, ensures consistent behavior
+- [Phase 02-core-scroll]: Use vi.fn with function declaration (not arrow function) for IntersectionObserver mock constructor — Arrow functions cannot be used with 'new' keyword; function declaration preserves constructor semantics while allowing call tracking
+- [Phase 02-core-scroll]: SkeletonCard shimmer animation timing set to 2.5s (not 1s or 4s) — Slower, deliberate animation consistent with vintage journal aesthetic per user decision in 02-CONTEXT.md
 
 ### Pending Todos
 
