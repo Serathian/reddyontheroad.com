@@ -8,6 +8,9 @@
   scroll-behavior: smooth;
   gap: var(--space-lg);
   padding: var(--space-xl);
+  /* Add vertical padding to allow first/last cards to scroll to center */
+  padding-top: 40vh;
+  padding-bottom: 40vh;
   height: 100%;
   
   /* Hide scrollbar but keep functionality */
