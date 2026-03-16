@@ -13,7 +13,11 @@ export default function Home() {
   return (
     <SplitLayout
       map={
-        <JourneyMap entries={mockDailyEntries} activeEntryId={activeEntryId} />
+        <JourneyMap
+          entries={mockDailyEntries}
+          activeEntryId={activeEntryId}
+          mapApiKey={process.env.NEXT_PUBLIC_MAPTILER_API_KEY}
+        />
       }
       content={
         <div className={styles.carouselWrapper}>

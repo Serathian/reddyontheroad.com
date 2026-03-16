@@ -1,13 +1,16 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import Map, { Layer, Marker, Popup, Source, type MapRef } from 'react-map-gl/mapbox'
+import maplibregl from 'maplibre-gl'
+import Map, { Layer, Marker, Popup, Source, type MapRef } from 'react-map-gl/maplibre'
 import type { DailyEntry } from '@/lib/types'
 import { buildStopPointsGeoJSON, buildTrailGeoJSON } from '@/lib/mapData'
 import {
+  buildMapTilerStyleUrl,
   CAMERA_DURATION_MS,
   CAMERA_STABLE_ZOOM,
   JourneyMapProps,
+  MAPTILER_API_KEY_ENV_VAR,
   NEAR_DISTANCE_SUBTLE_PAN_THRESHOLD_KM,
 } from './mapContracts'
 import { currentStopLayer, pastStopsLayer, trailLineLayer } from './mapLayers'
@@ -61,7 +64,7 @@ function useIsMobileViewport() {
   return isMobileViewport
 }
 
-export function JourneyMap({ entries, activeEntryId, mapboxAccessToken }: JourneyMapProps) {
+export function JourneyMap({ entries, activeEntryId, mapApiKey, mapboxAccessToken }: JourneyMapProps) {
   const mapRef = useRef<MapRef>(null)
   const [popupEntryId, setPopupEntryId] = useState<string | null>(null)
   const reducedMotion = useReducedMotionPreference()
@@ -142,13 +145,16 @@ export function JourneyMap({ entries, activeEntryId, mapboxAccessToken }: Journe
     ? entries.find((entry) => entry.id === popupEntryId) ?? null
     : null
 
+  const resolvedMapApiKey = mapApiKey ?? mapboxAccessToken ?? process.env[MAPTILER_API_KEY_ENV_VAR] ?? ''
+  const mapStyle = buildMapTilerStyleUrl(resolvedMapApiKey)
+
   return (
     <div className={styles.container}>
       <Map
         ref={mapRef}
+        mapLib={maplibregl}
         reuseMaps
-        mapboxAccessToken={mapboxAccessToken ?? process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN ?? ''}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
+        mapStyle={mapStyle}
         initialViewState={{
           longitude: activeEntry.longitude,
           latitude: activeEntry.latitude,
