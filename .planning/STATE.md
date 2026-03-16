@@ -2,16 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 03-map-integration-04-PLAN.md
-last_updated: "2026-03-16T12:05:01.029Z"
-last_activity: 2026-03-16 — Completed 03-04-PLAN.md (Coordinate-aware Marker Wiring)
+current_phase: 3.1
+current_phase_name: MapTiler Migration
+current_plan: 2
+status: executing
+stopped_at: Completed 03.1-01-PLAN.md
+last_updated: "2026-03-16T12:33:58.777Z"
+last_activity: 2026-03-16 — Completed 03.1-01-PLAN.md (Provider foundation swap)
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 12
   completed_plans: 12
-  percent: 100
+  percent: 93
 ---
 
 # Project State
@@ -22,16 +25,21 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** The map and content must move together seamlessly—as you navigate through days, the map animates to show where the family was, creating a unified storytelling experience that feels like flipping through a well-traveled journal.
 
-**Current focus:** Phase 4 - Rich Content
+**Current focus:** Phase 3.1 - MapTiler Migration
 
 ## Current Position
 
-Phase: 3 of 5 (Map Integration)
-Plan: 4 of 4
-Status: Completed 03-04-PLAN.md; phase complete and ready for Phase 4 planning
-Last activity: 2026-03-16 — Completed 03-04-PLAN.md (Coordinate-aware Marker Wiring)
+Phase: 3.1 of 5 (MapTiler Migration)
+Plan: 2 of 2
+Current Phase: 3.1
+Current Phase Name: MapTiler Migration
+Current Plan: 2
+Total Plans in Phase: 2
+Total Phases: 5
+Status: Ready to execute 03.1-02-PLAN.md
+Last activity: 2026-03-16 — Completed 03.1-01-PLAN.md (Provider foundation swap)
 
-Progress: [██████████] 100%
+Progress: [█████████░] 93%
 
 ## Performance Metrics
 
@@ -64,6 +72,7 @@ Progress: [██████████] 100%
 | Phase 03-map-integration P02 | 2 min | 3 tasks | 3 files |
 | Phase 03-map-integration P03 | 3 min | 3 tasks | 8 files |
 | Phase 03-map-integration P04 | 2 min | 3 tasks | 2 files |
+| Phase 03.1 P01 | 1 min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -103,6 +112,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 03-map-integration]: Use subtle animated emphasis for current marker with reduced-motion static equivalent
 - [Phase 03-map-integration]: Use Mapbox Marker longitude/latitude props for both current and past stop marker UI
 - [Phase 03-map-integration]: Keep mobile marker-density behavior reactive via resize-driven viewport state instead of module-scope window reads
+- [Phase 03.1]: Keep react-map-gl as the integration layer while swapping runtime provider to MapLibre
+- [Phase 03.1]: Preserve camera transition constants unchanged while introducing MapTiler key/style contracts
 
 ### Pending Todos
 
@@ -112,7 +123,7 @@ None yet.
 
 **Research Flags:**
 - Photo storage mechanism TBD (S3 vs Payload media) — need to decide before Phase 4
-- Mapbox access token needs to be obtained and configured before Phase 3
+- MapTiler API key needs to be obtained and configured for local map rendering during migration verification
 
 **Critical Pitfall Prevention:**
 - Phase 1: Map singleton pattern must be established to prevent re-mounting issues
@@ -121,8 +132,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T12:05:01.027Z
-Stopped at: Completed 03-map-integration-04-PLAN.md
+Last session: 2026-03-16T12:32:56.733Z
+Stopped at: Completed 03.1-01-PLAN.md
 Resume file: None
 
 ---

@@ -15,6 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Next.js setup, Payload integration, design system, basic layout
 - [ ] **Phase 2: Core Scroll** - Carousel navigation with scroll detection and day cards
 - [x] **Phase 3: Map Integration** - Mapbox animation, trailing path, location markers
+- [ ] **Phase 3.1 (INSERTED): MapTiler Migration** - Replace Mapbox provider with MapTiler free alternative while preserving map sync behavior
 - [ ] **Phase 4: Rich Content** - Full day view, photos, timeline scrubber, transitions
 - [ ] **Phase 5: Deployment** - Docker container, CI/CD, performance, accessibility
 
@@ -74,9 +75,24 @@ Plans:
 - [x] 03-03-PLAN.md — JourneyMap implementation and carousel synchronization wiring (Wave 3) ✅ 2026-03-16
 - [ ] 03-04-PLAN.md — [GAP CLOSURE] Coordinate-aware MAP-04 marker wiring and regression coverage (Wave 4)
 
+### Phase 3.1 (INSERTED): MapTiler Migration
+**Goal**: Migrate map provider from Mapbox to MapTiler (free alternative) using a minimal-swap approach that preserves existing map/content synchronization behavior.
+**Depends on**: Phase 3
+**Requirements**: MAP-01, MAP-02, MAP-03, MAP-04
+**Success Criteria** (what must be TRUE):
+  1. JourneyMap runs on MapLibre + MapTiler key/style wiring instead of Mapbox.
+  2. Current marker, 7-entry trail, and map camera pan/fly behavior remain unchanged from user perspective.
+  3. Existing map regression tests for MAP-01..MAP-04 pass after provider swap.
+  4. MapTiler public API key setup is documented for local/preview usage.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 03.1-01-PLAN.md — Provider foundation swap (deps/env/contracts/layer typings) (Wave 1)
+- [ ] 03.1-02-PLAN.md — JourneyMap runtime + tests migration to MapLibre/MapTiler (Wave 2)
+
 ### Phase 4: Rich Content
 **Goal**: Users can view full daily entries with photos, navigate quickly via timeline, and experience smooth transitions
-**Depends on**: Phase 3
+**Depends on**: Phase 3.1
 **Requirements**: CONTENT-01, CONTENT-02, CONTENT-03, CONTENT-04
 **Success Criteria** (what must be TRUE):
   1. User can click centered carousel card to open full day view with all content (photos, diary, metadata)
@@ -101,13 +117,14 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 3.1 → 4 → 5
 
 | Phase            | Plans Complete | Status      | Completed  |
 | ---------------- | -------------- | ----------- | ---------- |
 | 1. Foundation    | 5/5            | Complete    | 2026-03-15 |
 | 2. Core Scroll   | 0/TBD          | Not started | -          |
-| 3. Map Integration | 3/4 | In progress (gap closure) | - |
+| 3. Map Integration | 4/4 | Complete | 2026-03-16 |
+| 3.1 MapTiler Migration (INSERTED) | 1/2 | In Progress|  |
 | 4. Rich Content  | 0/TBD          | Not started | -          |
 | 5. Deployment    | 0/TBD          | Not started | -          |
 
