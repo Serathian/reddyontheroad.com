@@ -1,11 +1,237 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import { mockDailyEntries } from '@/lib/mockData'
 import { createCameraSpySet, createMockMapRef } from '@/tests/mocks/mapbox'
+import { JourneyMap } from '@/app/components/Map/JourneyMap'
+
+const mapSpies = createCameraSpySet()
+const mapRef = createMockMapRef(mapSpies)
+
+let prefersReducedMotion = false
+
+vi.mock('react-map-gl/mapbox', async () => {
+  const React = await import('react')
+
+  const MockMap = React.forwardRef(function MockMap(
+    { children, onLoad, ...props }: Record<string, unknown>,
+    ref: React.ForwardedRef<unknown>,
+  ) {
+    React.useImperativeHandle(ref, () => mapRef.current)
+    React.useEffect(() => {
+      onLoad?.()
+    }, [onLoad])
+
+    return (
+      <div data-testid="journey-map" data-props={JSON.stringify(props)}>
+        {children}
+      </div>
+    )
+  })
+
+  const Source = ({ id, data, children }: Record<string, unknown>) => (
+    <div data-testid={`source-${String(id)}`} data-features={JSON.stringify(data)}>
+      {children}
+    </div>
+  )
+
+  const Layer = ({ id }: Record<string, unknown>) => <div data-testid={`layer-${String(id)}`} />
+
+  const Marker = ({ children }: { children: React.ReactNode }) => <>{children}</>
+
+  const Popup = ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="map-popup">{children}</div>
+  )
+
+  return {
+    __esModule: true,
+    default: MockMap,
+    Source,
+    Layer,
+    Marker,
+    Popup,
+  }
+})
 
 describe('JourneyMap', () => {
-  it.todo('renders current location marker from selected DailyEntry')
-  it.todo('coalesces camera updates when active day changes quickly')
-  it.todo('emphasizes the current marker over trailing points')
-  it.todo('renders a trailing path context for recent journey entries')
+  beforeEach(() => {
+    mapSpies.stop.mockClear()
+    mapSpies.easeTo.mockClear()
+    mapSpies.flyTo.mockClear()
+    prefersReducedMotion = false
+
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: (query: string) => {
+      const isReducedMotionQuery = query === '(prefers-reduced-motion: reduce)'
+
+      return {
+        matches: isReducedMotionQuery ? prefersReducedMotion : false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      } as unknown as MediaQueryList
+      },
+    })
+  })
+
+  it('renders active stop as emphasized marker and mutes prior points', async () => {
+    const { container } = render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    const current = await screen.findByRole('button', { name: /current location/i })
+    const pastStops = container.querySelectorAll('[data-testid="past-stop"]')
+
+    expect(current).toHaveAttribute('data-state', 'current')
+    expect(current).toHaveAttribute('data-animated', 'true')
+    expect(pastStops.length).toBeGreaterThan(0)
+    expect(pastStops[0]).toHaveAttribute('data-state', 'past')
+  })
+
+  it('disables marker animation in reduced-motion mode while keeping static emphasis', async () => {
+    prefersReducedMotion = true
+
+    render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    const current = await screen.findByRole('button', { name: /current location/i })
+    expect(current).toHaveAttribute('data-animated', 'false')
+    expect(current).toHaveAttribute('data-emphasis', 'static')
+  })
+
+  it('stops current camera transition before issuing the next command', async () => {
+    const { rerender } = render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[0].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[1].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    await waitFor(() => {
+      expect(mapSpies.stop).toHaveBeenCalled()
+      expect(mapSpies.flyTo).toHaveBeenCalled()
+    })
+
+    const stopOrder = mapSpies.stop.mock.invocationCallOrder[0]
+    const commandOrder = mapSpies.flyTo.mock.invocationCallOrder[0]
+
+    expect(stopOrder).toBeLessThan(commandOrder)
+  })
+
+  it('uses pan/ease for nearby moves and fly for larger jumps', async () => {
+    const { rerender } = render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[7].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[8].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    await waitFor(() => expect(mapSpies.easeTo).toHaveBeenCalled())
+
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[0].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    await waitFor(() => expect(mapSpies.flyTo).toHaveBeenCalled())
+
+    expect(mapSpies.easeTo).toHaveBeenCalledWith(
+      expect.objectContaining({ duration: 1200 }),
+    )
+    expect(mapSpies.flyTo).toHaveBeenCalledWith(
+      expect.objectContaining({ duration: 1500 }),
+    )
+  })
+
+  it('coalesces camera updates to the latest active target during rapid changes', async () => {
+    const { rerender } = render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[0].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[4].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+    rerender(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[7].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    await waitFor(() => expect(mapSpies.flyTo).toHaveBeenCalled())
+
+    const latestCenter = [mockDailyEntries[7].longitude, mockDailyEntries[7].latitude]
+    const lastFlyCall = mapSpies.flyTo.mock.calls.at(-1)?.[0] as { center?: [number, number] }
+
+    expect(lastFlyCall.center).toEqual(latestCenter)
+  })
+
+  it('renders a trailing path context for recent journey entries', async () => {
+    render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[7].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    const trailSource = await screen.findByTestId('source-journey-trail')
+    const trailData = JSON.parse(trailSource.getAttribute('data-features') || '{}') as {
+      features?: [{ properties?: { pointCount?: number } }]
+    }
+
+    expect(trailData.features?.[0]?.properties?.pointCount).toBe(7)
+  })
 
   it('provides deterministic camera spies for future map assertions', () => {
     const spies = createCameraSpySet()
