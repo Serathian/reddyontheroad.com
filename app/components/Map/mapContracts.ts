@@ -71,10 +71,6 @@ export interface JourneyMapProps {
    */
   mapApiKey?: string
   /**
-   * @deprecated Legacy Mapbox prop kept temporarily for migration compatibility.
-   */
-  mapboxAccessToken?: string
-  /**
    * Optional callback emitted after camera transition settles.
    */
   onCameraSettled?: (entryId: DailyEntry['id'], mode: CameraTransitionMode) => void

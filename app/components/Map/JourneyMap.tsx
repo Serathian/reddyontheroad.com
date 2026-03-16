@@ -64,7 +64,7 @@ function useIsMobileViewport() {
   return isMobileViewport
 }
 
-export function JourneyMap({ entries, activeEntryId, mapApiKey, mapboxAccessToken }: JourneyMapProps) {
+export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProps) {
   const mapRef = useRef<MapRef>(null)
   const [popupEntryId, setPopupEntryId] = useState<string | null>(null)
   const reducedMotion = useReducedMotionPreference()
@@ -145,7 +145,7 @@ export function JourneyMap({ entries, activeEntryId, mapApiKey, mapboxAccessToke
     ? entries.find((entry) => entry.id === popupEntryId) ?? null
     : null
 
-  const resolvedMapApiKey = mapApiKey ?? mapboxAccessToken ?? process.env[MAPTILER_API_KEY_ENV_VAR] ?? ''
+  const resolvedMapApiKey = mapApiKey ?? process.env[MAPTILER_API_KEY_ENV_VAR] ?? ''
   const mapStyle = buildMapTilerStyleUrl(resolvedMapApiKey)
 
   return (
