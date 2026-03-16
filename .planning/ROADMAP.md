@@ -49,7 +49,7 @@ Plans:
   2. Active day is detected automatically as user scrolls (no manual selection needed)
   3. Day cards display date, location name, and preview content clearly
   4. Scroll performance maintains 60fps with <10% JS execution during scroll
-**Plans**: 3 plans in 3 waves
+**Plans**: 4 plans in 4 waves
 
 Plans:
 - [x] 02-01-PLAN.md — Type updates and test infrastructure (Wave 1) ✅ 2026-03-16
@@ -72,6 +72,7 @@ Plans:
 - [x] 03-01-PLAN.md — Mapbox stack install, map contracts, and Wave 0 test scaffolds (Wave 1) ✅ 2026-03-16
 - [x] 03-02-PLAN.md — 7-entry trail data/layer implementation with MAP-03 tests (Wave 2) ✅ 2026-03-16
 - [x] 03-03-PLAN.md — JourneyMap implementation and carousel synchronization wiring (Wave 3) ✅ 2026-03-16
+- [ ] 03-04-PLAN.md — [GAP CLOSURE] Coordinate-aware MAP-04 marker wiring and regression coverage (Wave 4)
 
 ### Phase 4: Rich Content
 **Goal**: Users can view full daily entries with photos, navigate quickly via timeline, and experience smooth transitions
@@ -106,7 +107,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | ---------------- | -------------- | ----------- | ---------- |
 | 1. Foundation    | 5/5            | Complete    | 2026-03-15 |
 | 2. Core Scroll   | 0/TBD          | Not started | -          |
-| 3. Map Integration | 3/3 | Complete | 2026-03-16 |
+| 3. Map Integration | 3/4 | In progress (gap closure) | - |
 | 4. Rich Content  | 0/TBD          | Not started | -          |
 | 5. Deployment    | 0/TBD          | Not started | -          |
 
