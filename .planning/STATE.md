@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 03-map-integration-01-PLAN.md
-last_updated: "2026-03-16T10:59:03.566Z"
-last_activity: 2026-03-16 — Completed 03-01-PLAN.md (Map Integration Foundation)
+stopped_at: Completed 03-map-integration-02-PLAN.md
+last_updated: "2026-03-16T11:04:22.427Z"
+last_activity: 2026-03-16 — Completed 03-02-PLAN.md (MAP-03 Trail Data + Layers)
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_plans: 10
+  percent: 91
 ---
 
 # Project State
@@ -27,18 +27,18 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 3 of 5 (Map Integration)
-Plan: 1 of 3
-Status: Completed 03-01-PLAN.md; ready for 03-02
-Last activity: 2026-03-16 — Completed 03-01-PLAN.md (Map Integration Foundation)
+Plan: 2 of 3
+Status: Completed 03-02-PLAN.md; ready for 03-03
+Last activity: 2026-03-16 — Completed 03-02-PLAN.md (MAP-03 Trail Data + Layers)
 
-Progress: [████████░░] 82%
+Progress: [█████████░] 91%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 14 minutes
-- Total execution time: 2.0 hours
+- Total plans completed: 10
+- Average duration: 13 minutes
+- Total execution time: 2.1 hours
 
 **By Phase:**
 
@@ -48,8 +48,8 @@ Progress: [████████░░] 82%
 | 02-core-scroll   | 2/3   | 23 min | 12 min   |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (48m), 01-03 (2m), 01-04 (45m), 02-01 (18m), 02-02 (5m)
-- Trend: Velocity increasing (02-02 fastest plan yet)
+- Last 5 plans: 01-03 (2m), 01-04 (45m), 02-01 (18m), 02-02 (5m), 03-02 (2m)
+- Trend: Fast execution sustained in recent plans
 
 | Phase | Plan | Duration | Tasks | Files |
 | ----- | ---- | -------- | ----- | ----- |
@@ -61,6 +61,7 @@ Progress: [████████░░] 82%
 | Phase 02-core-scroll P02 | 5 min | 3 tasks | 8 files |
 | Phase 02-core-scroll P03 | 1 min | 2 tasks | 4 files |
 | Phase 03-map-integration P01 | 3 min | 3 tasks | 7 files |
+| Phase 03-map-integration P02 | 2 min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 02-core-scroll]: Add 40vh vertical padding to carousel container — First and last cards couldn't reach center snap position. Padding creates scroll room for edge cards to center, aligning with IntersectionObserver rootMargin.
 - [Phase 03-map-integration]: Pin mapbox dependencies to exact versions to avoid integration drift during implementation waves
 - [Phase 03-map-integration]: Encode camera timing, zoom, and 7-entry trail behavior as exported contracts before implementation
+- [Phase 03-map-integration]: Use sequence-based last-7 entry slicing ending at active index instead of calendar slicing
+- [Phase 03-map-integration]: Encode visual fading through stop-point ageOpacity metadata consumed by map layers
 
 ### Pending Todos
 
@@ -111,8 +114,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T10:59:03.564Z
-Stopped at: Completed 03-map-integration-01-PLAN.md
+Last session: 2026-03-16T11:03:57.896Z
+Stopped at: Completed 03-map-integration-02-PLAN.md
 Resume file: None
 
 ---

@@ -60,10 +60,11 @@ Requirements extracted from PROJECT.md and validated against research findings. 
 - **Why**: Unified storytelling experience (map and content move together)
 - **Phase**: Phase 3
 
-**MAP-03**: 7-day trailing GPS path shows recent journey context
+- [x] **MAP-03**: 7-day trailing GPS path shows recent journey context
 - **Source**: PROJECT.md requirements
 - **Why**: Visual storytelling — "where we've been this week"
 - **Phase**: Phase 3
+- **Completed**: 2026-03-16 (Plan 03-02)
 
 **MAP-04**: Current location marker with animation
 - **Source**: FEATURES.md table stakes
