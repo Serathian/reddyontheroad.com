@@ -6,9 +6,9 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 03.1-01-PLAN.md
-last_updated: "2026-03-16T12:33:58.777Z"
-last_activity: 2026-03-16 — Completed 03.1-01-PLAN.md (Provider foundation swap)
+stopped_at: Completed 03.1-02-PLAN.md
+last_updated: "2026-03-16T12:41:35.554Z"
+last_activity: 2026-03-16
 progress:
   total_phases: 5
   completed_phases: 3
@@ -37,7 +37,7 @@ Current Plan: 2
 Total Plans in Phase: 2
 Total Phases: 5
 Status: Ready to execute 03.1-02-PLAN.md
-Last activity: 2026-03-16 — Completed 03.1-01-PLAN.md (Provider foundation swap)
+Last activity: 2026-03-16
 
 Progress: [█████████░] 93%
 
@@ -73,6 +73,7 @@ Progress: [█████████░] 93%
 | Phase 03-map-integration P03 | 3 min | 3 tasks | 8 files |
 | Phase 03-map-integration P04 | 2 min | 3 tasks | 2 files |
 | Phase 03.1 P01 | 1 min | 2 tasks | 6 files |
+| Phase 03.1 P02 | 1 min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -114,6 +115,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 03-map-integration]: Keep mobile marker-density behavior reactive via resize-driven viewport state instead of module-scope window reads
 - [Phase 03.1]: Keep react-map-gl as the integration layer while swapping runtime provider to MapLibre
 - [Phase 03.1]: Preserve camera transition constants unchanged while introducing MapTiler key/style contracts
+- [Phase 03.1]: Keep JourneyMap transition behavior unchanged while swapping only provider runtime wiring.
+- [Phase 03.1]: Prefer mapApiKey/NEXT_PUBLIC_MAPTILER_API_KEY and keep legacy mapboxAccessToken as temporary migration fallback.
 
 ### Pending Todos
 
@@ -132,8 +135,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T12:32:56.733Z
-Stopped at: Completed 03.1-01-PLAN.md
+Last session: 2026-03-16T12:41:08.598Z
+Stopped at: Completed 03.1-02-PLAN.md
 Resume file: None
 
 ---
