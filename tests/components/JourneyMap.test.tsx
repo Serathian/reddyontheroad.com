@@ -36,7 +36,23 @@ vi.mock('react-map-gl/mapbox', async () => {
 
   const Layer = ({ id }: Record<string, unknown>) => <div data-testid={`layer-${String(id)}`} />
 
-  const Marker = ({ children }: { children: React.ReactNode }) => <>{children}</>
+  const Marker = ({
+    children,
+    longitude,
+    latitude,
+  }: {
+    children: React.ReactNode
+    longitude: number
+    latitude: number
+  }) => (
+    <div
+      data-testid="map-marker"
+      data-longitude={String(longitude)}
+      data-latitude={String(latitude)}
+    >
+      {children}
+    </div>
+  )
 
   const Popup = ({ children }: { children: React.ReactNode }) => (
     <div data-testid="map-popup">{children}</div>
@@ -78,7 +94,7 @@ describe('JourneyMap', () => {
     })
   })
 
-  it('renders active stop as emphasized marker and mutes prior points', async () => {
+  it('coordinate-aware current marker uses active entry coordinates', async () => {
     const { container } = render(
       <JourneyMap
         entries={mockDailyEntries}
@@ -92,11 +108,19 @@ describe('JourneyMap', () => {
 
     expect(current).toHaveAttribute('data-state', 'current')
     expect(current).toHaveAttribute('data-animated', 'true')
+    expect(current.parentElement).toHaveAttribute(
+      'data-longitude',
+      String(mockDailyEntries[2].longitude),
+    )
+    expect(current.parentElement).toHaveAttribute(
+      'data-latitude',
+      String(mockDailyEntries[2].latitude),
+    )
     expect(pastStops.length).toBeGreaterThan(0)
     expect(pastStops[0]).toHaveAttribute('data-state', 'past')
   })
 
-  it('disables marker animation in reduced-motion mode while keeping static emphasis', async () => {
+  it('coordinate-aware reduced-motion current marker keeps coordinates and disables animation', async () => {
     prefersReducedMotion = true
 
     render(
@@ -110,6 +134,33 @@ describe('JourneyMap', () => {
     const current = await screen.findByRole('button', { name: /current location/i })
     expect(current).toHaveAttribute('data-animated', 'false')
     expect(current).toHaveAttribute('data-emphasis', 'static')
+    expect(current.parentElement).toHaveAttribute(
+      'data-longitude',
+      String(mockDailyEntries[2].longitude),
+    )
+    expect(current.parentElement).toHaveAttribute(
+      'data-latitude',
+      String(mockDailyEntries[2].latitude),
+    )
+  })
+
+  it('coordinate-aware past stops also receive marker longitude/latitude props', async () => {
+    const { container } = render(
+      <JourneyMap
+        entries={mockDailyEntries}
+        activeEntryId={mockDailyEntries[2].id}
+        mapboxAccessToken="test-token"
+      />,
+    )
+
+    const pastStops = await waitFor(() => container.querySelectorAll('[data-testid="past-stop"]'))
+    expect(pastStops.length).toBeGreaterThan(0)
+
+    const firstPast = pastStops[0]
+    const firstPastCoordinates = [mockDailyEntries[0].longitude, mockDailyEntries[0].latitude]
+
+    expect(firstPast.parentElement).toHaveAttribute('data-longitude', String(firstPastCoordinates[0]))
+    expect(firstPast.parentElement).toHaveAttribute('data-latitude', String(firstPastCoordinates[1]))
   })
 
   it('stops current camera transition before issuing the next command', async () => {
