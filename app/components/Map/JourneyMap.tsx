@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import Map, { Layer, Popup, Source, type MapRef } from 'react-map-gl/mapbox'
+import Map, { Layer, Marker, Popup, Source, type MapRef } from 'react-map-gl/mapbox'
 import type { DailyEntry } from '@/lib/types'
 import { buildStopPointsGeoJSON, buildTrailGeoJSON } from '@/lib/mapData'
 import {
@@ -45,10 +45,27 @@ function useReducedMotionPreference() {
   return reducedMotion
 }
 
+function useIsMobileViewport() {
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const updateViewport = () => setIsMobileViewport(window.innerWidth <= 768)
+    updateViewport()
+
+    window.addEventListener('resize', updateViewport)
+    return () => window.removeEventListener('resize', updateViewport)
+  }, [])
+
+  return isMobileViewport
+}
+
 export function JourneyMap({ entries, activeEntryId, mapboxAccessToken }: JourneyMapProps) {
   const mapRef = useRef<MapRef>(null)
   const [popupEntryId, setPopupEntryId] = useState<string | null>(null)
   const reducedMotion = useReducedMotionPreference()
+  const isMobileViewport = useIsMobileViewport()
 
   const activeIndex = useMemo(
     () => Math.max(0, entries.findIndex((entry) => entry.id === activeEntryId)),
@@ -160,26 +177,21 @@ export function JourneyMap({ entries, activeEntryId, mapboxAccessToken }: Journe
           }
 
           return (
-            <button
-              key={id}
-              type="button"
-              className={`${styles.marker} ${isCurrent ? styles.currentMarker : styles.pastMarker} ${
-                isCurrent && !reducedMotion ? styles.currentMarkerAnimated : ''
-              }`}
-              data-testid={isCurrent ? 'current-stop' : 'past-stop'}
-              data-state={isCurrent ? 'current' : 'past'}
-              data-animated={isCurrent && !reducedMotion ? 'true' : 'false'}
-              data-emphasis={isCurrent ? 'static' : 'muted'}
-              aria-label={isCurrent ? 'Current location' : 'Past stop'}
-              onClick={() => setPopupEntryId(id)}
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                transform: `translate(${longitude}px, ${latitude}px)`,
-                opacity: isCurrent ? 1 : feature.properties.ageOpacity,
-              }}
-            />
+            <Marker key={id} longitude={longitude} latitude={latitude} anchor="center">
+              <button
+                type="button"
+                className={`${styles.marker} ${isCurrent ? styles.currentMarker : styles.pastMarker} ${
+                  isCurrent && !reducedMotion ? styles.currentMarkerAnimated : ''
+                }`}
+                data-testid={isCurrent ? 'current-stop' : 'past-stop'}
+                data-state={isCurrent ? 'current' : 'past'}
+                data-animated={isCurrent && !reducedMotion ? 'true' : 'false'}
+                data-emphasis={isCurrent ? 'static' : 'muted'}
+                aria-label={isCurrent ? 'Current location' : 'Past stop'}
+                onClick={() => setPopupEntryId(id)}
+                style={{ opacity: isCurrent ? 1 : feature.properties.ageOpacity }}
+              />
+            </Marker>
           )
         })}
 
@@ -206,4 +218,3 @@ export function JourneyMap({ entries, activeEntryId, mapboxAccessToken }: Journe
     </div>
   )
 }
-  const isMobileViewport = typeof window !== 'undefined' ? window.innerWidth <= 768 : false
