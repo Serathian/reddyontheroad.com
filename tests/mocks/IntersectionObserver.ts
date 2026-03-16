@@ -73,8 +73,7 @@ export class MockIntersectionObserver implements IntersectionObserver {
         toJSON: () => ({})
       } as DOMRectReadOnly),
       rootBounds: null,
-      time: Date.now(),
-      isVisible: isIntersecting
+      time: Date.now()
     }
 
     this.callback([entry], this)
