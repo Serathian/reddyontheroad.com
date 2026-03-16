@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Next.js setup, Payload integration, design system, basic layout
 - [ ] **Phase 2: Core Scroll** - Carousel navigation with scroll detection and day cards
-- [ ] **Phase 3: Map Integration** - Mapbox animation, trailing path, location markers
+- [x] **Phase 3: Map Integration** - Mapbox animation, trailing path, location markers
 - [ ] **Phase 4: Rich Content** - Full day view, photos, timeline scrubber, transitions
 - [ ] **Phase 5: Deployment** - Docker container, CI/CD, performance, accessibility
 
@@ -71,7 +71,7 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — Mapbox stack install, map contracts, and Wave 0 test scaffolds (Wave 1) ✅ 2026-03-16
 - [x] 03-02-PLAN.md — 7-entry trail data/layer implementation with MAP-03 tests (Wave 2) ✅ 2026-03-16
-- [ ] 03-03-PLAN.md — JourneyMap implementation and carousel synchronization wiring (Wave 3)
+- [x] 03-03-PLAN.md — JourneyMap implementation and carousel synchronization wiring (Wave 3) ✅ 2026-03-16
 
 ### Phase 4: Rich Content
 **Goal**: Users can view full daily entries with photos, navigate quickly via timeline, and experience smooth transitions
@@ -106,7 +106,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | ---------------- | -------------- | ----------- | ---------- |
 | 1. Foundation    | 5/5            | Complete    | 2026-03-15 |
 | 2. Core Scroll   | 0/TBD          | Not started | -          |
-| 3. Map Integration | 2/3 | In Progress|  |
+| 3. Map Integration | 3/3 | Complete | 2026-03-16 |
 | 4. Rich Content  | 0/TBD          | Not started | -          |
 | 5. Deployment    | 0/TBD          | Not started | -          |
 

@@ -50,15 +50,17 @@ Requirements extracted from PROJECT.md and validated against research findings. 
 
 ### Map Integration (MAP)
 
-**MAP-01**: Mapbox GL map displays current day's GPS location
+- [x] **MAP-01**: Mapbox GL map displays current day's GPS location
 - **Source**: PROJECT.md requirements
 - **Why**: Core to "story map" concept
 - **Phase**: Phase 3
+- **Completed**: 2026-03-16 (Plan 03-03)
 
-**MAP-02**: Map camera animates smoothly between days as user navigates
+- [x] **MAP-02**: Map camera animates smoothly between days as user navigates
 - **Source**: PROJECT.md requirements, core value
 - **Why**: Unified storytelling experience (map and content move together)
 - **Phase**: Phase 3
+- **Completed**: 2026-03-16 (Plan 03-03)
 
 - [x] **MAP-03**: 7-day trailing GPS path shows recent journey context
 - **Source**: PROJECT.md requirements
@@ -66,10 +68,11 @@ Requirements extracted from PROJECT.md and validated against research findings. 
 - **Phase**: Phase 3
 - **Completed**: 2026-03-16 (Plan 03-02)
 
-**MAP-04**: Current location marker with animation
+- [x] **MAP-04**: Current location marker with animation
 - **Source**: FEATURES.md table stakes
 - **Why**: Clear visual indicator of current day's location
 - **Phase**: Phase 3
+- **Completed**: 2026-03-16 (Plan 03-03)
 
 ### Rich Content (CONTENT)
 

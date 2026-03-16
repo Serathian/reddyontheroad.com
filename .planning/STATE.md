@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 03-map-integration-02-PLAN.md
-last_updated: "2026-03-16T11:04:22.427Z"
-last_activity: 2026-03-16 — Completed 03-02-PLAN.md (MAP-03 Trail Data + Layers)
+stopped_at: Completed 03-map-integration-03-PLAN.md
+last_updated: "2026-03-16T11:17:04.848Z"
+last_activity: 2026-03-16 — Completed 03-03-PLAN.md (JourneyMap + Carousel Synchronization)
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 11
-  completed_plans: 10
-  percent: 91
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -22,21 +22,21 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** The map and content must move together seamlessly—as you navigate through days, the map animates to show where the family was, creating a unified storytelling experience that feels like flipping through a well-traveled journal.
 
-**Current focus:** Phase 3 - Map Integration
+**Current focus:** Phase 4 - Rich Content
 
 ## Current Position
 
 Phase: 3 of 5 (Map Integration)
-Plan: 2 of 3
-Status: Completed 03-02-PLAN.md; ready for 03-03
-Last activity: 2026-03-16 — Completed 03-02-PLAN.md (MAP-03 Trail Data + Layers)
+Plan: 3 of 3
+Status: Completed 03-03-PLAN.md; phase complete and ready for Phase 4 planning
+Last activity: 2026-03-16 — Completed 03-03-PLAN.md (JourneyMap + Carousel Synchronization)
 
-Progress: [█████████░] 91%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 11
 - Average duration: 13 minutes
 - Total execution time: 2.1 hours
 
@@ -48,7 +48,7 @@ Progress: [█████████░] 91%
 | 02-core-scroll   | 2/3   | 23 min | 12 min   |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (2m), 01-04 (45m), 02-01 (18m), 02-02 (5m), 03-02 (2m)
+- Last 5 plans: 01-04 (45m), 02-01 (18m), 02-02 (5m), 03-02 (2m), 03-03 (3m)
 - Trend: Fast execution sustained in recent plans
 
 | Phase | Plan | Duration | Tasks | Files |
@@ -62,6 +62,7 @@ Progress: [█████████░] 91%
 | Phase 02-core-scroll P03 | 1 min | 2 tasks | 4 files |
 | Phase 03-map-integration P01 | 3 min | 3 tasks | 7 files |
 | Phase 03-map-integration P02 | 2 min | 3 tasks | 3 files |
+| Phase 03-map-integration P03 | 3 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,9 @@ See PROJECT.md for all historical decisions.
 - [Phase 03-map-integration]: Encode camera timing, zoom, and 7-entry trail behavior as exported contracts before implementation
 - [Phase 03-map-integration]: Use sequence-based last-7 entry slicing ending at active index instead of calendar slicing
 - [Phase 03-map-integration]: Encode visual fading through stop-point ageOpacity metadata consumed by map layers
+- [Phase 03-map-integration]: Lift active entry selection to page-level state and run Carousel in controlled mode for map sync
+- [Phase 03-map-integration]: Use map.stop() before every transition and switch pan/fly based on near-distance threshold
+- [Phase 03-map-integration]: Use subtle animated emphasis for current marker with reduced-motion static equivalent
 
 ### Pending Todos
 
@@ -114,8 +118,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T11:03:57.896Z
-Stopped at: Completed 03-map-integration-02-PLAN.md
+Last session: 2026-03-16T11:17:04.846Z
+Stopped at: Completed 03-map-integration-03-PLAN.md
 Resume file: None
 
 ---
