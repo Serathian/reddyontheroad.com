@@ -125,4 +125,27 @@ describe('Carousel', () => {
     const skeletons = container.querySelectorAll('[aria-hidden="true"]')
     expect(skeletons.length).toBeGreaterThan(0)
   })
+
+  it('calls onActiveChange when observer sets active entry', () => {
+    const onActiveChange = vi.fn()
+    const { container } = render(<Carousel entries={mockEntries} onActiveChange={onActiveChange} />)
+
+    const card3 = container.querySelector('[data-id="entry-3"]')
+    expect(card3).toBeInTheDocument()
+
+    act(() => {
+      if (card3) {
+        mockObserver.triggerIntersection(card3, true)
+      }
+    })
+
+    expect(onActiveChange).toHaveBeenCalledWith('entry-3')
+  })
+
+  it('respects controlled activeId value', () => {
+    const { container } = render(<Carousel entries={mockEntries} activeId="entry-2" />)
+
+    const active = container.querySelector('[data-id="entry-2"]')
+    expect(active).toHaveAttribute('data-active', 'true')
+  })
 })

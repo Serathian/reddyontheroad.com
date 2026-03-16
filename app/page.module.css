@@ -1,15 +1,3 @@
-/* app/page.module.css */
-.mapPlaceholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background: var(--journal-paper);
-  color: var(--ink-faded);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-}
-
 .carouselWrapper {
   height: 100%; /* Fill contentPane height */
   display: flex;

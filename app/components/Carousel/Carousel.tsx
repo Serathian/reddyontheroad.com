@@ -9,12 +9,28 @@ import styles from './Carousel.module.css'
 interface CarouselProps {
   entries: DailyEntry[]
   isLoading?: boolean
+  onActiveChange?: (id: string) => void
+  activeId?: string | null
 }
 
-export function Carousel({ entries, isLoading = false }: CarouselProps) {
-  const [activeId, setActiveId] = useState<string | null>(null)
+export function Carousel({ entries, isLoading = false, onActiveChange, activeId }: CarouselProps) {
+  const [uncontrolledActiveId, setUncontrolledActiveId] = useState<string | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const cardRefs = useRef<Map<string, HTMLElement>>(new Map())
+  const lastNotifiedActiveId = useRef<string | null>(null)
+
+  const resolvedActiveId = activeId ?? uncontrolledActiveId
+
+  const setResolvedActiveId = (nextId: string) => {
+    if (activeId === undefined) {
+      setUncontrolledActiveId(nextId)
+    }
+
+    if (lastNotifiedActiveId.current !== nextId) {
+      onActiveChange?.(nextId)
+      lastNotifiedActiveId.current = nextId
+    }
+  }
 
   useEffect(() => {
     // Create observer with center-detection configuration
@@ -23,7 +39,7 @@ export function Carousel({ entries, isLoading = false }: CarouselProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute('data-id')
-            if (id) setActiveId(id)
+            if (id) setResolvedActiveId(id)
           }
         })
       },
@@ -41,7 +57,7 @@ export function Carousel({ entries, isLoading = false }: CarouselProps) {
 
     // CRITICAL: Cleanup on unmount (prevents memory leaks)
     return () => observer.disconnect()
-  }, [entries])
+  }, [entries, activeId, onActiveChange])
 
   // Loading state: show skeleton cards
   if (isLoading) {
@@ -60,7 +76,7 @@ export function Carousel({ entries, isLoading = false }: CarouselProps) {
         <DayCard
           key={entry.id}
           entry={entry}
-          isActive={activeId === entry.id}
+          isActive={resolvedActiveId === entry.id}
           ref={(el) => {
             // Ref callback pattern for dynamic list
             if (el) {
