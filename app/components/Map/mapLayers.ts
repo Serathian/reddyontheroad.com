@@ -1,4 +1,4 @@
-import type { LayerSpecification } from 'mapbox-gl'
+import type { LayerSpecification } from 'maplibre-gl'
 
 export const trailLineLayer: LayerSpecification = {
   id: 'journey-trail-line',

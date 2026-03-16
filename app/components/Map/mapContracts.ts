@@ -1,5 +1,15 @@
 import type { DailyEntry } from '@/lib/types'
 
+export const MAPTILER_API_KEY_ENV_VAR = 'NEXT_PUBLIC_MAPTILER_API_KEY' as const
+export const MAPTILER_DEFAULT_STYLE_ID = 'streets-v2' as const
+
+export function buildMapTilerStyleUrl(
+  apiKey: string,
+  styleId: string = MAPTILER_DEFAULT_STYLE_ID,
+): string {
+  return `https://api.maptiler.com/maps/${styleId}/style.json?key=${apiKey}`
+}
+
 /**
  * User-approved camera transition envelope for journal-like motion.
  * Keep map animation timing in the 1200–1600ms range for deliberate movement.
@@ -57,7 +67,11 @@ export interface JourneyMapProps {
    */
   activeEntryId: DailyEntry['id']
   /**
-   * Public Mapbox token provided via NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN.
+   * Public provider API key provided via NEXT_PUBLIC_MAPTILER_API_KEY.
+   */
+  mapApiKey?: string
+  /**
+   * @deprecated Legacy Mapbox prop kept temporarily for migration compatibility.
    */
   mapboxAccessToken?: string
   /**
