@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-15T19:18:49.315Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-16T06:20:29.471Z"
 last_activity: 2026-03-15 — Completed 01-04-PLAN.md (Mock Data Implementation)
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 8
+  completed_plans: 6
   percent: 100
 ---
 
@@ -22,16 +22,16 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** The map and content must move together seamlessly—as you navigate through days, the map animates to show where the family was, creating a unified storytelling experience that feels like flipping through a well-traveled journal.
 
-**Current focus:** Phase 1 - Foundation
+**Current focus:** Phase 2 - Core Scroll
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation)
-Plan: 4 of 4
-Status: Phase 01-foundation complete
-Last activity: 2026-03-15 — Completed 01-04-PLAN.md (Mock Data Implementation)
+Phase: 2 of 5 (Core Scroll)
+Plan: 1 of 3
+Status: Phase 02-core-scroll in progress
+Last activity: 2026-03-16 — Completed 02-01-PLAN.md (Type Updates and Test Infrastructure)
 
-Progress: [██████████] 100%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [██████████] 100%
 | Phase 01-foundation P03 | 2 min | 2 tasks | 5 files |
 | Phase 01-foundation P04 | 45 min | 3 tasks | 5 files |
 | Phase 01-foundation P05 | 1 min | 1 tasks | 1 files |
+| Phase 02-core-scroll P01 | 1 min | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 01-foundation]: Markdown diary content stored as multiline strings — Tests rendering in UI, ready for CMS integration
 - [Phase 01-foundation]: Typography sizes align with existing h1/h2/h3 base font sizes (1.125rem body, 1.5rem h3, 3rem h1)
 - [Phase 01-foundation]: Added semantic --font-heading alias for component clarity (points to --font-display)
+- [Phase 02-core-scroll]: Preview field required (not optional) because every carousel card needs display text — Unlike weather/distanceMiles which are genuinely optional metadata, preview is essential for carousel card rendering
+- [Phase 02-core-scroll]: IntersectionObserver mock registered globally in test setup for DRY principle — Prevents repetitive mock setup in every test file, ensures consistent behavior
 
 ### Pending Todos
 
@@ -95,9 +98,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T19:18:49.312Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-core-scroll/02-CONTEXT.md
+Last session: 2026-03-16T06:20:29.469Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None
 
 ---
 *Last updated: 2026-03-15*
