@@ -6,14 +6,14 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 04-rich-content-01-PLAN.md
-last_updated: "2026-03-16T18:00:22.480Z"
+stopped_at: Completed 04-rich-content-02-PLAN.md
+last_updated: "2026-03-16T18:24:34.784Z"
 last_activity: 2026-03-16
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 14
-  completed_plans: 13
+  completed_plans: 14
   percent: 93
 ---
 
@@ -76,6 +76,7 @@ Progress: [█████████░] 93%
 | Phase 03.1 P02 | 1 min | 2 tasks | 5 files |
 | Phase 03.1-maptiler-migration P03 | 1 min | 2 tasks | 3 files |
 | Phase 04-rich-content P01 | 2 min | 2 tasks | 9 files |
+| Phase 04-rich-content P02 | 22 min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -123,6 +124,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 03.1-maptiler-migration]: Scoped fallback-removal changes to contract/key-resolution paths only to preserve MAP-01..MAP-04 sync behavior.
 - [Phase 04-rich-content]: Use sessionStorage key photo-order:{entryId} to keep photo randomization stable per day for one browser session.
 - [Phase 04-rich-content]: Keep lightbox controls in PhotoCollage to provide in-place previous/next navigation without route changes.
+- [Phase 04-rich-content]: Kept activeEntryId as the single source of truth and added page-level viewMode only for right-pane swapping
+- [Phase 04-rich-content]: Implemented timeline scrubber as native range input with aria-valuetext and polite live region for exact day announcements
 
 ### Pending Todos
 
@@ -141,8 +144,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T18:00:22.477Z
-Stopped at: Completed 04-rich-content-01-PLAN.md
+Last session: 2026-03-16T18:24:34.781Z
+Stopped at: Completed 04-rich-content-02-PLAN.md
 Resume file: None
 
 ---
