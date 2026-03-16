@@ -29,7 +29,7 @@ export function Carousel({ entries, isLoading = false }: CarouselProps) {
       },
       {
         root: null, // viewport as root
-        rootMargin: '-50% 0px -50% 0px', // center 50% detection zone
+        rootMargin: '-40% 0px -40% 0px', // center 20% detection zone (vertical)
         threshold: 0, // trigger immediately when entering zone
       }
     )

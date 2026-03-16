@@ -70,12 +70,12 @@ describe('Carousel', () => {
   it('creates IntersectionObserver with correct rootMargin configuration', () => {
     render(<Carousel entries={mockEntries} />)
 
-    // Verify IntersectionObserver was created with center-detection config
+    // Verify IntersectionObserver was created with center-detection config (vertical)
     expect(IntersectionObserver).toHaveBeenCalledWith(
       expect.any(Function),
       expect.objectContaining({
         root: null,
-        rootMargin: '-50% 0px -50% 0px',
+        rootMargin: '-40% 0px -40% 0px',
         threshold: 0,
       })
     )

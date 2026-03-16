@@ -1,12 +1,14 @@
-/* Carousel: Horizontal scroll container with scroll-snap */
+/* Carousel: Vertical scroll container with scroll-snap */
 
 .carousel {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  flex-direction: column;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   gap: var(--space-lg);
   padding: var(--space-xl);
+  height: 100%;
   
   /* Hide scrollbar but keep functionality */
   scrollbar-width: none; /* Firefox */
