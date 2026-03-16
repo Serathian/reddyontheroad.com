@@ -3,8 +3,9 @@
 .container {
   display: flex;
   flex-direction: row; /* Side-by-side on desktop */
-  min-height: 100vh;
+  height: 100vh; /* Lock to viewport height - no page scroll */
   width: 100%;
+  overflow: hidden; /* Prevent page-level scroll */
 }
 
 .mapPane {
@@ -17,9 +18,9 @@
 .contentPane {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
-  padding: var(--space-xl);
+  overflow: hidden; /* Prevent contentPane from scrolling - child will scroll */
   background: var(--journal-paper);
+  height: 100%; /* Fill parent height */
 }
 
 /* Mobile: Stack vertically, sticky map */

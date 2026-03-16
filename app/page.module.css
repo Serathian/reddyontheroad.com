@@ -11,8 +11,7 @@
 }
 
 .carouselWrapper {
+  height: 100%; /* Fill contentPane height */
   display: flex;
-  align-items: center;
-  height: 100%;
-  overflow: hidden; /* Prevent double scrollbars */
+  flex-direction: column;
 }
