@@ -10,6 +10,11 @@ export const CAMERA_DURATION_RANGE_MS = {
   max: 1600,
 } as const
 
+export const CAMERA_DURATION_MS = {
+  pan: 1200,
+  fly: 1500,
+} as const
+
 /**
  * Preserve a stable zoom feel as entries advance.
  * Implementations should avoid aggressive zoom jumps between adjacent points.
@@ -54,7 +59,7 @@ export interface JourneyMapProps {
   /**
    * Public Mapbox token provided via NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN.
    */
-  mapboxAccessToken: string
+  mapboxAccessToken?: string
   /**
    * Optional callback emitted after camera transition settles.
    */

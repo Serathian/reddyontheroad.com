@@ -1,0 +1,79 @@
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: var(--journal-paper-dark);
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.marker {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+
+.pastMarker {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--leather-tan);
+  opacity: 0.6;
+  box-shadow: 0 0 0 1px var(--leather-dark);
+}
+
+.currentMarker {
+  width: 1rem;
+  height: 1rem;
+  background: var(--sepia-light);
+  box-shadow:
+    0 0 0 2px var(--leather-dark),
+    0 0 0 8px rgb(184 134 11 / 0.25);
+}
+
+.currentMarkerAnimated {
+  animation: currentPulse 1800ms ease-in-out infinite;
+}
+
+@keyframes currentPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.popup {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ink-black);
+}
+
+.popup strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.mobileHint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileHint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .currentMarkerAnimated {
+    animation: none;
+  }
+}
