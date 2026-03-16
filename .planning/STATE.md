@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-16T08:29:00Z"
-last_activity: 2026-03-15 — Completed 01-04-PLAN.md (Mock Data Implementation)
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-16T07:01:19.268Z"
+last_activity: 2026-03-16 — Completed 02-03-PLAN.md (Carousel Integration)
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
-  percent: 100
+  completed_plans: 8
+  percent: 80
 ---
 
 # Project State
@@ -27,9 +27,9 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 2 of 5 (Core Scroll)
-Plan: 2 of 3
-Status: Phase 02-core-scroll in progress
-Last activity: 2026-03-16 — Completed 02-02-PLAN.md (Carousel Component)
+Plan: 3 of 3
+Status: Phase 02-core-scroll complete
+Last activity: 2026-03-16 — Completed 02-03-PLAN.md (Carousel Integration)
 
 Progress: [████████░░] 80%
 
@@ -59,6 +59,7 @@ Progress: [████████░░] 80%
 | Phase 01-foundation P04 | 45 min | 3 tasks | 5 files |
 | Phase 02-core-scroll P01 | 18 min | 3 tasks | 5 files |
 | Phase 02-core-scroll P02 | 5 min | 3 tasks | 8 files |
+| Phase 02-core-scroll P03 | 1 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,9 @@ See PROJECT.md for all historical decisions.
 - [Phase 02-core-scroll]: IntersectionObserver mock registered globally in test setup for DRY principle — Prevents repetitive mock setup in every test file, ensures consistent behavior
 - [Phase 02-core-scroll]: Use vi.fn with function declaration (not arrow function) for IntersectionObserver mock constructor — Arrow functions cannot be used with 'new' keyword; function declaration preserves constructor semantics while allowing call tracking
 - [Phase 02-core-scroll]: SkeletonCard shimmer animation timing set to 2.5s (not 1s or 4s) — Slower, deliberate animation consistent with vintage journal aesthetic per user decision in 02-CONTEXT.md
+- [Phase 02-core-scroll]: Change carousel from horizontal to vertical scroll — User requested vertical scroll after seeing horizontal implementation. Better fits journal/feed mental model.
+- [Phase 02-core-scroll]: Implement fixed viewport layout for scroll containment — Vertical scroll was leaking to page level. Fixed SplitLayout and page wrapper heights to contain scroll within carousel.
+- [Phase 02-core-scroll]: Add 40vh vertical padding to carousel container — First and last cards couldn't reach center snap position. Padding creates scroll room for edge cards to center, aligning with IntersectionObserver rootMargin.
 
 ### Pending Todos
 
@@ -104,8 +108,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T06:20:29.469Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-03-16T07:01:19.266Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None
 
 ---
