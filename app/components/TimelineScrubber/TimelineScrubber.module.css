@@ -1,0 +1,53 @@
+.scrubber {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: min(60vh, 28rem);
+  pointer-events: none;
+}
+
+.range {
+  pointer-events: auto;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 1.75rem;
+  height: 100%;
+  margin: 0;
+  accent-color: var(--leather-medium);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .scrubber {
+    left: 50%;
+    top: auto;
+    bottom: 0.75rem;
+    transform: translateX(-50%);
+    width: min(70vw, 18rem);
+    height: 2.5rem;
+  }
+
+  .range {
+    writing-mode: horizontal-tb;
+    direction: ltr;
+    width: 100%;
+    height: 1.5rem;
+  }
+}
