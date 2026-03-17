@@ -1,25 +1,103 @@
 .scrubber {
+  --thumb-percent: 0%;
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
+  width: 3.35rem;
   height: min(60vh, 28rem);
   pointer-events: none;
+  padding: 0.45rem 0.45rem 0.45rem 0.62rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--aged-paper) 95%, white 5%) 0%,
+    color-mix(in srgb, var(--journal-paper) 92%, var(--aged-paper) 8%) 55%,
+    color-mix(in srgb, var(--journal-paper-dark) 90%, var(--aged-paper) 10%) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--leather-dark) 46%, transparent);
+  border-left: 0;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow:
+    0 10px 22px rgba(44, 24, 16, 0.18),
+    inset 0 0 0 1px color-mix(in srgb, var(--aged-paper) 40%, transparent);
+}
+
+.interacting {
+  box-shadow:
+    0 12px 24px rgba(44, 24, 16, 0.24),
+    inset 0 0 0 1px color-mix(in srgb, var(--aged-paper) 56%, transparent);
+}
+
+.scrubber::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.22rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--leather-dark) 72%, black 28%) 0%,
+    color-mix(in srgb, var(--leather-dark) 55%, transparent) 50%,
+    color-mix(in srgb, var(--leather-dark) 72%, black 28%) 100%
+  );
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.scrubber::after {
+  content: '';
+  position: absolute;
+  left: -0.65rem;
+  top: 50%;
+  width: 0.65rem;
+  height: 2px;
+  transform: translateY(-50%);
+  background: color-mix(in srgb, var(--leather-dark) 52%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--aged-paper) 35%, transparent);
+}
+
+.preview {
+  position: absolute;
+  left: calc(100% + 0.55rem);
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--aged-paper) 90%, white 10%);
+  border: 1px solid color-mix(in srgb, var(--leather-dark) 30%, transparent);
+  color: var(--ink-dark);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 14px rgba(44, 24, 16, 0.16);
 }
 
 .range {
   pointer-events: auto;
   writing-mode: vertical-lr;
-  direction: rtl;
-  width: 1.75rem;
+  direction: ltr;
+  width: 1.9rem;
   height: 100%;
   margin: 0;
   accent-color: var(--leather-medium);
+}
+
+.motorhomeIcon {
+  position: absolute;
+  left: -0.8rem;
+  top: var(--thumb-percent);
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(44, 24, 16, 0.25));
+  pointer-events: none;
+  user-select: none;
 }
 
 .srOnly {
@@ -36,12 +114,34 @@
 
 @media (max-width: 768px) {
   .scrubber {
+    --thumb-percent: 50%;
     left: 50%;
     top: auto;
     bottom: 0.75rem;
     transform: translateX(-50%);
     width: min(70vw, 18rem);
-    height: 2.5rem;
+    height: 3.1rem;
+    padding: 0.4rem 0.55rem;
+    border-left: 1px solid color-mix(in srgb, var(--leather-dark) 40%, transparent);
+    border-radius: 1rem;
+  }
+
+  .motorhomeIcon {
+    left: var(--thumb-percent);
+    top: -0.85rem;
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  .scrubber::before,
+  .scrubber::after {
+    display: none;
+  }
+
+  .preview {
+    left: 50%;
+    top: auto;
+    bottom: calc(100% + 0.4rem);
+    transform: translateX(-50%);
   }
 
   .range {
