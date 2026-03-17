@@ -6,14 +6,14 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 04-rich-content-02-PLAN.md
-last_updated: "2026-03-16T18:24:34.784Z"
-last_activity: 2026-03-16
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-03-17T11:34:51.370Z"
+last_activity: 2026-03-17
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 14
-  completed_plans: 14
+  total_plans: 15
+  completed_plans: 15
   percent: 93
 ---
 
@@ -37,7 +37,7 @@ Current Plan: 2
 Total Plans in Phase: 2
 Total Phases: 5
 Status: Ready to execute 03.1-02-PLAN.md
-Last activity: 2026-03-16
+Last activity: 2026-03-17
 
 Progress: [█████████░] 93%
 
@@ -77,6 +77,7 @@ Progress: [█████████░] 93%
 | Phase 03.1-maptiler-migration P03 | 1 min | 2 tasks | 3 files |
 | Phase 04-rich-content P01 | 2 min | 2 tasks | 9 files |
 | Phase 04-rich-content P02 | 22 min | 2 tasks | 10 files |
+| Phase 04-rich-content P03 | 4 min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -126,6 +127,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 04-rich-content]: Keep lightbox controls in PhotoCollage to provide in-place previous/next navigation without route changes.
 - [Phase 04-rich-content]: Kept activeEntryId as the single source of truth and added page-level viewMode only for right-pane swapping
 - [Phase 04-rich-content]: Implemented timeline scrubber as native range input with aria-valuetext and polite live region for exact day announcements
+- [Phase 04-rich-content]: Implemented motorhome icon as decorative aria-hidden overlay while preserving native range semantics.
+- [Phase 04-rich-content]: Added stable motorhome icon marker assertion to lock CONTENT-04 without altering SR/keyboard contract.
 
 ### Pending Todos
 
@@ -144,8 +147,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T18:24:34.781Z
-Stopped at: Completed 04-rich-content-02-PLAN.md
+Last session: 2026-03-17T11:34:51.368Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
 
 ---
