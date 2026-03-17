@@ -34,30 +34,43 @@ const entries: DailyEntry[] = [
 ]
 
 describe('TimelineScrubber', () => {
-  it('updates day during drag and snaps to nearest day on release', () => {
+  it('renders a decorative motorhome icon affordance', () => {
+    const onDayChange = vi.fn()
+    render(<TimelineScrubber entries={entries} activeIndex={0} onDayChange={onDayChange} />)
+
+    const icon = screen.getByTestId('timeline-motorhome-icon')
+    expect(icon).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it('updates only on release and snaps to nearest day', () => {
     const onDayChange = vi.fn()
     render(<TimelineScrubber entries={entries} activeIndex={0} onDayChange={onDayChange} />)
 
     const slider = screen.getByRole('slider', { name: 'Journey timeline' })
 
+    fireEvent.pointerDown(slider)
     fireEvent.input(slider, { target: { value: '1.6' } })
-    expect(onDayChange).toHaveBeenCalledWith(2)
+    expect(onDayChange).not.toHaveBeenCalled()
 
-    fireEvent.mouseUp(slider)
+    fireEvent.pointerUp(slider)
+    expect(onDayChange).toHaveBeenCalledWith(2)
     expect(slider).toHaveValue('2')
   })
 
-  it('moves exactly one day with keyboard arrows', () => {
+  it('moves exactly one day with keyboard arrows and commits on key release', () => {
     const onDayChange = vi.fn()
     render(<TimelineScrubber entries={entries} activeIndex={1} onDayChange={onDayChange} />)
 
     const slider = screen.getByRole('slider', { name: 'Journey timeline' })
 
     fireEvent.keyDown(slider, { key: 'ArrowUp' })
-    expect(onDayChange).toHaveBeenCalledWith(2)
+    expect(onDayChange).not.toHaveBeenCalled()
+    fireEvent.keyUp(slider, { key: 'ArrowUp' })
+    expect(onDayChange).toHaveBeenCalledWith(0)
 
     fireEvent.keyDown(slider, { key: 'ArrowDown' })
-    expect(onDayChange).toHaveBeenCalledWith(0)
+    fireEvent.keyUp(slider, { key: 'ArrowDown' })
+    expect(onDayChange).toHaveBeenCalledWith(1)
   })
 
   it('exposes aria-valuetext and announces exact day format in live region', () => {
@@ -70,6 +83,19 @@ describe('TimelineScrubber', () => {
     expect(slider).toHaveAttribute('aria-valuetext', 'Day 1 of 3: June 20, 2024, Athens, Greece')
 
     rerender(<TimelineScrubber entries={entries} activeIndex={1} onDayChange={onDayChange} />)
-    expect(screen.getByText('Day 2 of 3: June 21, 2024, Corinth, Greece')).toBeInTheDocument()
+    expect(screen.getByTestId('timeline-preview')).toHaveTextContent('Day 2 of 3')
+  })
+
+  it('shows visible date/location preview while scrubbing before commit', () => {
+    const onDayChange = vi.fn()
+    render(<TimelineScrubber entries={entries} activeIndex={0} onDayChange={onDayChange} />)
+
+    const slider = screen.getByRole('slider', { name: 'Journey timeline' })
+
+    fireEvent.pointerDown(slider)
+    fireEvent.input(slider, { target: { value: '1.4' } })
+
+    expect(screen.getByTestId('timeline-preview')).toHaveTextContent('Day 2 of 3')
+    expect(onDayChange).not.toHaveBeenCalled()
   })
 })
