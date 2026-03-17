@@ -143,10 +143,10 @@ export function TimelineScrubber({ entries, activeIndex, onDayChange }: Timeline
           setIsInteracting(true)
         }}
         onPointerUp={(event) => commitDraft(Number(event.currentTarget.value))}
-        onPointerCancel={commitDraft}
+        onPointerCancel={() => commitDraft()}
         onMouseUp={(event) => commitDraft(Number(event.currentTarget.value))}
         onTouchEnd={(event) => commitDraft(Number(event.currentTarget.value))}
-        onBlur={commitDraft}
+        onBlur={() => commitDraft()}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
       />
