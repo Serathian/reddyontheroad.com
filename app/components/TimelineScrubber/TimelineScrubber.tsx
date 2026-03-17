@@ -121,6 +121,7 @@ export function TimelineScrubber({ entries, activeIndex, onDayChange }: Timeline
       <span
         className={styles.motorhomeIcon}
         data-testid="timeline-motorhome-icon"
+        data-icon="motorhome"
         aria-hidden="true"
       >
         🚐
