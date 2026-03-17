@@ -40,6 +40,7 @@ describe('TimelineScrubber', () => {
 
     const icon = screen.getByTestId('timeline-motorhome-icon')
     expect(icon).toHaveAttribute('aria-hidden', 'true')
+    expect(icon).toHaveAttribute('data-icon', 'motorhome')
   })
 
   it('updates only on release and snaps to nearest day', () => {
