@@ -101,11 +101,12 @@ Plans:
   3. Photos display in random order on each visit (different sequence per session)
   4. Timeline scrubber allows user to jump to any day by dragging motorhome icon
   5. Timeline scrubber is keyboard accessible (arrow keys work, screen reader announces day)
-**Plans**: 2 plans in 2 waves
+**Plans**: 3 plans in 3 waves
 
 Plans:
 - [ ] 04-01-PLAN.md — Full-day diary/photos surface + session-stable photo randomization contracts (Wave 1)
 - [ ] 04-02-PLAN.md — Page-mode swap + floating accessible timeline scrubber integration (Wave 2)
+- [ ] 04-03-PLAN.md — [GAP CLOSURE] Add motorhome icon scrubber affordance while preserving native accessibility semantics (Wave 3)
 
 ### Phase 5: Deployment
 **Goal**: Production-ready application deployed via automated pipeline with optimized performance
