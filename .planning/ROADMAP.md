@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 2: Core Scroll** - Carousel navigation with scroll detection and day cards
 - [x] **Phase 3: Map Integration** - Mapbox animation, trailing path, location markers
 - [x] **Phase 3.1 (INSERTED): MapTiler Migration** - Replace Mapbox provider with MapTiler free alternative while preserving map sync behavior (completed 2026-03-16)
-- [ ] **Phase 4: Rich Content** - Full day view, photos, timeline scrubber, transitions
+- [x] **Phase 4: Rich Content** - Full day view, photos, timeline scrubber, transitions (completed 2026-03-19)
 - [ ] **Phase 5: Deployment** - Docker container, CI/CD, performance, accessibility
 
 ## Phase Details
@@ -104,9 +104,9 @@ Plans:
 **Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] 04-01-PLAN.md — Full-day diary/photos surface + session-stable photo randomization contracts (Wave 1)
-- [ ] 04-02-PLAN.md — Page-mode swap + floating accessible timeline scrubber integration (Wave 2)
-- [ ] 04-03-PLAN.md — [GAP CLOSURE] Add motorhome icon scrubber affordance while preserving native accessibility semantics (Wave 3)
+- [x] 04-01-PLAN.md — Full-day diary/photos surface + session-stable photo randomization contracts (Wave 1) ✅ 2026-03-19
+- [x] 04-02-PLAN.md — Page-mode swap + floating accessible timeline scrubber integration (Wave 2) ✅ 2026-03-19
+- [x] 04-03-PLAN.md — [GAP CLOSURE] Add motorhome icon scrubber affordance while preserving native accessibility semantics (Wave 3) ✅ 2026-03-19
 
 ### Phase 5: Deployment
 **Goal**: Production-ready application deployed via automated pipeline with optimized performance
@@ -131,7 +131,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 3.1 → 4 → 5
 | 2. Core Scroll   | 0/TBD          | Not started | -          |
 | 3. Map Integration | 4/4 | Complete | 2026-03-16 |
 | 3.1 MapTiler Migration (INSERTED) | 2/2 | Complete   | 2026-03-16 |
-| 4. Rich Content  | 0/TBD          | Not started | -          |
+| 4. Rich Content  | 3/3            | Complete    | 2026-03-19 |
 | 5. Deployment    | 0/TBD          | Not started | -          |
 
 ---
