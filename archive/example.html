@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reddy on the Road - Finland to Spain 2022</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS (if using) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- OR use custom CSS -->
+  <link rel="stylesheet" href="design-system-styles.css">
+  
+  <style>
+    /* Inline Tailwind Config for CDN */
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#92400E',
+              light: '#B45309',
+              dark: '#78350F',
+            },
+            accent: '#F97316',
+          },
+          fontFamily: {
+            display: ['Abril Fatface', 'serif'],
+            body: ['Merriweather', 'serif'],
+            handwritten: ['Caveat', 'cursive'],
+          },
+        }
+      }
+    }
+  </style>
+</head>
+<body class="bg-amber-50 font-body text-amber-900">
+
+  <!-- Skip to Content Link (Accessibility) -->
+  <a href="#main-content" class="skip-to-content">
+    Skip to main content
+  </a>
+
+  <!-- Navigation Bar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-amber-50/95 backdrop-blur-sm border-b border-amber-200">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="font-display text-2xl text-amber-800 hover:text-amber-900 transition-colors duration-200">
+        Reddy on the Road
+      </a>
+      <div class="flex gap-6">
+        <a href="#map" class="text-amber-700 hover:text-amber-900 transition-colors duration-200 cursor-pointer">Map</a>
+        <a href="#timeline" class="text-amber-700 hover:text-amber-900 transition-colors duration-200 cursor-pointer">Timeline</a>
+        <a href="#about" class="text-amber-700 hover:text-amber-900 transition-colors duration-200 cursor-pointer">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content" class="pt-20">
+    
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 text-center">
+      <h1 class="font-display text-5xl text-amber-900 mb-6">
+        Our 2022 Adventure
+      </h1>
+      <p class="font-body text-xl text-amber-800 max-w-2xl mx-auto mb-8">
+        Join us on an unforgettable journey from the Arctic Circle to the Mediterranean, 
+        traveling over 10,000 kilometers in our motorhome with our 3-year-old daughter Emma.
+      </p>
+      <div class="font-handwritten text-2xl text-amber-700 italic">
+        "The best memories are made on the road" - The Reddy Family
+      </div>
+    </section>
+
+    <!-- Map Section (Sticky) -->
+    <section id="map" class="max-w-7xl mx-auto px-6 mb-12">
+      <div class="sticky top-20 h-[50vh] bg-amber-100 rounded-xl shadow-lg overflow-hidden">
+        <!-- Replace with actual map implementation (Mapbox/Leaflet) -->
+        <div class="w-full h-full flex items-center justify-center">
+          <div class="text-center">
+            <svg class="w-16 h-16 mx-auto mb-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+            </svg>
+            <p class="font-display text-2xl text-amber-900">Interactive Map</p>
+            <p class="text-amber-700 mt-2">Finland → Spain and back</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="max-w-3xl mx-auto px-6 py-16">
+      
+      <!-- Timeline Post 1 -->
+      <article class="bg-amber-50 border-l-4 border-orange-500 rounded-xl p-8 mb-12 shadow-md">
+        <span class="inline-block bg-amber-800 text-amber-50 px-4 py-2 rounded-full font-display text-sm mb-4">
+          May 15, 2022
+        </span>
+        
+        <h2 class="font-display text-3xl text-amber-900 mb-4">
+          Rovaniemi, Finland
+        </h2>
+        
+        <!-- Photo Grid -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="aspect-[4/3] bg-amber-200 rounded-lg"></div>
+          <div class="aspect-[4/3] bg-amber-200 rounded-lg"></div>
+        </div>
+        
+        <div class="prose prose-amber max-w-none">
+          <p class="font-body text-amber-900 leading-relaxed">
+            Our journey began in the magical city of Rovaniemi, where the Arctic Circle 
+            meets adventure. Emma was thrilled to see her first reindeer, and we spent 
+            the afternoon exploring the Santa Claus Village. The midnight sun cast a 
+            golden glow over everything, making it feel like time stood still.
+          </p>
+        </div>
+        
+        <!-- Handwritten Note -->
+        <div class="mt-6 pl-6 border-l-2 border-amber-200">
+          <p class="font-handwritten text-lg text-amber-700 italic">
+            "Look Daddy, real reindeer! Can we take one home?" - Emma
+          </p>
+        </div>
+      </article>
+
+      <!-- Timeline Post 2 -->
+      <article class="bg-amber-50 border-l-4 border-orange-500 rounded-xl p-8 mb-12 shadow-md">
+        <span class="inline-block bg-amber-800 text-amber-50 px-4 py-2 rounded-full font-display text-sm mb-4">
+          May 18, 2022
+        </span>
+        
+        <h2 class="font-display text-3xl text-amber-900 mb-4">
+          Stockholm, Sweden
+        </h2>
+        
+        <!-- Photo Grid -->
+        <div class="grid grid-cols-1 gap-4 mb-6">
+          <div class="aspect-[16/9] bg-amber-200 rounded-lg"></div>
+        </div>
+        
+        <div class="prose prose-amber max-w-none">
+          <p class="font-body text-amber-900 leading-relaxed">
+            Three days later, we arrived in beautiful Stockholm. The archipelago was 
+            absolutely stunning, and we found a perfect camping spot overlooking the water. 
+            Emma loved feeding the ducks by the harbor, and we enjoyed traditional Swedish 
+            fika at a cozy café in Gamla Stan.
+          </p>
+        </div>
+        
+        <div class="mt-6 pl-6 border-l-2 border-amber-200">
+          <p class="font-handwritten text-lg text-amber-700 italic">
+            "Mommy, can we live here forever?" - Emma
+          </p>
+        </div>
+      </article>
+
+      <!-- Timeline Post 3 -->
+      <article class="bg-amber-50 border-l-4 border-orange-500 rounded-xl p-8 mb-12 shadow-md">
+        <span class="inline-block bg-amber-800 text-amber-50 px-4 py-2 rounded-full font-display text-sm mb-4">
+          May 25, 2022
+        </span>
+        
+        <h2 class="font-display text-3xl text-amber-900 mb-4">
+          Copenhagen, Denmark
+        </h2>
+        
+        <!-- Photo Grid -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="aspect-square bg-amber-200 rounded-lg"></div>
+          <div class="aspect-square bg-amber-200 rounded-lg"></div>
+          <div class="aspect-square bg-amber-200 rounded-lg"></div>
+        </div>
+        
+        <div class="prose prose-amber max-w-none">
+          <p class="font-body text-amber-900 leading-relaxed">
+            Copenhagen welcomed us with its famous hygge atmosphere. We visited Tivoli 
+            Gardens, where Emma went on her first roller coaster (the gentle one!). The 
+            colorful Nyhavn harbor was the perfect backdrop for family photos, and we 
+            enjoyed the best pastries of our lives at a local bakery.
+          </p>
+        </div>
+        
+        <div class="mt-6 pl-6 border-l-2 border-amber-200">
+          <p class="font-handwritten text-lg text-amber-700 italic">
+            "The merry-go-round was SO FAST!" - Emma (it wasn't)
+          </p>
+        </div>
+      </article>
+
+      <!-- More posts would continue here... -->
+
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-3xl mx-auto px-6 py-16">
+      <div class="bg-amber-50 rounded-xl p-8 shadow-md">
+        <h2 class="font-display text-4xl text-amber-900 mb-6">About This Journey</h2>
+        <p class="font-body text-amber-900 leading-relaxed mb-4">
+          In the summer of 2022, we embarked on the adventure of a lifetime. With our 
+          trusty motorhome packed and our 3-year-old daughter Emma full of excitement, 
+          we drove from the Arctic Circle in Finland all the way to the sunny beaches 
+          of Spain, and back again.
+        </p>
+        <p class="font-body text-amber-900 leading-relaxed mb-4">
+          Over 10,000 kilometers, 12 countries, and countless memories later, we created 
+          this digital diary to preserve and share our journey. Every photo, every story, 
+          and every moment captured here is a piece of our family's adventure.
+        </p>
+        <p class="font-handwritten text-xl text-amber-700 italic mt-8">
+          "Not all who wander are lost" - J.R.R. Tolkien
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-amber-800 text-amber-50 py-12 mt-24">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="font-display text-2xl mb-4">Reddy on the Road</p>
+      <p class="font-body text-amber-100">Finland to Spain, 2022</p>
+      <p class="font-body text-amber-200 text-sm mt-4">
+        A family adventure preserved for eternity
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

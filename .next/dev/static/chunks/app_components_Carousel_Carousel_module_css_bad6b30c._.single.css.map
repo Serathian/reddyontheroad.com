@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/components/Carousel/Carousel.module.css"],"sourcesContent":["/* Carousel: Vertical scroll container with scroll-snap */\n\n.carousel {\n  display: flex;\n  flex-direction: column;\n  overflow-y: auto;\n  scroll-snap-type: y mandatory;\n  scroll-behavior: smooth;\n  gap: var(--space-lg);\n  padding: var(--space-xl);\n  /* Add vertical padding to allow first/last cards to scroll to center */\n  padding-top: 40vh;\n  padding-bottom: 40vh;\n  height: 100%;\n  \n  /* Hide scrollbar but keep functionality */\n  scrollbar-width: none; /* Firefox */\n  -ms-overflow-style: none; /* IE/Edge */\n}\n\n.carousel::-webkit-scrollbar {\n  display: none; /* Chrome/Safari */\n}\n"],"names":[],"mappings":"AAEA;;;;;;;;;;;;;;;AAkBA"}}]
+}

@@ -2,7 +2,7 @@
 phase: 03
 slug: map-integration
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-03-16
 ---
@@ -19,18 +19,18 @@ created: 2026-03-16
 |----------|-------|
 | **Framework** | Vitest 4.1.0 + Testing Library + jsdom |
 | **Config file** | vitest.config.ts |
-| **Quick run command** | `npm run test:run -- tests/components/JourneyMap.test.tsx` |
+| **Quick run command** | `npm run test:run -- tests/lib/mapData.test.ts -t "builds 7-entry trail"` |
 | **Full suite command** | `npm run test:run` |
-| **Estimated runtime** | ~45 seconds |
+| **Estimated runtime** | smoke: ~8-15s, full suite: ~45s |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `npm run test:run -- tests/components/JourneyMap.test.tsx`
+- **After every task commit (fast feedback):** Run `npm run test:run -- tests/lib/mapData.test.ts -t "builds 7-entry trail"` or the task-targeted single-test equivalent (`-t` filter).
 - **After every plan wave:** Run `npm run test:run`
 - **Before `/gsd-verify-work`:** Full suite must be green
-- **Max feedback latency:** 60 seconds
+- **Max feedback latency (task-level):** 30 seconds
 
 ---
 
@@ -69,7 +69,7 @@ created: 2026-03-16
 - [ ] Sampling continuity: no 3 consecutive tasks without automated verify
 - [ ] Wave 0 covers all MISSING references
 - [ ] No watch-mode flags
-- [ ] Feedback latency < 60s
+- [ ] Task-level feedback latency <= 30s (longer runs reserved for wave/phase gates)
 - [ ] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending

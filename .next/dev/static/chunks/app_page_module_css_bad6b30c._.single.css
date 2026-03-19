@@ -1,0 +1,67 @@
+/* [project]/app/page.module.css [app-client] (css) */
+.page-module__E0kJGG__carouselWrapper {
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+}
+
+.page-module__E0kJGG__rightPane, .page-module__E0kJGG__viewSwap {
+  height: 100%;
+  position: relative;
+}
+
+.page-module__E0kJGG__layer {
+  transition: opacity .18s ease-out;
+  position: absolute;
+  inset: 0;
+}
+
+.page-module__E0kJGG__visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-module__E0kJGG__hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-module__E0kJGG__fullDayLayer {
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.page-module__E0kJGG__backButton {
+  z-index: 2;
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper-dark);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: .5rem .75rem;
+  position: sticky;
+  top: 0;
+}
+
+.page-module__E0kJGG__mapBoundScrubber {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.page-module__E0kJGG__mapBoundScrubber > * {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-module__E0kJGG__layer {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=app_page_module_css_bad6b30c._.single.css.map*/

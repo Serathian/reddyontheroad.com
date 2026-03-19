@@ -1,0 +1,24 @@
+[00:00:03.832] Server  LOG     ✓ Ready in 2.6s
+[00:00:11.007] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:11.494] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/santorini-sunset.jpg" "received" null
+[00:00:15.238] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[00:00:16.786] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[00:00:18.547] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/halkidiki-cove.jpg" "received" null
+[00:00:20.645] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/knossos-dolphins.jpg" "received" null
+[00:00:57.983] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/santorini-sunset.jpg" "received" null
+[00:01:02.931] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[00:01:10.666] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/knossos-dolphins.jpg" "received" null
+[24:02:55.099] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/santorini-sunset.jpg" "received" null
+[24:02:55.126] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:03:01.378] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[24:03:03.854] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[24:03:04.603] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[24:03:16.603] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[24:03:19.475] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[24:03:20.235] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[24:03:21.278] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/santorini-sunset.jpg" "received" null
+[24:03:22.688] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[24:03:58.716] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[24:03:59.535] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/delphi-temple.jpg" "received" null
+[24:04:02.946] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/thessaloniki-walls.jpg" "received" null
+[24:04:03.534] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/photos/halkidiki-cove.jpg" "received" null

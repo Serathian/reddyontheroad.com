@@ -20,6 +20,7 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId,
   const observerRef = useRef<IntersectionObserver | null>(null)
   const cardRefs = useRef<Map<string, HTMLElement>>(new Map())
   const lastNotifiedActiveId = useRef<string | null>(null)
+  const suppressObserverUntil = useRef(0)
 
   const resolvedActiveId = activeId ?? uncontrolledActiveId
 
@@ -37,13 +38,33 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId,
   useEffect(() => {
     // Create observer with center-detection configuration
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('data-id')
-            if (id) setResolvedActiveId(id)
-          }
-        })
+      (observerEntries) => {
+        if (Date.now() < suppressObserverUntil.current) {
+          return
+        }
+
+        const visibleEntries = observerEntries.filter((entry) => entry.isIntersecting)
+        if (visibleEntries.length === 0) {
+          return
+        }
+
+        const viewportCenter = window.innerHeight / 2
+
+        const closestToCenter = visibleEntries
+          .map((entry) => {
+            const rect = entry.boundingClientRect
+            const cardCenter = rect.top + rect.height / 2
+            return {
+              id: entry.target.getAttribute('data-id'),
+              distance: Math.abs(cardCenter - viewportCenter),
+            }
+          })
+          .filter((item): item is { id: string; distance: number } => Boolean(item.id))
+          .sort((a, b) => a.distance - b.distance)[0]
+
+        if (closestToCenter?.id) {
+          setResolvedActiveId(closestToCenter.id)
+        }
       },
       {
         root: null, // viewport as root
@@ -60,6 +81,31 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId,
     // CRITICAL: Cleanup on unmount (prevents memory leaks)
     return () => observer.disconnect()
   }, [entries, activeId, onActiveChange])
+
+  useEffect(() => {
+    // Keep controlled activeId in sync with visual center when selection
+    // comes from external controls (e.g. timeline scrubber).
+    if (!activeId) {
+      return
+    }
+
+    const activeCard = cardRefs.current.get(activeId)
+    if (!activeCard) {
+      return
+    }
+
+    if (typeof activeCard.scrollIntoView !== 'function') {
+      return
+    }
+
+    // Avoid observer feedback loops while programmatically centering card
+    suppressObserverUntil.current = Date.now() + 250
+
+    activeCard.scrollIntoView({
+      block: 'center',
+      behavior: 'auto',
+    })
+  }, [activeId])
 
   // Loading state: show skeleton cards
   if (isLoading) {

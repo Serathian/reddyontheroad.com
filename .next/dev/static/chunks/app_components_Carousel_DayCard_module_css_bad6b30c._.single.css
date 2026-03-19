@@ -1,0 +1,76 @@
+/* [project]/app/components/Carousel/DayCard.module.css [app-client] (css) */
+.DayCard-module__kVkfwa__card {
+  background: var(--journal-paper-stained);
+  border: 1px solid var(--leather-dark);
+  padding: var(--space-lg);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--shadow-md);
+  border-radius: 4px;
+  flex: none;
+  margin: 0 auto;
+  transition: transform .3s, box-shadow .3s;
+  transform: scale(1);
+}
+
+.DayCard-module__kVkfwa__card[data-active="true"] {
+  box-shadow: var(--shadow-xl);
+  z-index: 1;
+  transform: scale(1.08);
+}
+
+.DayCard-module__kVkfwa__date {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: var(--space-sm);
+  letter-spacing: .05em;
+  display: block;
+}
+
+.DayCard-module__kVkfwa__location {
+  font-family: var(--font-display), cursive;
+  font-size: var(--text-xl);
+  color: var(--ink-black);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.DayCard-module__kVkfwa__preview {
+  font-family: var(--font-body), serif;
+  font-size: var(--text-base);
+  color: var(--ink-black);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.DayCard-module__kVkfwa__openButton {
+  margin-top: var(--space-md);
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor: pointer;
+  border-radius: 4px;
+  align-self: flex-start;
+  padding: .45rem .7rem;
+}
+
+.DayCard-module__kVkfwa__openButton:focus-visible, .DayCard-module__kVkfwa__card:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .DayCard-module__kVkfwa__card {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=app_components_Carousel_DayCard_module_css_bad6b30c._.single.css.map*/

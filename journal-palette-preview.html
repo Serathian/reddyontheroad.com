@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Palette Preview - Reddy on the Road</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Aged Paper */
+      --journal-paper: #F5F1E8;
+      --journal-paper-dark: #EDE8DC;
+      --journal-paper-stained: #E8E0D0;
+      
+      /* Sepia Tones */
+      --sepia-light: #F4ECD8;
+      --sepia-medium: #D4C4A8;
+      --sepia-dark: #A89476;
+      
+      /* Leather */
+      --leather-dark: #3E2723;
+      --leather-medium: #5D4037;
+      --leather-light: #6D4C41;
+      --leather-worn: #795548;
+      --leather-cognac: #8D6E63;
+      --leather-tan: #A1887F;
+      
+      /* Ink */
+      --ink-black: #1A1412;
+      --ink-faded: #4A3C35;
+      --ink-sepia: #6B5D54;
+      --ink-blue: #2C3E50;
+      
+      /* Accents */
+      --vintage-red: #A0522D;
+      --vintage-gold: #B8860B;
+      --vintage-green: #556B2F;
+      --vintage-blue: #4A6FA5;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Crimson Text', serif;
+      background: var(--journal-paper);
+      padding: 2rem;
+      color: var(--ink-black);
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--leather-dark);
+      margin-bottom: 0.5rem;
+      text-shadow: 0.5px 0.5px 0.5px rgba(26, 20, 18, 0.3);
+    }
+    
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--ink-faded);
+      margin-bottom: 3rem;
+    }
+    
+    .section {
+      margin-bottom: 3rem;
+    }
+    
+    .section-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      color: var(--leather-medium);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--sepia-medium);
+      padding-bottom: 0.5rem;
+    }
+    
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .color-card {
+      border: 1px solid var(--sepia-medium);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .color-swatch {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .color-info {
+      padding: 1rem;
+      background: white;
+    }
+    
+    .color-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--leather-dark);
+      margin-bottom: 0.25rem;
+    }
+    
+    .color-hex {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8125rem;
+      color: var(--ink-faded);
+    }
+    
+    .color-use {
+      font-size: 0.75rem;
+      color: var(--ink-sepia);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    
+    /* Texture Samples */
+    .texture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .texture-sample {
+      border: 1px solid var(--sepia-medium);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .texture-display {
+      height: 200px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .paper-texture {
+      background: var(--journal-paper);
+      background-image: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+    
+    .leather-texture {
+      background: linear-gradient(135deg, var(--leather-medium) 0%, var(--leather-dark) 100%);
+      background-image: 
+        radial-gradient(circle at 25% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 75% 70%, rgba(0,0,0,0.1) 0%, transparent 50%);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .stained-paper {
+      background: var(--journal-paper-stained);
+      background-image: 
+        radial-gradient(circle at 30% 40%, var(--sepia-light) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, var(--sepia-medium) 0%, transparent 30%);
+    }
+    
+    .photo-frame {
+      width: 180px;
+      height: 140px;
+      padding: 12px 12px 40px 12px;
+      background: var(--journal-paper);
+      box-shadow: 
+        0 2px 8px rgba(0,0,0,0.15),
+        0 8px 20px rgba(0,0,0,0.1);
+      transform: rotate(-2deg);
+      border: 1px solid var(--sepia-medium);
+    }
+    
+    .photo-frame-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--sepia-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Caveat', cursive;
+      color: var(--ink-faded);
+      font-size: 0.875rem;
+    }
+    
+    .texture-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--ink-black);
+    }
+    
+    .texture-label-leather {
+      color: var(--journal-paper);
+    }
+    
+    .texture-info {
+      padding: 1rem;
+      background: white;
+    }
+    
+    .texture-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--leather-dark);
+      margin-bottom: 0.5rem;
+    }
+    
+    .texture-desc {
+      font-size: 0.875rem;
+      color: var(--ink-faded);
+      line-height: 1.6;
+    }
+    
+    /* Typography Samples */
+    .type-sample {
+      padding: 2rem;
+      background: white;
+      border: 1px solid var(--sepia-medium);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .type-display {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--sepia-medium);
+    }
+    
+    .type-meta {
+      font-size: 0.875rem;
+      color: var(--ink-sepia);
+    }
+    
+    .handwritten-xl {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--leather-dark);
+      line-height: 1.2;
+    }
+    
+    .handwritten-lg {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--leather-medium);
+      line-height: 1.2;
+    }
+    
+    .handwritten-md {
+      font-family: 'Caveat', cursive;
+      font-size: 1.875rem;
+      font-weight: 400;
+      color: var(--ink-black);
+      line-height: 1.3;
+    }
+    
+    .serif-body {
+      font-family: 'Crimson Text', serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--ink-black);
+      line-height: 1.8;
+    }
+    
+    .serif-caption {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--ink-faded);
+      line-height: 1.6;
+    }
+    
+    .mono-stats {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.875rem;
+      color: var(--ink-sepia);
+    }
+    
+    /* Comparison Section */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .comparison-card {
+      padding: 2rem;
+      border-radius: 8px;
+      border: 2px solid;
+    }
+    
+    .old-design {
+      background: #FFFBEB;
+      border-color: #FEF3C7;
+    }
+    
+    .new-design {
+      background: var(--journal-paper);
+      border-color: var(--sepia-medium);
+    }
+    
+    .comparison-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .comparison-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .comparison-list li {
+      padding: 0.5rem 0;
+      font-size: 0.9375rem;
+    }
+    
+    .comparison-list li::before {
+      margin-right: 0.5rem;
+    }
+    
+    .old-design .comparison-list li::before {
+      content: '❌';
+    }
+    
+    .new-design .comparison-list li::before {
+      content: '✅';
+    }
+    
+    @media (max-width: 768px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .handwritten-xl {
+        font-size: 2.5rem;
+      }
+      
+      .handwritten-lg {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Journal Design Palette Preview</h1>
+    <p class="subtitle">Leather-bound travel diary aesthetic — Aged paper, rich leather, handwritten warmth</p>
+    
+    <!-- AGED PAPER COLORS -->
+    <div class="section">
+      <h2 class="section-title">Aged Paper Foundation</h2>
+      <div class="palette-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--journal-paper);"></div>
+          <div class="color-info">
+            <div class="color-name">Journal Paper</div>
+            <div class="color-hex">#F5F1E8</div>
+            <div class="color-use">Main background, content areas</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--journal-paper-dark);"></div>
+          <div class="color-info">
+            <div class="color-name">Journal Paper Dark</div>
+            <div class="color-hex">#EDE8DC</div>
+            <div class="color-use">Subtle depth, card backgrounds</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--journal-paper-stained);"></div>
+          <div class="color-info">
+            <div class="color-name">Paper Stained</div>
+            <div class="color-hex">#E8E0D0</div>
+            <div class="color-use">Weathered edges, aged areas</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--sepia-light);"></div>
+          <div class="color-info">
+            <div class="color-name">Sepia Light</div>
+            <div class="color-hex">#F4ECD8</div>
+            <div class="color-use">Light sepia wash, highlights</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--sepia-medium);"></div>
+          <div class="color-info">
+            <div class="color-name">Sepia Medium</div>
+            <div class="color-hex">#D4C4A8</div>
+            <div class="color-use">Borders, dividers</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--sepia-dark);"></div>
+          <div class="color-info">
+            <div class="color-name">Sepia Dark</div>
+            <div class="color-hex">#A89476</div>
+            <div class="color-use">Deep sepia, aged effects</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- LEATHER COLORS -->
+    <div class="section">
+      <h2 class="section-title">Rich Leather Accents</h2>
+      <div class="palette-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-dark);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Dark</div>
+            <div class="color-hex">#3E2723</div>
+            <div class="color-use">Primary text, dark accents, navigation</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-medium);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Medium</div>
+            <div class="color-hex">#5D4037</div>
+            <div class="color-use">Headers, navigation bars</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-light);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Light</div>
+            <div class="color-hex">#6D4C41</div>
+            <div class="color-use">Hover states, lighter accents</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-worn);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Worn</div>
+            <div class="color-hex">#795548</div>
+            <div class="color-use">Subtle borders, aged leather</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-cognac);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Cognac</div>
+            <div class="color-hex">#8D6E63</div>
+            <div class="color-use">Warm accents, interactive elements</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--leather-tan);"></div>
+          <div class="color-info">
+            <div class="color-name">Leather Tan</div>
+            <div class="color-hex">#A1887F</div>
+            <div class="color-use">Secondary elements, soft leather</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- INK COLORS -->
+    <div class="section">
+      <h2 class="section-title">Handwritten Ink</h2>
+      <div class="palette-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--ink-black);"></div>
+          <div class="color-info">
+            <div class="color-name">Ink Black</div>
+            <div class="color-hex">#1A1412</div>
+            <div class="color-use">Primary text, rich dark ink</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--ink-faded);"></div>
+          <div class="color-info">
+            <div class="color-name">Ink Faded</div>
+            <div class="color-hex">#4A3C35</div>
+            <div class="color-use">Secondary text, captions</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--ink-sepia);"></div>
+          <div class="color-info">
+            <div class="color-name">Ink Sepia</div>
+            <div class="color-hex">#6B5D54</div>
+            <div class="color-use">Meta information, dates</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--ink-blue);"></div>
+          <div class="color-info">
+            <div class="color-name">Ink Blue</div>
+            <div class="color-hex">#2C3E50</div>
+            <div class="color-use">Links, blue ink accent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VINTAGE ACCENTS -->
+    <div class="section">
+      <h2 class="section-title">Vintage Accent Colors</h2>
+      <div class="palette-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--vintage-red);"></div>
+          <div class="color-info">
+            <div class="color-name">Vintage Red</div>
+            <div class="color-hex">#A0522D</div>
+            <div class="color-use">Ribbon bookmark, special markers</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--vintage-gold);"></div>
+          <div class="color-info">
+            <div class="color-name">Vintage Gold</div>
+            <div class="color-hex">#B8860B</div>
+            <div class="color-use">Gold leaf, special moments</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--vintage-green);"></div>
+          <div class="color-info">
+            <div class="color-name">Vintage Green</div>
+            <div class="color-hex">#556B2F</div>
+            <div class="color-use">Map accent, nature references</div>
+          </div>
+        </div>
+        
+        <div class="color-card">
+          <div class="color-swatch" style="background: var(--vintage-blue);"></div>
+          <div class="color-info">
+            <div class="color-name">Vintage Blue</div>
+            <div class="color-hex">#4A6FA5</div>
+            <div class="color-use">Denim blue, travel theme</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- TEXTURE SAMPLES -->
+    <div class="section">
+      <h2 class="section-title">Texture Samples</h2>
+      <div class="texture-grid">
+        <div class="texture-sample">
+          <div class="texture-display paper-texture">
+            <div class="texture-label">Aged Paper Grain</div>
+          </div>
+          <div class="texture-info">
+            <div class="texture-name">Paper Texture</div>
+            <div class="texture-desc">Subtle paper grain overlay for main content areas. Creates authentic journal feel without overwhelming content.</div>
+          </div>
+        </div>
+        
+        <div class="texture-sample">
+          <div class="texture-display leather-texture">
+            <div class="texture-label texture-label-leather">Leather Binding</div>
+          </div>
+          <div class="texture-info">
+            <div class="texture-name">Leather Texture</div>
+            <div class="texture-desc">Rich leather gradient for navigation and headers. Provides tactile depth and premium feel.</div>
+          </div>
+        </div>
+        
+        <div class="texture-sample">
+          <div class="texture-display stained-paper">
+            <div class="texture-label">Coffee Stains</div>
+          </div>
+          <div class="texture-info">
+            <div class="texture-name">Stained Paper</div>
+            <div class="texture-desc">Weathered areas with subtle coffee/water stains. Adds character and aged authenticity.</div>
+          </div>
+        </div>
+        
+        <div class="texture-sample">
+          <div class="texture-display paper-texture">
+            <div class="photo-frame">
+              <div class="photo-frame-inner">Photo Here</div>
+            </div>
+          </div>
+          <div class="texture-info">
+            <div class="texture-name">Photo Frame</div>
+            <div class="texture-desc">Vintage Polaroid-style frame with thick bottom margin. Perfect for family photo galleries.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- TYPOGRAPHY SAMPLES -->
+    <div class="section">
+      <h2 class="section-title">Typography Specimens</h2>
+      
+      <div class="type-sample">
+        <div class="type-display handwritten-xl">
+          Our Journey Across Europe
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Caveat Bold 700, 56px (3.5rem) • <strong>Use:</strong> Main page title, hero heading
+        </div>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-display handwritten-lg">
+          Week 3: Through the Swiss Alps
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Caveat Bold 700, 40px (2.5rem) • <strong>Use:</strong> Week headings, major sections
+        </div>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-display handwritten-md">
+          A memorable day exploring mountain villages...
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Caveat Regular 400, 30px (1.875rem) • <strong>Use:</strong> Subheadings, handwritten notes
+        </div>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-display serif-body">
+          The morning started with a breathtaking view of the Matterhorn. We drove through winding mountain roads, stopping at small villages where time seemed to stand still. Our daughter spotted cows with bells around their necks, and we couldn't resist taking dozens of photos of her delighted face.
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Crimson Text Regular 400, 18px (1.125rem), line-height 1.8 • <strong>Use:</strong> Body text, story paragraphs
+        </div>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-display serif-caption">
+          Photo taken at Zermatt, Switzerland • September 15, 2022 • 📸 Canon EOS
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Crimson Text Regular 400, 14px (0.875rem) • <strong>Use:</strong> Captions, photo metadata
+        </div>
+      </div>
+      
+      <div class="type-sample">
+        <div class="type-display mono-stats">
+          Distance: 287 km | Stops: 4 | Photos: 126 | Duration: 6 days
+        </div>
+        <div class="type-meta">
+          <strong>Font:</strong> Courier Prime Regular 400, 14px (0.875rem) • <strong>Use:</strong> Statistics, data, dates
+        </div>
+      </div>
+    </div>
+    
+    <!-- COMPARISON -->
+    <div class="section">
+      <h2 class="section-title">Design Comparison</h2>
+      <div class="comparison">
+        <div class="comparison-card old-design">
+          <div class="comparison-title">❌ Coffee Palette (Before)</div>
+          <ul class="comparison-list">
+            <li>Yellowish cream background (#FEF3C7)</li>
+            <li>Too bright and warm</li>
+            <li>Abril Fatface — too formal/rigid</li>
+            <li>Merriweather — lacks personality</li>
+            <li>Limited texture/tactile feel</li>
+          </ul>
+        </div>
+        
+        <div class="comparison-card new-design">
+          <div class="comparison-title">✅ Leather Journal (After)</div>
+          <ul class="comparison-list">
+            <li>Aged paper neutral (#F5F1E8)</li>
+            <li>Rich leather browns (#3E2723-#8D6E63)</li>
+            <li>Caveat — handwritten warmth</li>
+            <li>Crimson Text — classic journal serif</li>
+            <li>Paper grain & leather textures</li>
+            <li>Vintage photo treatments</li>
+            <li>Weathered, diary-like authenticity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

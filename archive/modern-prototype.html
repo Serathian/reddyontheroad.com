@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reddy on the Road - Finland to Spain 2022</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <!-- Mapbox -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Coffee Palette */
+      --color-primary: #92400E;
+      --color-secondary: #B45309;
+      --color-background: #FEF3C7;
+      --color-card: #FFFBEB;
+      --color-text: #78350F;
+      --color-accent: #F97316;
+      
+      /* Modern Elevation */
+      --elevation-1: 0 1px 3px rgba(146, 64, 14, 0.1);
+      --elevation-2: 0 4px 12px rgba(146, 64, 14, 0.1);
+      --elevation-3: 0 10px 24px rgba(146, 64, 14, 0.12);
+      --elevation-4: 0 20px 40px rgba(146, 64, 14, 0.15);
+      
+      /* Spacing */
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --space-4xl: 96px;
+      
+      /* Border Radius */
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      
+      /* Typography */
+      --font-display: 'Abril Fatface', serif;
+      --font-body: 'Merriweather', serif;
+      
+      /* Layout */
+      --navbar-height: 72px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-background);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--navbar-height);
+      background: rgba(255, 251, 235, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(146, 64, 14, 0.15);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar-content {
+      max-width: 1400px;
+      width: 100%;
+      padding: 0 var(--space-2xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: var(--space-xl);
+    }
+
+    .navbar-link {
+      color: var(--color-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: color 200ms;
+    }
+
+    .navbar-link:hover {
+      color: var(--color-primary);
+    }
+
+    /* Layout Container */
+    .layout-container {
+      padding-top: var(--navbar-height);
+      display: flex;
+    }
+
+    /* Fixed Map (Left Half) */
+    .map-container {
+      position: fixed;
+      left: 0;
+      top: var(--navbar-height);
+      width: 50%;
+      height: calc(100vh - var(--navbar-height));
+      z-index: 10;
+    }
+
+    .map-canvas {
+      width: 100%;
+      height: 100%;
+      background: #E5E5E5;
+      border-right: 1px solid rgba(146, 64, 14, 0.2);
+    }
+
+    /* Map Progress Indicator */
+    .map-progress {
+      position: absolute;
+      bottom: var(--space-2xl);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 251, 235, 0.98);
+      backdrop-filter: blur(8px);
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-full);
+      box-shadow: var(--elevation-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      border: 1px solid rgba(146, 64, 14, 0.1);
+    }
+
+    .progress-text {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: var(--color-primary);
+    }
+
+    .progress-bar {
+      width: 120px;
+      height: 6px;
+      background: rgba(146, 64, 14, 0.15);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+      width: 33%;
+      transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: var(--radius-full);
+    }
+
+    /* Timeline (Right Half) */
+    .timeline-container {
+      margin-left: 50%;
+      width: 50%;
+      padding: var(--space-4xl) var(--space-2xl);
+      min-height: 200vh;
+    }
+
+    /* Week Card */
+    .week-card {
+      background: var(--color-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+      box-shadow: var(--elevation-2);
+      border: 1px solid rgba(146, 64, 14, 0.1);
+      transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .week-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+    }
+
+    .week-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--elevation-3);
+    }
+
+    /* Week Badge */
+    .week-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--color-primary);
+      color: var(--color-background);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Photo Grid - Bento Style */
+    .photo-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 200px);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .photo-bento-item {
+      background: #E5E5E5;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-bento-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .photo-bento-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-bento-item:first-child {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+
+    /* Week Title */
+    .week-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+      line-height: 1.2;
+    }
+
+    .week-route {
+      font-size: 1.125rem;
+      color: var(--color-secondary);
+      font-weight: 500;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Week Summary */
+    .week-summary {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Stats Bar */
+    .week-stats {
+      display: flex;
+      gap: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(146, 64, 14, 0.15);
+      color: var(--color-secondary);
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .map-container {
+        position: sticky;
+        width: 100%;
+        height: 40vh;
+        top: var(--navbar-height);
+      }
+
+      .timeline-container {
+        margin-left: 0;
+        width: 100%;
+        padding: var(--space-xl) var(--space-lg);
+      }
+
+      .navbar-content {
+        padding: 0 var(--space-lg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .week-card {
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+      }
+
+      .photo-bento {
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px 200px 200px;
+        gap: var(--space-sm);
+      }
+
+      .photo-bento-item:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .week-title {
+        font-size: 1.5rem;
+      }
+
+      .week-summary {
+        font-size: 1rem;
+      }
+
+      .week-stats {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+      }
+
+      .navbar-links {
+        display: none;
+      }
+    }
+
+    /* Map placeholder styling */
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: var(--color-primary);
+    }
+
+    .map-placeholder-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .map-placeholder-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .map-placeholder-sub {
+      font-size: 1rem;
+      color: var(--color-secondary);
+    }
+
+    /* Photo placeholders */
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+      font-size: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="/" class="navbar-logo">Reddy on the Road</a>
+      <div class="navbar-links">
+        <a href="#timeline" class="navbar-link">Timeline</a>
+        <a href="#about" class="navbar-link">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="layout-container">
+    
+    <!-- Fixed Map (Left Half) -->
+    <div class="map-container">
+      <div id="map" class="map-canvas">
+        <!-- Map Placeholder -->
+        <div class="map-placeholder">
+          <div class="map-placeholder-icon">🗺️</div>
+          <div class="map-placeholder-text">Interactive Route Map</div>
+          <div class="map-placeholder-sub">Animates as you scroll through weeks</div>
+        </div>
+      </div>
+      
+      <!-- Progress Indicator -->
+      <div class="map-progress">
+        <span class="progress-text" id="progress-text">Week 1 of 12</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrolling Timeline (Right Half) -->
+    <div class="timeline-container" id="timeline">
+      
+      <!-- Week 1 -->
+      <article class="week-card" data-week="1">
+        <span class="week-badge">Week 1 • May 15-21, 2022</span>
+        
+        <div class="photo-bento">
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">📸</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">📷</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🏔️</div>
+          </div>
+        </div>
+        
+        <h2 class="week-title">Arctic Circle to Helsinki</h2>
+        <p class="week-route">Rovaniemi → Oulu → Helsinki</p>
+        
+        <p class="week-summary">
+          Our journey began in the magical city of Rovaniemi, where the Arctic Circle meets adventure. 
+          Emma was thrilled to see her first reindeer at the Santa Claus Village. The midnight sun cast 
+          a golden glow over everything, making time feel endless. We drove through endless forests and 
+          past crystal-clear lakes, stopping in Oulu for traditional Finnish salmon soup before reaching 
+          the vibrant capital of Helsinki.
+        </p>
+        
+        <div class="week-stats">
+          <span class="stat-item">📍 3 stops</span>
+          <span class="stat-item">🚗 640 km</span>
+          <span class="stat-item">📸 34 photos</span>
+        </div>
+      </article>
+
+      <!-- Week 2 -->
+      <article class="week-card" data-week="2">
+        <span class="week-badge">Week 2 • May 22-28, 2022</span>
+        
+        <div class="photo-bento">
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🌊</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🏛️</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">☕</div>
+          </div>
+        </div>
+        
+        <h2 class="week-title">Through Sweden</h2>
+        <p class="week-route">Stockholm → Gothenburg</p>
+        
+        <p class="week-summary">
+          Three days exploring Stockholm's beautiful archipelago and Gamla Stan's cobblestone streets. 
+          Emma loved feeding the ducks by the harbor, and we discovered the joy of Swedish fika culture. 
+          The drive to Gothenburg took us through endless forests and past hundreds of red cottages. 
+          We found the perfect camping spot overlooking the North Sea, where Emma collected shells 
+          for an entire afternoon.
+        </p>
+        
+        <div class="week-stats">
+          <span class="stat-item">📍 2 stops</span>
+          <span class="stat-item">🚗 470 km</span>
+          <span class="stat-item">📸 42 photos</span>
+        </div>
+      </article>
+
+      <!-- Week 3 -->
+      <article class="week-card" data-week="3">
+        <span class="week-badge">Week 3 • May 29 - June 4, 2022</span>
+        
+        <div class="photo-bento">
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🎡</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🏰</div>
+          </div>
+          <div class="photo-bento-item">
+            <div class="photo-placeholder">🥐</div>
+          </div>
+        </div>
+        
+        <h2 class="week-title">Danish Hygge</h2>
+        <p class="week-route">Copenhagen → Aarhus</p>
+        
+        <p class="week-summary">
+          Copenhagen welcomed us with its famous hygge atmosphere and colorful Nyhavn harbor. 
+          Emma's first roller coaster at Tivoli Gardens (the gentle one!) was a huge success. 
+          We enjoyed the best pastries of our lives at a cozy bakery, where the baker gave Emma 
+          a free cookie every morning. The coastal drive to Aarhus revealed stunning beaches 
+          and charming fishing villages where we stopped for fresh seafood.
+        </p>
+        
+        <div class="week-stats">
+          <span class="stat-item">📍 2 stops</span>
+          <span class="stat-item">🚗 315 km</span>
+          <span class="stat-item">📸 56 photos</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <script>
+    // Simple scroll progress tracking
+    const progressText = document.getElementById('progress-text');
+    const progressFill = document.getElementById('progress-fill');
+    const weekCards = document.querySelectorAll('.week-card');
+    const totalWeeks = weekCards.length;
+
+    // Intersection Observer to track which week is visible
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const weekNumber = entry.target.dataset.week;
+          const progress = (weekNumber / totalWeeks) * 100;
+          
+          progressText.textContent = `Week ${weekNumber} of ${totalWeeks}`;
+          progressFill.style.width = `${progress}%`;
+          
+          console.log(`Now viewing Week ${weekNumber}`);
+          // Here you would update the map animation
+        }
+      });
+    }, observerOptions);
+
+    // Observe all week cards
+    weekCards.forEach(card => observer.observe(card));
+
+    // Mapbox initialization (add your token)
+    // mapboxgl.accessToken = 'YOUR_MAPBOX_TOKEN';
+    // const map = new mapboxgl.Map({
+    //   container: 'map',
+    //   style: 'mapbox://styles/mapbox/streets-v12',
+    //   center: [25.0, 60.0],
+    //   zoom: 4
+    // });
+  </script>
+
+</body>
+</html>

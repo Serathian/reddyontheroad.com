@@ -1,0 +1,21 @@
+/* [project]/app/components/Carousel/Carousel.module.css [app-client] (css) */
+.Carousel-module__nu5vFW__carousel {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 40vh;
+  padding-bottom: 40vh;
+  display: flex;
+  overflow-y: auto;
+}
+
+.Carousel-module__nu5vFW__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/*# sourceMappingURL=app_components_Carousel_Carousel_module_css_bad6b30c._.single.css.map*/

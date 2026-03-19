@@ -1,0 +1,342 @@
+/* [project]/app/components/SplitLayout/SplitLayout.module.css [app-client] (css) */
+.SplitLayout-module__tk6JYW__container {
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.SplitLayout-module__tk6JYW__mapPane {
+  background: var(--journal-paper-dark);
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.SplitLayout-module__tk6JYW__contentPane {
+  background: var(--journal-paper);
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .SplitLayout-module__tk6JYW__container {
+    flex-direction: column;
+  }
+
+  .SplitLayout-module__tk6JYW__mapPane {
+    z-index: 10;
+    flex: none;
+    height: 40vh;
+    position: sticky;
+    top: 0;
+  }
+
+  .SplitLayout-module__tk6JYW__contentPane {
+    padding: var(--space-lg);
+    flex: 1;
+  }
+}
+
+/* [project]/app/components/Carousel/DayCard.module.css [app-client] (css) */
+.DayCard-module__kVkfwa__card {
+  background: var(--journal-paper-stained);
+  border: 1px solid var(--leather-dark);
+  padding: var(--space-lg);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--shadow-md);
+  border-radius: 4px;
+  flex: none;
+  margin: 0 auto;
+  transition: transform .3s, box-shadow .3s;
+  transform: scale(1);
+}
+
+.DayCard-module__kVkfwa__card[data-active="true"] {
+  box-shadow: var(--shadow-xl);
+  z-index: 1;
+  transform: scale(1.08);
+}
+
+.DayCard-module__kVkfwa__date {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: var(--space-sm);
+  letter-spacing: .05em;
+  display: block;
+}
+
+.DayCard-module__kVkfwa__location {
+  font-family: var(--font-display), cursive;
+  font-size: var(--text-xl);
+  color: var(--ink-black);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.DayCard-module__kVkfwa__preview {
+  font-family: var(--font-body), serif;
+  font-size: var(--text-base);
+  color: var(--ink-black);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.DayCard-module__kVkfwa__openButton {
+  margin-top: var(--space-md);
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor: pointer;
+  border-radius: 4px;
+  align-self: flex-start;
+  padding: .45rem .7rem;
+}
+
+.DayCard-module__kVkfwa__openButton:focus-visible, .DayCard-module__kVkfwa__card:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .DayCard-module__kVkfwa__card {
+    transition: none;
+  }
+}
+
+/* [project]/app/components/Carousel/SkeletonCard.module.css [app-client] (css) */
+.SkeletonCard-module__zpNZXW__card {
+  background: var(--journal-paper-stained);
+  border: 1px solid var(--sepia-medium);
+  padding: var(--space-lg);
+  min-width: 280px;
+  max-width: 320px;
+  box-shadow: var(--shadow-md);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.SkeletonCard-module__zpNZXW__card:after {
+  content: "";
+  background: linear-gradient(90deg, #0000 0%, #ffffff26 25%, #ffffff4d 50%, #ffffff26 75%, #0000 100%);
+  animation: 2.5s ease-in-out infinite SkeletonCard-module__zpNZXW__shimmer;
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+}
+
+@keyframes SkeletonCard-module__zpNZXW__shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .SkeletonCard-module__zpNZXW__card:after {
+    animation: none;
+  }
+}
+
+.SkeletonCard-module__zpNZXW__date {
+  width: 80px;
+  height: .875rem;
+  margin-bottom: var(--space-sm);
+  background: #00000014;
+  border-radius: 2px;
+}
+
+.SkeletonCard-module__zpNZXW__location {
+  width: 60%;
+  height: 1.5rem;
+  margin-bottom: var(--space-md);
+  background: #00000014;
+  border-radius: 2px;
+}
+
+.SkeletonCard-module__zpNZXW__preview {
+  background: #00000014;
+  border-radius: 2px;
+  width: 100%;
+  height: 3rem;
+}
+
+/* [project]/app/components/Carousel/Carousel.module.css [app-client] (css) */
+.Carousel-module__nu5vFW__carousel {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 40vh;
+  padding-bottom: 40vh;
+  display: flex;
+  overflow-y: auto;
+}
+
+.Carousel-module__nu5vFW__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* [project]/app/components/Map/JourneyMap.module.css [app-client] (css) */
+.JourneyMap-module__vBP8WG__container {
+  background: var(--journal-paper-dark);
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.JourneyMap-module__vBP8WG__map {
+  width: 100%;
+  height: 100%;
+}
+
+.JourneyMap-module__vBP8WG__marker {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  border: 0;
+  border-radius: 999px;
+}
+
+.JourneyMap-module__vBP8WG__pastMarker {
+  background: var(--leather-tan);
+  opacity: .6;
+  width: .75rem;
+  height: .75rem;
+  box-shadow: 0 0 0 1px var(--leather-dark);
+}
+
+.JourneyMap-module__vBP8WG__currentMarker {
+  background: var(--sepia-light);
+  width: 1rem;
+  height: 1rem;
+  box-shadow: 0 0 0 2px var(--leather-dark), 0 0 0 8px #b8860b40;
+}
+
+.JourneyMap-module__vBP8WG__currentMarkerAnimated {
+  animation: 1.8s ease-in-out infinite JourneyMap-module__vBP8WG__currentPulse;
+}
+
+@keyframes JourneyMap-module__vBP8WG__currentPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.JourneyMap-module__vBP8WG__popup {
+  color: var(--ink-black);
+  margin: 0;
+  font-size: .875rem;
+}
+
+.JourneyMap-module__vBP8WG__popup strong {
+  font-family: var(--font-display);
+  margin-bottom: .25rem;
+  font-size: 1rem;
+  display: block;
+}
+
+.JourneyMap-module__vBP8WG__mobileHint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .JourneyMap-module__vBP8WG__mobileHint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .JourneyMap-module__vBP8WG__currentMarkerAnimated {
+    animation: none;
+  }
+}
+
+/* [project]/app/page.module.css [app-client] (css) */
+.page-module__E0kJGG__carouselWrapper {
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+}
+
+.page-module__E0kJGG__rightPane, .page-module__E0kJGG__viewSwap {
+  height: 100%;
+  position: relative;
+}
+
+.page-module__E0kJGG__layer {
+  transition: opacity .18s ease-out;
+  position: absolute;
+  inset: 0;
+}
+
+.page-module__E0kJGG__visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-module__E0kJGG__hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-module__E0kJGG__fullDayLayer {
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.page-module__E0kJGG__backButton {
+  z-index: 2;
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--leather-dark);
+  background: var(--journal-paper-dark);
+  color: var(--ink-black);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: .5rem .75rem;
+  position: sticky;
+  top: 0;
+}
+
+.page-module__E0kJGG__mapBoundScrubber {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.page-module__E0kJGG__mapBoundScrubber > * {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-module__E0kJGG__layer {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=app_f65f0082._.css.map*/

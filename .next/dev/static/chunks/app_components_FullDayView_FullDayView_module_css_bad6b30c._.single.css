@@ -1,0 +1,67 @@
+/* [project]/app/components/FullDayView/FullDayView.module.css [app-client] (css) */
+.FullDayView-module__t1OCEG__container {
+  height: 100%;
+  padding: var(--space-xl);
+  gap: var(--space-lg);
+  background: var(--journal-paper);
+  display: grid;
+  overflow-y: auto;
+}
+
+.FullDayView-module__t1OCEG__header {
+  gap: var(--space-sm);
+  display: grid;
+}
+
+.FullDayView-module__t1OCEG__date {
+  font-family: var(--font-mono), monospace;
+  color: var(--ink-faded);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: var(--text-sm);
+}
+
+.FullDayView-module__t1OCEG__location {
+  font-size: var(--text-3xl);
+  color: var(--leather-dark);
+  line-height: 1.1;
+}
+
+.FullDayView-module__t1OCEG__metaChips {
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.FullDayView-module__t1OCEG__chip {
+  border: 1px solid var(--sepia-medium);
+  background: var(--sepia-light);
+  color: var(--ink-sepia);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  border-radius: 999px;
+  padding: .15rem .5rem;
+}
+
+.FullDayView-module__t1OCEG__diary {
+  gap: var(--space-md);
+  color: var(--ink-black);
+  line-height: 1.7;
+  display: grid;
+}
+
+:is(.FullDayView-module__t1OCEG__diary h1, .FullDayView-module__t1OCEG__diary h2, .FullDayView-module__t1OCEG__diary h3) {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+:is(.FullDayView-module__t1OCEG__diary p, .FullDayView-module__t1OCEG__diary ul, .FullDayView-module__t1OCEG__diary ol) {
+  margin-bottom: var(--space-sm);
+}
+
+.FullDayView-module__t1OCEG__photos {
+  gap: var(--space-sm);
+  display: grid;
+}
+
+/*# sourceMappingURL=app_components_FullDayView_FullDayView_module_css_bad6b30c._.single.css.map*/

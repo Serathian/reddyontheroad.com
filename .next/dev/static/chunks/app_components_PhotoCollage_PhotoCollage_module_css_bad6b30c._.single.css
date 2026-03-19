@@ -1,0 +1,58 @@
+/* [project]/app/components/PhotoCollage/PhotoCollage.module.css [app-client] (css) */
+.PhotoCollage-module__-H8jGW__wrapper {
+  gap: var(--space-md);
+  display: grid;
+}
+
+.PhotoCollage-module__-H8jGW__grid {
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  display: grid;
+}
+
+.PhotoCollage-module__-H8jGW__photoButton {
+  border: 1px solid var(--sepia-medium);
+  background: var(--journal-paper-stained);
+  padding: var(--space-xs);
+  text-align: left;
+  gap: var(--space-xs);
+  cursor: pointer;
+  border-radius: 2px;
+  display: grid;
+}
+
+.PhotoCollage-module__-H8jGW__photo {
+  object-fit: cover;
+  border: 1px solid var(--leather-cognac);
+  width: 100%;
+  height: 170px;
+}
+
+.PhotoCollage-module__-H8jGW__caption {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  color: var(--ink-sepia);
+}
+
+.PhotoCollage-module__-H8jGW__controls {
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.PhotoCollage-module__-H8jGW__navButton {
+  border: 1px solid var(--leather-dark);
+  background: var(--sepia-light);
+  color: var(--ink-black);
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-mono), monospace;
+  cursor: pointer;
+}
+
+.PhotoCollage-module__-H8jGW__emptyMessage {
+  font-family: var(--font-body), serif;
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+/*# sourceMappingURL=app_components_PhotoCollage_PhotoCollage_module_css_bad6b30c._.single.css.map*/
