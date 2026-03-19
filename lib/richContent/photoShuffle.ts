@@ -26,7 +26,15 @@ function isValidOrder(value: unknown, length: number): value is number[] {
     return false
   }
 
-  return value.every((index) => Number.isInteger(index) && index >= 0 && index < length)
+  const isWithinRange = value.every(
+    (index) => Number.isInteger(index) && index >= 0 && index < length
+  )
+
+  if (!isWithinRange) {
+    return false
+  }
+
+  return new Set(value).size === length
 }
 
 export function getSessionPhotoOrder(entryId: string, photoCount: number): number[] {
