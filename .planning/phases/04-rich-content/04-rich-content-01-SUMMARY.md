@@ -35,6 +35,7 @@ key-files:
 key-decisions:
   - "Use `sessionStorage` keyed by `photo-order:{entryId}` so each day randomizes once per browser session and stays stable across re-renders."
   - "Embed lightweight previous/next lightbox controls in `PhotoCollage` to keep full-day photo navigation in-place without route changes."
+  - "Treat duplicate cached indices as invalid and regenerate order to preserve true shuffle permutations."
 
 patterns-established:
   - "Diary-first rendering order: header/date-location → optional chips → markdown body → photos"
@@ -44,25 +45,25 @@ requirements-completed: [CONTENT-01, CONTENT-03]
 
 # Metrics
 duration: 2 min
-completed: 2026-03-16
+completed: 2026-03-19
 ---
 
 # Phase 4 Plan 1: Full-day diary/photos surface + session-stable randomization Summary
 
-**Diary-first full-day rendering now ships with full markdown content plus per-day session-stable photo collage ordering and in-place lightbox navigation.**
+**Diary-first full-day rendering ships with full markdown content, session-stable per-day photo collage ordering, and hardened cached-order validation for resilient lightbox browsing.**
 
 ## Performance
 
 - **Duration:** 2 min
-- **Started:** 2026-03-16T19:57:10+02:00
-- **Completed:** 2026-03-16T19:59:13+02:00
+- **Started:** 2026-03-19T07:29:04Z
+- **Completed:** 2026-03-19T07:31:07Z
 - **Tasks:** 2
-- **Files modified:** 9
+- **Files modified:** 2
 
 ## Accomplishments
-- Added rich-content dependencies and implemented `photoShuffle` helpers that cache stable per-day index order in `sessionStorage`.
-- Delivered `FullDayView` with full markdown rendering and conditional weather/distance chips.
-- Implemented `PhotoCollage` with exact empty state copy (`No photos for this day`) and in-place lightbox open/previous/next behavior.
+- Re-verified rich-content dependencies, `FullDayView`, and `PhotoCollage` behavior against plan verification commands.
+- Added regression coverage for malformed cached photo orders to protect session-stable randomization guarantees.
+- Hardened `photoShuffle` cache validation to reject duplicate index arrays before rendering collage/lightbox sequences.
 
 ## Task Commits
 
@@ -72,6 +73,8 @@ Each task was committed atomically:
 2. **Task 1 (GREEN): photo shuffle + dependencies** - `84a4255` (feat)
 3. **Task 2 (RED): full day view behavior tests** - `6ef81e7` (test)
 4. **Task 2 (GREEN): full day view + collage + lightbox** - `657be5c` (feat)
+5. **Task 1 (Rule 1 RED): invalid cache regression test** - `3e54ace` (test)
+6. **Task 1 (Rule 1 GREEN): unique-order cache validation** - `2d0a2aa` (feat)
 
 **Plan metadata:** pending
 
@@ -85,10 +88,24 @@ Each task was committed atomically:
 ## Decisions Made
 - Used `sessionStorage` with explicit per-day key format (`photo-order:{entryId}`) to guarantee deterministic session behavior.
 - Kept lightbox interaction inside `PhotoCollage` (instead of extra wrapper) to satisfy plan scope and reduce integration complexity.
+- Enforced unique permutation validation for cached index arrays so stale/corrupted `sessionStorage` values cannot yield duplicate photos.
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+### Auto-fixed Issues
+
+**1. [Rule 1 - Bug] Reject duplicate cached photo index orders**
+- **Found during:** Task 1 (session-stable photo shuffle utility)
+- **Issue:** `isValidOrder` accepted duplicate indices, allowing malformed `sessionStorage` values to produce repeated photos and missing entries.
+- **Fix:** Added failing regression test, then updated validation to require set cardinality equal to photo count before reusing cached order.
+- **Files modified:** `tests/lib/photoShuffle.test.ts`, `lib/richContent/photoShuffle.ts`
+- **Verification:** `npm run test:run -- tests/lib/photoShuffle.test.ts` and `npm run test:run -- tests/components/FullDayView.test.tsx tests/lib/photoShuffle.test.ts`
+- **Committed in:** `3e54ace`, `2d0a2aa`
+
+---
+
+**Total deviations:** 1 auto-fixed (1 bug)
+**Impact on plan:** Fix tightens CONTENT-03 correctness without scope creep; all planned behavior remains intact.
 
 ## Issues Encountered
 None.
@@ -99,11 +116,11 @@ None - no external service configuration required.
 
 ## Next Phase Readiness
 - Ready for `04-02-PLAN.md` to wire page-level mode switching and timeline scrubber integration.
-- Full-day rich content and photo contracts are now in place for page orchestration work.
+- Full-day rich content and photo contracts are in place and now resilient to corrupted cached photo-order values.
 
 ---
 *Phase: 04-rich-content*
-*Completed: 2026-03-16*
+*Completed: 2026-03-19*
 
 ## Self-Check: PASSED
 

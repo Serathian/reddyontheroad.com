@@ -6,9 +6,9 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-03-18T07:40:38.766Z"
-last_activity: 2026-03-17
+stopped_at: Completed 04-rich-content-01-PLAN.md
+last_updated: "2026-03-19T07:31:57.080Z"
+last_activity: 2026-03-19
 progress:
   total_phases: 5
   completed_phases: 4
@@ -37,7 +37,7 @@ Current Plan: 2
 Total Plans in Phase: 2
 Total Phases: 5
 Status: Ready to execute 03.1-02-PLAN.md
-Last activity: 2026-03-17
+Last activity: 2026-03-19
 
 Progress: [█████████░] 93%
 
@@ -78,6 +78,7 @@ Progress: [█████████░] 93%
 | Phase 04-rich-content P01 | 2 min | 2 tasks | 9 files |
 | Phase 04-rich-content P02 | 22 min | 2 tasks | 10 files |
 | Phase 04-rich-content P03 | 4 min | 2 tasks | 3 files |
+| Phase 04-rich-content P01 | 2 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -129,6 +130,9 @@ See PROJECT.md for all historical decisions.
 - [Phase 04-rich-content]: Implemented timeline scrubber as native range input with aria-valuetext and polite live region for exact day announcements
 - [Phase 04-rich-content]: Implemented motorhome icon as decorative aria-hidden overlay while preserving native range semantics.
 - [Phase 04-rich-content]: Added stable motorhome icon marker assertion to lock CONTENT-04 without altering SR/keyboard contract.
+- [Phase 04-rich-content]: Use sessionStorage key photo-order:{entryId} for per-day session-stable randomization.
+- [Phase 04-rich-content]: Keep lightbox controls in PhotoCollage for in-place previous/next navigation without route changes.
+- [Phase 04-rich-content]: Validate cached photo-order arrays as unique permutations and regenerate malformed values.
 
 ### Pending Todos
 
@@ -147,8 +151,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T11:34:51.368Z
-Stopped at: Completed 04-03-PLAN.md
+Last session: 2026-03-19T07:31:57.077Z
+Stopped at: Completed 04-rich-content-01-PLAN.md
 Resume file: None
 
 ---
