@@ -6,8 +6,8 @@ current_phase: 3.1
 current_phase_name: MapTiler Migration
 current_plan: 2
 status: executing
-stopped_at: Completed 04-rich-content-01-PLAN.md
-last_updated: "2026-03-19T07:31:57.080Z"
+stopped_at: Completed 04-rich-content-02-PLAN.md
+last_updated: "2026-03-19T07:35:09.102Z"
 last_activity: 2026-03-19
 progress:
   total_phases: 5
@@ -79,6 +79,7 @@ Progress: [█████████░] 93%
 | Phase 04-rich-content P02 | 22 min | 2 tasks | 10 files |
 | Phase 04-rich-content P03 | 4 min | 2 tasks | 3 files |
 | Phase 04-rich-content P01 | 2 min | 2 tasks | 2 files |
+| Phase 04-rich-content P02 | 22 min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -133,6 +134,8 @@ See PROJECT.md for all historical decisions.
 - [Phase 04-rich-content]: Use sessionStorage key photo-order:{entryId} for per-day session-stable randomization.
 - [Phase 04-rich-content]: Keep lightbox controls in PhotoCollage for in-place previous/next navigation without route changes.
 - [Phase 04-rich-content]: Validate cached photo-order arrays as unique permutations and regenerate malformed values.
+- [Phase 04-rich-content]: Kept day synchronization architecture unchanged (activeEntryId as single source of truth) and added viewMode only for right-pane content selection.
+- [Phase 04-rich-content]: Chose native range semantics for scrubber interaction and accessibility rather than custom drag widget behavior.
 
 ### Pending Todos
 
@@ -151,8 +154,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T07:31:57.077Z
-Stopped at: Completed 04-rich-content-01-PLAN.md
+Last session: 2026-03-19T07:35:09.100Z
+Stopped at: Completed 04-rich-content-02-PLAN.md
 Resume file: None
 
 ---
