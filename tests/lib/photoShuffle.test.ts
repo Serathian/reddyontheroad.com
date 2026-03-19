@@ -79,4 +79,20 @@ describe('photoShuffle', () => {
     expect(day3Order).not.toBe(day4Order)
     expect(firstDay).not.toEqual(secondDay)
   })
+
+  it('regenerates invalid cached order values before applying shuffle', () => {
+    sessionStorage.setItem('photo-order:day-5', JSON.stringify([0, 0, 1, 2]))
+
+    vi.spyOn(Math, 'random')
+      .mockReturnValueOnce(0.75)
+      .mockReturnValueOnce(0.25)
+      .mockReturnValueOnce(0.1)
+
+    const shuffled = shufflePhotosForDay('day-5', photos)
+    const cachedOrder = JSON.parse(sessionStorage.getItem('photo-order:day-5') ?? '[]') as number[]
+
+    expect(cachedOrder).toHaveLength(photos.length)
+    expect(new Set(cachedOrder).size).toBe(photos.length)
+    expect(shuffled.map((photo) => photo.url)).toEqual(cachedOrder.map((index) => photos[index].url))
+  })
 })
