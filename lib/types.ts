@@ -8,13 +8,15 @@ export interface Photo {
 export interface DailyEntry {
   id: string
   date: string // ISO 8601 format
-  location: string
+  location: string // Display format: "City, Country"
+  city: string
+  country: string
   latitude: number
   longitude: number
   preview: string // Hand-crafted summary for carousel display (1-2 sentences)
   diary: string
   weather?: string
-  distanceMiles?: number
+  distanceKilometers?: number
   photos?: Photo[]
 }
 

@@ -31,6 +31,8 @@ describe('FullDayView', () => {
     id: 'entry-100',
     date: '2024-06-24',
     location: 'Patras, Greece',
+    city: 'Patras',
+    country: 'Greece',
     latitude: 38.2466,
     longitude: 21.7346,
     preview: 'Left Athens and drove west.',
@@ -59,18 +61,18 @@ This final sentence must remain visible without truncation.`,
         entry={{
           ...baseEntry,
           weather: 'Rainy, 19°C',
-          distanceMiles: 132,
+          distanceKilometers: 212,
         }}
       />
     )
 
     expect(screen.getByText('Rainy, 19°C')).toBeInTheDocument()
-    expect(screen.getByText('132 miles')).toBeInTheDocument()
+    expect(screen.getByText('212 km')).toBeInTheDocument()
 
-    rerender(<FullDayView entry={{ ...baseEntry, weather: undefined, distanceMiles: undefined }} />)
+    rerender(<FullDayView entry={{ ...baseEntry, weather: undefined, distanceKilometers: undefined }} />)
 
     expect(screen.queryByText('Rainy, 19°C')).not.toBeInTheDocument()
-    expect(screen.queryByText('132 miles')).not.toBeInTheDocument()
+    expect(screen.queryByText('212 km')).not.toBeInTheDocument()
   })
 
   it('shows the exact empty photo state copy when a day has no photos', () => {

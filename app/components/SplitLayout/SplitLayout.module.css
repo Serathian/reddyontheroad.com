@@ -12,7 +12,7 @@
 .mapPane {
   flex: 1;
   min-width: 0; /* Prevents flex items from overflowing */
-  background: var(--journal-paper-dark);
+  background: var(--gray-100);
   position: relative;
 }
 
@@ -20,9 +20,14 @@
   flex: 1;
   min-width: 0;
   overflow: hidden; /* Prevent contentPane from scrolling - child will scroll */
-  background: var(--journal-paper);
+  background: var(--cream);
   height: 100%; /* Fill parent height */
   position: relative;
+}
+
+/* Desktop: No additional adjustments needed */
+@media (min-width: 1024px) {
+  /* Header height will be handled by content padding */
 }
 
 /* Mobile: Stack vertically, sticky map */
@@ -34,7 +39,7 @@
   .mapPane {
     height: 40vh; /* Fixed height for map on mobile */
     position: sticky;
-    top: 0;
+    top: 56px; /* Below the header */
     z-index: 10;
     flex: none; /* Don't grow/shrink */
   }

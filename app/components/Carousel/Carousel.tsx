@@ -120,10 +120,11 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId,
 
   return (
     <div className={styles.carousel} data-testid="carousel-container" ref={containerRef}>
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <DayCard
           key={entry.id}
           entry={entry}
+          dayNumber={index + 1}
           isActive={resolvedActiveId === entry.id}
           onOpen={resolvedActiveId === entry.id ? () => onOpenDay?.(entry.id) : undefined}
           ref={(el) => {

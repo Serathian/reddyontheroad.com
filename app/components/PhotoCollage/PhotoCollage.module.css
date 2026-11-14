@@ -5,32 +5,67 @@
 
 .grid {
   display: grid;
-  gap: var(--space-md);
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--space-xl);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  padding: var(--space-md) 0;
 }
 
+/* Polaroid-style photo frames */
 .photoButton {
-  border: 1px solid var(--sepia-medium);
-  background: var(--journal-paper-stained);
-  padding: var(--space-xs);
-  text-align: left;
-  display: grid;
-  gap: var(--space-xs);
+  border: none;
+  background: var(--surface-container-lowest);
+  padding: 1rem 1rem 2.5rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 12px rgba(59, 56, 37, 0.12), 0 1px 3px rgba(59, 56, 37, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: rotate(0deg);
+}
+
+/* Intentional asymmetry with slight rotations */
+.photoButton:nth-child(6n+1) {
+  transform: rotate(-2deg);
+}
+
+.photoButton:nth-child(6n+2) {
+  transform: rotate(1.5deg);
+}
+
+.photoButton:nth-child(6n+3) {
+  transform: rotate(-1deg);
+}
+
+.photoButton:nth-child(6n+4) {
+  transform: rotate(2deg);
+}
+
+.photoButton:nth-child(6n+5) {
+  transform: rotate(-1.5deg);
+}
+
+.photoButton:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 8px 24px rgba(59, 56, 37, 0.16), 0 2px 6px rgba(59, 56, 37, 0.12);
 }
 
 .photo {
   width: 100%;
-  height: 170px;
+  height: 200px;
   object-fit: cover;
-  border: 1px solid var(--leather-cognac);
+  border: none;
+  border-radius: 0.125rem;
 }
 
 .caption {
-  font-family: var(--font-mono), monospace;
-  font-size: var(--text-sm);
-  color: var(--ink-sepia);
+  font-family: var(--font-metadata), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--on-surface-variant);
+  text-align: center;
 }
 
 .controls {
@@ -40,16 +75,24 @@
 }
 
 .navButton {
-  border: 1px solid var(--leather-dark);
-  background: var(--sepia-light);
-  color: var(--ink-black);
-  padding: var(--space-xs) var(--space-sm);
-  font-family: var(--font-mono), monospace;
+  border: none;
+  background: var(--surface-container);
+  color: var(--on-surface);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-metadata), sans-serif;
   cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.navButton:hover {
+  background: var(--surface-container-high);
 }
 
 .emptyMessage {
   font-family: var(--font-body), serif;
-  color: var(--ink-faded);
+  color: var(--on-surface-variant);
   font-style: italic;
+  text-align: center;
+  padding: var(--space-xl);
 }

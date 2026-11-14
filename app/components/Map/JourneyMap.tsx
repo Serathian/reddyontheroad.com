@@ -14,6 +14,7 @@ import {
   NEAR_DISTANCE_SUBTLE_PAN_THRESHOLD_KM,
 } from './mapContracts'
 import { currentStopLayer, pastStopsLayer, trailLineLayer } from './mapLayers'
+import { ZoomControls } from '../ZoomControls/ZoomControls'
 import styles from './JourneyMap.module.css'
 
 function distanceKm(a: DailyEntry, b: DailyEntry): number {
@@ -217,6 +218,8 @@ export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProp
           </Popup>
         )}
       </Map>
+
+      <ZoomControls mapRef={mapRef} />
 
       <span className={styles.mobileHint} aria-hidden>
         Tap markers for details

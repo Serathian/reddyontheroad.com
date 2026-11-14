@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { caveat, crimsonText, courierPrime } from "./fonts";
+import { plusJakartaSans, newsreader } from "./fonts";
+import Header from "./components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${caveat.variable} ${crimsonText.variable} ${courierPrime.variable}`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </head>
+      <body className={`${plusJakartaSans.variable} ${newsreader.variable}`}>
+        <Header />
         {children}
       </body>
     </html>

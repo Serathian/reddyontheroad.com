@@ -1,35 +1,26 @@
-import { Caveat, Crimson_Text, Courier_Prime } from 'next/font/google';
+import { Plus_Jakarta_Sans, Newsreader } from 'next/font/google';
 
 /**
- * Journal Design System - Font Configuration
+ * Modern Explorer's Journal - Font Configuration
  * 
  * Typography Hierarchy:
- * - Caveat: Handwritten headers, annotations, personal touch
- * - Crimson Text: Body text, captions, literary feel
- * - Courier Prime: Stats, dates, data (typewriter aesthetic)
+ * - Plus Jakarta Sans: UI elements, headers, navigation, stats (modern sans-serif)
+ * - Newsreader: Body text, storytelling, journal entries (elegant serif)
  */
 
-// Display Font - Handwritten Headers
-export const caveat = Caveat({
-  weight: ['400', '700'],
+// Sans-serif Font - UI & Headers
+export const plusJakartaSans = Plus_Jakarta_Sans({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-caveat',
+  variable: '--font-sans',
   display: 'swap',
 });
 
-// Body Font - Readable Serif
-export const crimsonText = Crimson_Text({
-  weight: ['400', '600'],
+// Serif Font - Body & Storytelling
+export const newsreader = Newsreader({
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-crimson',
-  display: 'swap',
-});
-
-// Monospace Font - Stats & Data
-export const courierPrime = Courier_Prime({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-courier',
+  variable: '--font-serif',
   display: 'swap',
 });

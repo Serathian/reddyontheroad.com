@@ -6,6 +6,8 @@ export const mockDailyEntries: DailyEntry[] = [
     id: 'entry-001',
     date: '2024-06-15',
     location: 'Santorini, Greece',
+    city: 'Santorini',
+    country: 'Greece',
     latitude: 36.3932,
     longitude: 25.4615,
     preview: 'Arrived in Santorini and witnessed the legendary sunset at Oia. The caldera turned deep blue as the sun melted into the Aegean.',
@@ -17,7 +19,7 @@ Evening brought the legendary sunset. Hundreds of tourists gathered, but somehow
 
 Had dinner at a taverna overlooking the sea. Fresh octopus, Greek salad, and local wine. The owner told stories about the island before tourism took over.`,
     weather: 'Sunny, 28°C',
-    distanceMiles: 150,
+    distanceKilometers: 241,
     photos: [
       {
         url: '/photos/santorini-sunset.jpg',
@@ -30,6 +32,8 @@ Had dinner at a taverna overlooking the sea. Fresh octopus, Greek salad, and loc
     id: 'entry-002',
     date: '2024-06-16',
     location: 'Athens, Greece',
+    city: 'Athens',
+    country: 'Greece',
     latitude: 37.9838,
     longitude: 23.7275,
     preview: 'Early morning at the Acropolis to beat the crowds. The Parthenon is humbling — 2,500 years old and still standing.',
@@ -43,12 +47,14 @@ The view from the top shows Athens sprawling in every direction, mountains in th
 
 Spent the afternoon in Plaka, the old neighborhood. Got hopelessly lost in the narrow streets. Found a bookshop selling old travel guides from the 1960s. Bought one as a souvenir.`,
     weather: 'Clear, 32°C',
-    distanceMiles: 75,
+    distanceKilometers: 121,
   },
   {
     id: 'entry-003',
     date: '2024-06-17',
     location: 'Delphi, Greece',
+    city: 'Delphi',
+    country: 'Greece',
     latitude: 38.4824,
     longitude: 22.5010,
     preview: 'Drove to ancient Delphi, home of the Oracle. The mountain sanctuary feels mystical even today.',
@@ -64,7 +70,7 @@ The museum has the bronze charioteer, one of the most beautiful ancient sculptur
 
 Tomorrow: heading to Meteora to see the cliff-top monasteries.`,
     weather: 'Partly cloudy, 26°C',
-    distanceMiles: 110,
+    distanceKilometers: 177,
     photos: [
       {
         url: '/photos/delphi-temple.jpg',
@@ -77,6 +83,8 @@ Tomorrow: heading to Meteora to see the cliff-top monasteries.`,
     id: 'entry-004',
     date: '2024-06-18',
     location: 'Meteora, Greece',
+    city: 'Meteora',
+    country: 'Greece',
     latitude: 39.7217,
     longitude: 21.6306,
     preview: 'Monasteries perched on impossible rock pillars. Monks built these 600 years ago without modern tools — humbling.',
@@ -90,12 +98,14 @@ Met a monk who's lived here for thirty years. He said the hardest part isn't the
 
 The silence at dawn is complete. No cars, no voices, just wind through the rocks and distant bells.`,
     weather: 'Clear, 24°C',
-    distanceMiles: 140,
+    distanceKilometers: 225,
   },
   {
     id: 'entry-005',
     date: '2024-06-19',
     location: 'Thessaloniki, Greece',
+    city: 'Thessaloniki',
+    country: 'Greece',
     latitude: 40.6401,
     longitude: 22.9444,
     preview: 'Second city, first impressions. Byzantine walls, Ottoman markets, and the best street food in Greece.',
@@ -109,7 +119,7 @@ Lunch at Modiano Market. Fresh seafood, spices, olives. Got into a conversation 
 
 Evening in Ladadika district. Old warehouse buildings converted to bars and restaurants. Live music spilling into the streets. This city knows how to live.`,
     weather: 'Warm, 29°C',
-    distanceMiles: 195,
+    distanceKilometers: 314,
     photos: [
       {
         url: '/photos/thessaloniki-walls.jpg',
@@ -122,6 +132,8 @@ Evening in Ladadika district. Old warehouse buildings converted to bars and rest
     id: 'entry-006',
     date: '2024-06-20',
     location: 'Olympus Base, Greece',
+    city: 'Olympus Base',
+    country: 'Greece',
     latitude: 40.0855,
     longitude: 22.3583,
     preview: 'Attempted the trail to Mount Olympus. Made it halfway before weather turned. Zeus had other plans.',
@@ -137,12 +149,14 @@ The Greeks built their gods' home on this mountain for a reason. It demands resp
 
 Spent the evening in Litochoro, the base town. Tomorrow: heading to the peninsula.`,
     weather: 'Started clear, became stormy, 18°C at altitude',
-    distanceMiles: 50,
+    distanceKilometers: 80,
   },
   {
     id: 'entry-007',
     date: '2024-06-21',
     location: 'Halkidiki Peninsula, Greece',
+    city: 'Halkidiki Peninsula',
+    country: 'Greece',
     latitude: 40.1411,
     longitude: 23.5528,
     preview: 'Three-fingered peninsula. Turquoise water, pine forests to the beach, and finally some quiet.',
@@ -156,7 +170,7 @@ Rented a small boat for the afternoon. Followed the coastline, stopping at hidde
 
 Evening in a tiny fishing village. Grilled fish, white wine, conversation with locals about the best diving spots. They invited me back in September when the crowds are gone.`,
     weather: 'Perfect, 27°C',
-    distanceMiles: 85,
+    distanceKilometers: 137,
     photos: [
       {
         url: '/photos/halkidiki-cove.jpg',
@@ -169,6 +183,8 @@ Evening in a tiny fishing village. Grilled fish, white wine, conversation with l
     id: 'entry-008',
     date: '2024-06-22',
     location: 'Crete, Greece',
+    city: 'Crete',
+    country: 'Greece',
     latitude: 35.2401,
     longitude: 25.1442,
     preview: 'Flew to Crete, largest of the Greek islands. Starting in Heraklion, heading to Knossos tomorrow.',
@@ -184,12 +200,14 @@ Tomorrow: Knossos and the Palace of Minos. The center of Minoan civilization, ol
 
 Can already tell this island is different. Wilder, more independent. The Cretans have always done things their own way.`,
     weather: 'Hot, 31°C',
-    distanceMiles: 310,
+    distanceKilometers: 499,
   },
   {
     id: 'entry-009',
     date: '2024-06-23',
     location: 'Knossos, Crete',
+    city: 'Knossos',
+    country: 'Greece',
     latitude: 35.2979,
     longitude: 25.1632,
     preview: 'Palace of Minos. 4,000 years old. The reconstruction is controversial but gives you a sense of the scale.',
@@ -205,7 +223,7 @@ The Minoans had flush toilets and sophisticated plumbing 4,000 years ago. Then t
 
 Spent hours wandering the ruins, trying to imagine life here at its height. Tomorrow: Samaria Gorge, one of the longest in Europe.`,
     weather: 'Sunny, 30°C',
-    distanceMiles: 3,
+    distanceKilometers: 5,
     photos: [
       {
         url: '/photos/knossos-dolphins.jpg',

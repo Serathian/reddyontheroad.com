@@ -1,5 +1,5 @@
-/* Design System: Leather Journal Aesthetic */
-/* Source: JOURNAL_DESIGN_SYSTEM.md - CURRENT APPROVED DESIGN */
+/* Design System: Modern Explorer's Journal */
+/* Source: STITCH_DESIGN_ANALYSIS.md - Stitch Design Implementation */
 
 /* CSS Reset */
 *,
@@ -12,109 +12,243 @@
 
 :root {
   /* Fonts - Reference next/font CSS variables */
-  --font-display: var(--font-caveat);
-  --font-body: var(--font-crimson);
-  --font-mono: var(--font-courier);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
   
-  /* Typography Size Scale - Referenced by components */
-  --text-sm: 0.875rem;     /* 14px - Small text, captions, metadata */
-  --text-base: 1.125rem;   /* 18px - Body text (matches body font-size) */
-  --text-lg: 1.25rem;      /* 20px - Subheadings, emphasized text */
-  --text-xl: 1.5rem;       /* 24px - Large headings (matches h3) */
-  --text-3xl: 3rem;        /* 48px - Display headings (matches h1) */
+  /* Typography Size Scale */
+  --text-xs: 0.75rem;      /* 12px - Tiny labels, meta */
+  --text-sm: 0.875rem;     /* 14px - Small text, captions */
+  --text-base: 1rem;       /* 16px - Body text */
+  --text-lg: 1.125rem;     /* 18px - Large body */
+  --text-xl: 1.25rem;      /* 20px - Subheadings */
+  --text-2xl: 1.5rem;      /* 24px - Headings */
+  --text-3xl: 1.875rem;    /* 30px - Large headings */
+  --text-4xl: 2.25rem;     /* 36px - Display headings */
+  --text-5xl: 3rem;        /* 48px - Hero text */
   
-  /* Font Family Aliases */
-  --font-heading: var(--font-display); /* Alias for semantic clarity */
+  /* Primary Palette - Earth Tones */
+  --burnt-orange: #C65D3B;
+  --burnt-orange-dark: #A34827;
+  --olive-green: #4A5D3F;
+  --olive-green-dark: #3A4D2F;
+  --cream: #FBF9F4;
+  --warm-white: #FFFDF8;
   
-  /* Aged Paper Foundation (JOURNAL_DESIGN_SYSTEM.md lines 23-32) */
-  --journal-paper: #F5F1E8;
-  --journal-paper-dark: #EDE8DC;
-  --journal-paper-stained: #E8E0D0;
-  --sepia-light: #F4ECD8;
-  --sepia-medium: #D4C4A8;
-  --sepia-dark: #A89476;
+  /* Neutral Foundation */
+  --gray-50: #FAFAF9;
+  --gray-100: #F5F5F4;
+  --gray-200: #E7E5E4;
+  --gray-300: #D6D3D1;
+  --gray-400: #A8A29E;
+  --gray-500: #78716C;
+  --gray-600: #57534E;
+  --gray-700: #44403C;
+  --gray-800: #292524;
+  --gray-900: #1C1917;
   
-  /* Leather Accents (lines 36-45) */
-  --leather-dark: #3E2723;
-  --leather-medium: #5D4037;
-  --leather-light: #6D4C41;
-  --leather-worn: #795548;
-  --leather-cognac: #8D6E63;
-  --leather-tan: #A1887F;
+  /* Semantic UI Colors */
+  --border-light: rgba(68, 64, 60, 0.1);
+  --border-medium: rgba(68, 64, 60, 0.2);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
   
-  /* Ink & Writing (lines 49-54) */
-  --ink-black: #1A1412;
-  --ink-faded: #4A3C35;
-  --ink-sepia: #6B5D54;
-  --ink-blue: #2C3E50;
+  /* Background Colors */
+  --bg-page: var(--cream);
+  --bg-card: var(--warm-white);
+  --bg-overlay: rgba(255, 253, 248, 0.8);
   
-  /* Vintage Accents (lines 58-63) */
-  --vintage-red: #A0522D;
-  --vintage-gold: #B8860B;
-  --vintage-green: #556B2F;
-  --vintage-blue: #4A6FA5;
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 253, 248, 0.8);
+  --glass-border: rgba(68, 64, 60, 0.1);
+  --glass-blur: blur(12px);
   
-  /* Functional Colors (lines 67-72) */
-  --focus-ring: #8D6E63;
-  --success: #6B8E23;
-  --warning: #CD853F;
-  --error: #A0522D;
+  /* Functional Colors */
+  --focus-ring: var(--burnt-orange);
+  --success: #4A7C59;
+  --warning: #D97706;
+  --error: #DC2626;
   
-  /* Spacing (from design-system/MASTER.md - these are universal) */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
+  /* Spacing Scale */
+  --space-xs: 0.25rem;     /* 4px */
+  --space-sm: 0.5rem;      /* 8px */
+  --space-md: 1rem;        /* 16px */
+  --space-lg: 1.5rem;      /* 24px */
+  --space-xl: 2rem;        /* 32px */
+  --space-2xl: 3rem;       /* 48px */
+  --space-3xl: 4rem;       /* 64px */
   
-  /* Shadow Depths (from design-system/MASTER.md) */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-  --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+  /* Shadow Depths */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  
+  /* Scrapbook Card Rotations */
+  --rotate-left: -2deg;
+  --rotate-right: 2deg;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
 }
 
-/* Base Typography (JOURNAL_DESIGN_SYSTEM.md lines 92-111) */
+/* Base Typography */
 body {
-  font-family: var(--font-body), serif;
-  font-size: 1.125rem;
-  line-height: 1.8;
-  color: var(--ink-black);
-  background: var(--journal-paper);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-display), cursive;
+/* Grain Texture Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans), sans-serif;
   font-weight: 700;
-  color: var(--leather-dark);
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: var(--text-5xl);
+  font-weight: 800;
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: var(--text-4xl);
 }
 
 h3 {
-  font-size: 1.875rem;
-  font-weight: 400;
+  font-size: var(--text-3xl);
 }
 
-/* Focus States (JOURNAL_DESIGN_SYSTEM.md lines 372-377) */
+h4 {
+  font-size: var(--text-2xl);
+}
+
+h5 {
+  font-size: var(--text-xl);
+}
+
+h6 {
+  font-size: var(--text-lg);
+}
+
+/* Serif text for storytelling */
+.serif {
+  font-family: var(--font-serif), serif;
+}
+
+/* Material Symbols Icons */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+}
+
+/* Utility Classes */
+
+/* Glassmorphism effect */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+/* Scrapbook card rotations */
+.rotate-left {
+  transform: rotate(var(--rotate-left));
+}
+
+.rotate-right {
+  transform: rotate(var(--rotate-right));
+}
+
+.rotate-none {
+  transform: rotate(0deg);
+}
+
+/* Hover straighten effect for rotated cards */
+.rotate-left:hover,
+.rotate-right:hover {
+  transform: rotate(0deg);
+}
+
+/* Transitions */
+.transition-all {
+  transition: all var(--transition-base);
+}
+
+.transition-transform {
+  transition: transform var(--transition-base);
+}
+
+/* Scrapbook tape decoration */
+.tape {
+  position: relative;
+}
+
+.tape::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 253, 248, 0.6);
+  border: 1px solid rgba(68, 64, 60, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tape-left::before {
+  left: 24px;
+  transform: rotate(-5deg);
+}
+
+.tape-right::before {
+  right: 24px;
+  left: auto;
+  transform: rotate(5deg);
+}
+
+/* Focus States */
 :focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
-/* Reduced Motion (lines 381-393) */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -123,11 +257,18 @@ h3 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  
+  /* Disable rotations for accessibility */
+  .rotate-left,
+  .rotate-right {
+    transform: rotate(0deg) !important;
+  }
 }
 
-/* Mobile Typography Adjustments (lines 342-347) */
+/* Mobile Typography Adjustments */
 @media (max-width: 768px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  body { font-size: 1rem; }
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  body { font-size: 0.9375rem; }
 }
