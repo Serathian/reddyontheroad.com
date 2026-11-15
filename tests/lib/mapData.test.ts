@@ -10,6 +10,8 @@ function createEntries(count: number): DailyEntry[] {
     latitude: 37 + index * 0.1,
     longitude: 23 + index * 0.1,
     location: `Location ${index}`,
+    city: `City ${index}`,
+    country: 'Greece',
     preview: `Preview ${index}`,
     diary: `Diary ${index}`,
   }))

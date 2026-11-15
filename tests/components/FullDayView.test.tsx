@@ -81,7 +81,22 @@ This final sentence must remain visible without truncation.`,
     expect(screen.getByText('No photos for this day')).toBeInTheDocument()
   })
 
-  it('opens lightbox on photo click and supports previous/next navigation', () => {
+  it('renders single photo as hero image without empty collage message', () => {
+    render(
+      <FullDayView
+        entry={{
+          ...baseEntry,
+          photos: [{ url: '/photos/one.jpg', alt: 'First photo alt', caption: 'First caption' }],
+        }}
+      />,
+    )
+
+    expect(screen.getByAltText('First photo alt')).toBeInTheDocument()
+    expect(screen.getByText('First caption')).toBeInTheDocument()
+    expect(screen.queryByText('No photos for this day')).not.toBeInTheDocument()
+  })
+
+  it('renders hero image and opens lightbox on collage photo click with previous/next navigation', () => {
     render(
       <FullDayView
         entry={{
@@ -95,15 +110,17 @@ This final sentence must remain visible without truncation.`,
       />
     )
 
+    expect(screen.getByAltText('First photo alt')).toBeInTheDocument()
+
     fireEvent.click(screen.getByRole('button', { name: /open photo 1/i }))
 
     expect(screen.getByRole('dialog', { name: 'Photo lightbox' })).toBeInTheDocument()
-    expect(screen.getByText('First photo alt')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByRole('button', { name: 'Next photo' }))
     expect(screen.getByText('Second photo alt')).toBeInTheDocument()
 
+    fireEvent.click(screen.getByRole('button', { name: 'Next photo' }))
+    expect(screen.getByText('Third photo alt')).toBeInTheDocument()
+
     fireEvent.click(screen.getByRole('button', { name: 'Previous photo' }))
-    expect(screen.getByText('First photo alt')).toBeInTheDocument()
+    expect(screen.getByText('Second photo alt')).toBeInTheDocument()
   })
 })

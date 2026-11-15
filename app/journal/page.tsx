@@ -84,7 +84,6 @@ export default function Home() {
           <JourneyMap
             entries={mockDailyEntries}
             activeEntryId={activeEntryId}
-            mapApiKey={process.env.NEXT_PUBLIC_MAPTILER_API_KEY}
           />
           <StatsOverlay entries={mockDailyEntries} activeEntryId={activeEntryId} />
         </div>

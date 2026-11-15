@@ -1,25 +1,27 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
-import Home from '@/app/page'
+import JournalPage from '@/app/journal/page'
 import { MockIntersectionObserver } from '@/tests/mocks/IntersectionObserver'
 
 let mapMountCount = 0
 
-vi.mock('@/app/components/Map/JourneyMap', () => ({
-  JourneyMap: ({ activeEntryId }: { activeEntryId: string }) => {
-    const React = require('react') as typeof import('react')
+vi.mock('@/app/components/Map/JourneyMap', async () => {
+  const React = await import('react')
 
-    React.useEffect(() => {
-      mapMountCount += 1
-    }, [])
+  return {
+    JourneyMap: ({ activeEntryId }: { activeEntryId: string }) => {
+      React.useEffect(() => {
+        mapMountCount += 1
+      }, [])
 
-    return (
-      <div data-testid="journey-map-shell" data-active-entry={activeEntryId}>
-        map-mounted
-      </div>
-    )
-  },
-}))
+      return (
+        <div data-testid="journey-map-shell" data-active-entry={activeEntryId}>
+          map-mounted
+        </div>
+      )
+    },
+  }
+})
 
 describe('Rich content shell orchestration', () => {
   let mockObserver: MockIntersectionObserver
@@ -37,8 +39,13 @@ describe('Rich content shell orchestration', () => {
     global.IntersectionObserver = SpyConstructor
   })
 
+  afterEach(() => {
+    global.IntersectionObserver = originalIntersectionObserver
+    vi.clearAllMocks()
+  })
+
   it('allows only the active centered card to trigger full-day open', async () => {
-    const { container } = render(<Home />)
+    const { container } = render(<JournalPage />)
 
     const activeCard = container.querySelector('[data-active="true"]')
     expect(activeCard).toBeInTheDocument()
@@ -46,16 +53,16 @@ describe('Rich content shell orchestration', () => {
     const inactiveCard = container.querySelector('[data-active="false"]')
     expect(inactiveCard).toBeInTheDocument()
 
-    expect(screen.getAllByRole('button', { name: /open full day/i })).toHaveLength(1)
+    expect(screen.getAllByRole('button', { name: /read more/i })).toHaveLength(1)
     expect(activeCard?.querySelector('button')).toBeTruthy()
     expect(inactiveCard?.querySelector('button')).toBeNull()
 
-    fireEvent.click(screen.getByRole('button', { name: /open full day/i }))
+    fireEvent.click(screen.getByRole('button', { name: /read more/i }))
     expect(await screen.findByRole('button', { name: /back to timeline/i })).toBeInTheDocument()
   })
 
   it('shows persistent back control and returns to the same active day', async () => {
-    const { container } = render(<Home />)
+    const { container } = render(<JournalPage />)
 
     const targetCard = container.querySelector('[data-id="entry-003"]')
     expect(targetCard).toBeInTheDocument()
@@ -68,7 +75,7 @@ describe('Rich content shell orchestration', () => {
       mockObserver.triggerIntersection(targetCard as Element, true)
     })
 
-    const openButton = await screen.findByRole('button', { name: /open full day/i })
+    const openButton = await screen.findByRole('button', { name: /read more/i })
     fireEvent.click(openButton)
 
     expect(screen.getByRole('button', { name: /back to timeline/i })).toBeInTheDocument()
@@ -83,12 +90,12 @@ describe('Rich content shell orchestration', () => {
   })
 
   it('restores carousel scroll position after returning from full-day view', async () => {
-    const { container } = render(<Home />)
+    const { container } = render(<JournalPage />)
 
     const carousel = container.querySelector('[data-testid="carousel-container"]') as HTMLElement
     carousel.scrollTop = 480
 
-    fireEvent.click(screen.getByRole('button', { name: /open full day/i }))
+    fireEvent.click(screen.getByRole('button', { name: /read more/i }))
     fireEvent.click(await screen.findByRole('button', { name: /back to timeline/i }))
 
     await waitFor(() => {
@@ -97,13 +104,13 @@ describe('Rich content shell orchestration', () => {
   })
 
   it('keeps map mounted while right pane swaps with crossfade states', async () => {
-    render(<Home />)
+    render(<JournalPage />)
 
     const rightPane = screen.getByTestId('right-pane-mode')
     expect(rightPane).toHaveAttribute('data-view-mode', 'carousel')
     expect(mapMountCount).toBe(1)
 
-    fireEvent.click(screen.getByRole('button', { name: /open full day/i }))
+    fireEvent.click(screen.getByRole('button', { name: /read more/i }))
 
     await waitFor(() => {
       expect(rightPane).toHaveAttribute('data-view-mode', 'full')
@@ -125,9 +132,9 @@ describe('Rich content shell orchestration', () => {
     })
     window.dispatchEvent(new Event('resize'))
 
-    render(<Home />)
+    render(<JournalPage />)
 
-    fireEvent.click(screen.getByRole('button', { name: /open full day/i }))
+    fireEvent.click(screen.getByRole('button', { name: /read more/i }))
 
     expect(await screen.findByTestId('journey-map-shell')).toBeInTheDocument()
     expect(screen.getByTestId('layout-shell')).toHaveAttribute('data-mobile-full', 'true')

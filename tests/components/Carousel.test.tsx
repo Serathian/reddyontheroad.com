@@ -10,6 +10,8 @@ describe('Carousel', () => {
       id: 'entry-1',
       date: '2024-06-15',
       location: 'Santorini, Greece',
+      city: 'Santorini',
+      country: 'Greece',
       latitude: 36.393156,
       longitude: 25.461509,
       preview: 'Azure domes against endless blue.',
@@ -19,6 +21,8 @@ describe('Carousel', () => {
       id: 'entry-2',
       date: '2024-06-16',
       location: 'Athens, Greece',
+      city: 'Athens',
+      country: 'Greece',
       latitude: 37.983716,
       longitude: 23.727539,
       preview: 'Ancient stones whisper stories.',
@@ -28,6 +32,8 @@ describe('Carousel', () => {
       id: 'entry-3',
       date: '2024-06-17',
       location: 'Delphi, Greece',
+      city: 'Delphi',
+      country: 'Greece',
       latitude: 38.482266,
       longitude: 22.501104,
       preview: 'Clouds drift through mountain ruins.',
@@ -43,10 +49,10 @@ describe('Carousel', () => {
     originalIntersectionObserver = global.IntersectionObserver
     
     // Create a proper constructor function (not arrow function)
-    const SpyConstructor = vi.fn(function(this: any, callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+    const SpyConstructor = vi.fn(function(this: unknown, callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
       mockObserver = new MockIntersectionObserver(callback, options)
       return mockObserver
-    }) as any
+    }) as unknown as typeof IntersectionObserver
     
     // Replace global constructor with spy
     global.IntersectionObserver = SpyConstructor

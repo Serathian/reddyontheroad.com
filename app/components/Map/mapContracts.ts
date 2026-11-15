@@ -1,13 +1,66 @@
+import type { StyleSpecification } from 'maplibre-gl'
 import type { DailyEntry } from '@/lib/types'
 
-export const MAPTILER_API_KEY_ENV_VAR = 'NEXT_PUBLIC_MAPTILER_API_KEY' as const
-export const MAPTILER_DEFAULT_STYLE_ID = 'streets-v2' as const
+export const MAP_STYLE_URL_ENV_VAR = 'NEXT_PUBLIC_MAP_STYLE_URL' as const
+export const BASEMAP_GLYPHS_URL = 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf' as const
 
-export function buildMapTilerStyleUrl(
-  apiKey: string,
-  styleId: string = MAPTILER_DEFAULT_STYLE_ID,
-): string {
-  return `https://api.maptiler.com/maps/${styleId}/style.json?key=${apiKey}`
+export const DEFAULT_BASEMAP_TILES = [
+  'https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
+  'https://b.tile.opentopomap.org/{z}/{x}/{y}.png',
+  'https://c.tile.opentopomap.org/{z}/{x}/{y}.png',
+] as const
+
+export const DEFAULT_BASEMAP_ATTRIBUTION = '© OpenStreetMap contributors, OpenTopoMap' as const
+
+export function buildDefaultBasemapStyle(): StyleSpecification {
+  return {
+    version: 8,
+    glyphs: BASEMAP_GLYPHS_URL,
+    sources: {
+      'topo-source': {
+        type: 'raster',
+        tiles: [...DEFAULT_BASEMAP_TILES],
+        tileSize: 256,
+        attribution: DEFAULT_BASEMAP_ATTRIBUTION,
+      },
+    },
+    layers: [
+      {
+        id: 'topo-layer',
+        type: 'raster',
+        source: 'topo-source',
+        minzoom: 0,
+        maxzoom: 18,
+        paint: {
+          'raster-opacity': 0.92,
+          'raster-saturation': -0.3,
+          'raster-contrast': 0.15,
+        },
+      },
+    ],
+  }
+}
+
+export const DEFAULT_BASEMAP_STYLE: StyleSpecification = buildDefaultBasemapStyle()
+
+export function resolveMapStyle(
+  overrideStyle?: string | StyleSpecification,
+): string | StyleSpecification {
+  if (typeof overrideStyle === 'string') {
+    const trimmed = overrideStyle.trim()
+    if (trimmed.length > 0) {
+      return trimmed
+    }
+  } else if (overrideStyle && typeof overrideStyle === 'object') {
+    return overrideStyle
+  }
+
+  const envStyleUrl = process.env[MAP_STYLE_URL_ENV_VAR]?.trim()
+  if (envStyleUrl) {
+    return envStyleUrl
+  }
+
+  return DEFAULT_BASEMAP_STYLE
 }
 
 /**
@@ -67,9 +120,9 @@ export interface JourneyMapProps {
    */
   activeEntryId: DailyEntry['id']
   /**
-   * Public provider API key provided via NEXT_PUBLIC_MAPTILER_API_KEY.
+   * Optional custom MapLibre style URL or StyleSpecification overriding NEXT_PUBLIC_MAP_STYLE_URL and the default keyless raster style.
    */
-  mapApiKey?: string
+  mapStyle?: string | StyleSpecification
   /**
    * Optional callback emitted after camera transition settles.
    */

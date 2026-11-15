@@ -24,18 +24,18 @@ export function Carousel({ entries, isLoading = false, onActiveChange, activeId,
 
   const resolvedActiveId = activeId ?? uncontrolledActiveId
 
-  const setResolvedActiveId = (nextId: string) => {
-    if (activeId === undefined) {
-      setUncontrolledActiveId(nextId)
-    }
-
-    if (lastNotifiedActiveId.current !== nextId) {
-      onActiveChange?.(nextId)
-      lastNotifiedActiveId.current = nextId
-    }
-  }
-
   useEffect(() => {
+    const setResolvedActiveId = (nextId: string) => {
+      if (activeId === undefined) {
+        setUncontrolledActiveId(nextId)
+      }
+
+      if (lastNotifiedActiveId.current !== nextId) {
+        onActiveChange?.(nextId)
+        lastNotifiedActiveId.current = nextId
+      }
+    }
+
     // Create observer with center-detection configuration
     const observer = new IntersectionObserver(
       (observerEntries) => {

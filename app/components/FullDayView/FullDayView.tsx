@@ -72,9 +72,9 @@ export function FullDayView({
         <Markdown remarkPlugins={[remarkGfm]}>{entry.diary}</Markdown>
       </section>
 
-      {shuffledPhotos.length > 1 ? (
+      {shuffledPhotos.length !== 1 ? (
         <section className={styles.photos} aria-label="Photos">
-          <PhotoCollage photos={shuffledPhotos.slice(1)} />
+          <PhotoCollage photos={shuffledPhotos.length > 1 ? shuffledPhotos.slice(1) : []} />
         </section>
       ) : null}
 

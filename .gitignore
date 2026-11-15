@@ -12,4 +12,5 @@ vite.config.ts.timestamp-*
 # Next.js
 .next
 *.log
+*.tsbuildinfo
 

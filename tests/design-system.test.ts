@@ -1,40 +1,42 @@
-import { describe, it, expect, beforeAll } from 'vitest'
-import { JSDOM } from 'jsdom'
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 
 describe('Design System CSS Variables', () => {
   let styles: CSSStyleDeclaration
+  let styleElement: HTMLStyleElement
 
   beforeAll(() => {
-    // Load globals.css and parse CSS custom properties
     const cssPath = path.join(process.cwd(), 'app/globals.css')
     const cssContent = fs.readFileSync(cssPath, 'utf-8')
-    
-    // Create a DOM to compute styles
-    const dom = new JSDOM(`<!DOCTYPE html><html><head><style>${cssContent}</style></head><body></body></html>`)
-    const doc = dom.window.document
-    styles = dom.window.getComputedStyle(doc.documentElement)
+
+    styleElement = document.createElement('style')
+    styleElement.textContent = cssContent
+    document.head.appendChild(styleElement)
+
+    styles = window.getComputedStyle(document.documentElement)
   })
 
-  it('defines journal paper color', () => {
-    const color = styles.getPropertyValue('--journal-paper').trim()
-    expect(color).toBe('#F5F1E8')
+  afterAll(() => {
+    styleElement.remove()
   })
 
-  it('defines leather dark color', () => {
-    const color = styles.getPropertyValue('--leather-dark').trim()
-    expect(color).toBe('#3E2723')
+  it('defines cream and warm white surface colors', () => {
+    expect(styles.getPropertyValue('--cream').trim()).toBe('#FBF9F4')
+    expect(styles.getPropertyValue('--warm-white').trim()).toBe('#FFFDF8')
   })
 
-  it('defines ink black color', () => {
-    const color = styles.getPropertyValue('--ink-black').trim()
-    expect(color).toBe('#1A1412')
+  it('defines burnt orange and olive green earth tone accents', () => {
+    expect(styles.getPropertyValue('--burnt-orange').trim()).toBe('#C65D3B')
+    expect(styles.getPropertyValue('--olive-green').trim()).toBe('#4A5D3F')
   })
 
-  it('defines focus ring color', () => {
-    const color = styles.getPropertyValue('--focus-ring').trim()
-    expect(color).toBe('#8D6E63')
+  it('defines neutral gray-900 ink color', () => {
+    expect(styles.getPropertyValue('--gray-900').trim()).toBe('#1C1917')
+  })
+
+  it('defines focus ring color token', () => {
+    expect(styles.getPropertyValue('--focus-ring').trim()).toBe('var(--burnt-orange)')
   })
 
   it('defines spacing scale', () => {

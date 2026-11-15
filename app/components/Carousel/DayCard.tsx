@@ -68,7 +68,7 @@ export const DayCard = forwardRef<HTMLElement, DayCardProps>(
             <h3 className={styles.location}>{entry.location}</h3>
             <time className={styles.date}>{formatDate(entry.date)}</time>
           </div>
-          <span className={`material-symbols-rounded ${styles.icon}`}>
+          <span className={`material-symbols-rounded ${styles.icon}`} aria-hidden="true">
             {icon}
           </span>
         </div>
@@ -84,7 +84,7 @@ export const DayCard = forwardRef<HTMLElement, DayCardProps>(
               className={styles.photo}
             />
             <div className={styles.locationBadge}>
-              <span className="material-symbols-rounded">location_on</span>
+              <span className="material-symbols-rounded" aria-hidden="true">location_on</span>
               {entry.location}
             </div>
           </div>
@@ -97,7 +97,7 @@ export const DayCard = forwardRef<HTMLElement, DayCardProps>(
         {isActive && onOpen && (
           <button type="button" className={styles.readMore} onClick={onOpen}>
             <span>Read more</span>
-            <span className="material-symbols-rounded">arrow_forward</span>
+            <span className="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
           </button>
         )}
       </article>

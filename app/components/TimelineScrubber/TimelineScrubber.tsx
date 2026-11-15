@@ -41,19 +41,25 @@ export function TimelineScrubber({ entries, activeIndex, onDayChange }: Timeline
   const maxIndex = Math.max(0, entries.length - 1)
   const safeIndex = clamp(activeIndex, 0, maxIndex)
   const [draftValue, setDraftValue] = useState<number>(safeIndex)
+  const [prevSafeIndex, setPrevSafeIndex] = useState<number>(safeIndex)
   const [isInteracting, setIsInteracting] = useState(false)
   const isInteractingRef = useRef(false)
   const draftValueRef = useRef<number>(safeIndex)
-  const draftIndex = clamp(Math.round(draftValue), 0, maxIndex)
+
+  if (safeIndex !== prevSafeIndex) {
+    setPrevSafeIndex(safeIndex)
+    if (!isInteracting) {
+      setDraftValue(safeIndex)
+    }
+  }
 
   useEffect(() => {
-    if (isInteractingRef.current) {
-      return
+    if (!isInteractingRef.current) {
+      draftValueRef.current = draftValue
     }
+  }, [draftValue])
 
-    setDraftValue(safeIndex)
-    draftValueRef.current = safeIndex
-  }, [safeIndex])
+  const draftIndex = clamp(Math.round(draftValue), 0, maxIndex)
 
   const announcement = useMemo(() => buildAnnouncement(entries, draftIndex), [entries, draftIndex])
   const dayCountLabel = useMemo(
@@ -89,11 +95,12 @@ export function TimelineScrubber({ entries, activeIndex, onDayChange }: Timeline
     }
 
     event.preventDefault()
+    const baseValue = isInteractingRef.current ? draftValueRef.current : draftValue
     isInteractingRef.current = true
     setIsInteracting(true)
 
     const delta = event.key === 'ArrowUp' || event.key === 'ArrowRight' ? -1 : 1
-    const next = clamp(Math.round(draftValue) + delta, 0, maxIndex)
+    const next = clamp(Math.round(baseValue) + delta, 0, maxIndex)
     setDraftValue(next)
     draftValueRef.current = next
   }

@@ -19,7 +19,7 @@
 * **Next.js Standalone**: Configured with `output: "standalone"` in `next.config.ts`.
 * **Webpack Build Flag**: Uses `next build --webpack` in `package.json` to ensure clean, reliable font and module resolution in container builds.
 * **Production Container**: Built via multi-stage `Dockerfile` (Node 22-alpine), served by `node server.js` on port 3000 behind Traefik.
-* **CI/CD**: Pushes to `epic/fresh-start`, `master`, or `main` trigger `.github/workflows/docker-publish.yml` to build `ghcr.io/Serathian/reddyontheroad.com:latest` and notify Watchtower.
+* **CI/CD**: Pushes to `main` trigger `.github/workflows/docker-publish.yml` to run lint, TypeScript checks, and Vitest tests before building `ghcr.io/Serathian/reddyontheroad.com:latest` and notifying Watchtower (pull requests to `main` run verification checks only).
 
 ---
 
@@ -28,6 +28,10 @@
 ```bash
 # Start local dev server (port 3001)
 npm run dev
+
+# Run ESLint and TypeScript checks
+npm run lint
+npx tsc --noEmit
 
 # Run Vitest unit tests
 npm run test:run

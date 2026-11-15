@@ -2,16 +2,22 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
-import Map, { Layer, Marker, Popup, Source, type MapRef } from 'react-map-gl/maplibre'
+import Map, {
+  AttributionControl,
+  Layer,
+  Marker,
+  Popup,
+  Source,
+  type MapRef,
+} from 'react-map-gl/maplibre'
 import type { DailyEntry } from '@/lib/types'
 import { buildStopPointsGeoJSON, buildTrailGeoJSON } from '@/lib/mapData'
 import {
-  buildMapTilerStyleUrl,
   CAMERA_DURATION_MS,
   CAMERA_STABLE_ZOOM,
   JourneyMapProps,
-  MAPTILER_API_KEY_ENV_VAR,
   NEAR_DISTANCE_SUBTLE_PAN_THRESHOLD_KM,
+  resolveMapStyle,
 } from './mapContracts'
 import { currentStopLayer, pastStopsLayer, trailLineLayer } from './mapLayers'
 import { ZoomControls } from '../ZoomControls/ZoomControls'
@@ -65,11 +71,17 @@ function useIsMobileViewport() {
   return isMobileViewport
 }
 
-export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProps) {
+export function JourneyMap({ entries, activeEntryId, mapStyle }: JourneyMapProps) {
   const mapRef = useRef<MapRef>(null)
   const [popupEntryId, setPopupEntryId] = useState<string | null>(null)
+  const [prevActiveEntryId, setPrevActiveEntryId] = useState(activeEntryId)
   const reducedMotion = useReducedMotionPreference()
   const isMobileViewport = useIsMobileViewport()
+
+  if (activeEntryId !== prevActiveEntryId) {
+    setPrevActiveEntryId(activeEntryId)
+    setPopupEntryId(null)
+  }
 
   const activeIndex = useMemo(
     () => Math.max(0, entries.findIndex((entry) => entry.id === activeEntryId)),
@@ -136,9 +148,7 @@ export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProp
     previousEntryRef.current = activeEntry
   }, [activeEntry])
 
-  useEffect(() => {
-    setPopupEntryId(null)
-  }, [activeEntryId])
+  const resolvedMapStyle = useMemo(() => resolveMapStyle(mapStyle), [mapStyle])
 
   if (!activeEntry) return null
 
@@ -146,16 +156,13 @@ export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProp
     ? entries.find((entry) => entry.id === popupEntryId) ?? null
     : null
 
-  const resolvedMapApiKey = mapApiKey ?? process.env[MAPTILER_API_KEY_ENV_VAR] ?? ''
-  const mapStyle = buildMapTilerStyleUrl(resolvedMapApiKey)
-
   return (
     <div className={styles.container}>
       <Map
         ref={mapRef}
         mapLib={maplibregl}
         reuseMaps
-        mapStyle={mapStyle}
+        mapStyle={resolvedMapStyle}
         initialViewState={{
           longitude: activeEntry.longitude,
           latitude: activeEntry.latitude,
@@ -165,6 +172,7 @@ export function JourneyMap({ entries, activeEntryId, mapApiKey }: JourneyMapProp
         logoPosition="bottom-right"
         style={{ width: '100%', height: '100%' }}
       >
+        <AttributionControl compact position="bottom-left" />
         <Source id="journey-trail" type="geojson" data={trailGeoJSON}>
           <Layer {...trailLineLayer} />
         </Source>

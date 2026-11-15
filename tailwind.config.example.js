@@ -131,7 +131,7 @@ module.exports = {
   plugins: [
     // Typography Plugin (optional but recommended)
     // npm install @tailwindcss/typography
-    require('@tailwindcss/typography'),
+    // require('@tailwindcss/typography'),
     
     // Aspect Ratio Plugin (if using Tailwind < v3.0)
     // require('@tailwindcss/aspect-ratio'),

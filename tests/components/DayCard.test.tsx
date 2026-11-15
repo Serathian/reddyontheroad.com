@@ -8,6 +8,8 @@ describe('DayCard', () => {
     id: 'test-1',
     date: '2024-06-15',
     location: 'Santorini, Greece',
+    city: 'Santorini',
+    country: 'Greece',
     latitude: 36.393156,
     longitude: 25.461509,
     preview: 'Azure domes against endless blue - this island steals your breath.',
